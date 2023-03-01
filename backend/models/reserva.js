@@ -21,6 +21,11 @@ const Reserva = sequelize.define('Reserva', {
     type: Sequelize.TIME,
     allowNull: false
   },
+  estado: {
+    type: Sequelize.ENUM('reservado', 'pendiente', 'disponible'),
+    allowNull: false,
+    defaultValue: 'disponible'
+  },
   id_cancha: {
     type: Sequelize.INTEGER,
     allowNull: false,
