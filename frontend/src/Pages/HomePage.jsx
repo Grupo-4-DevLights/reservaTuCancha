@@ -1,7 +1,14 @@
+import { Hero } from "../Components/HomePage/Hero";
+import { NavBar } from "../Components/NavBar";
+
+
+
 export function HomePage() {
-  return (
-    <div className="HomePage">
-      <h1>Reserva tu canchita</h1>
-    </div>
-  )
+  return (<>
+    <NavBar />  
+    <Hero />
+    <Hero />
+
+    </>
+  );
 }
