@@ -13,6 +13,7 @@ router.use('/api/reserva',require('./reservaRoutes'))
 router.use('/api/indexPage',require('./indexPage'))
 router.use('/api/usersPage',require('./usersPage'))
 router.use('/api/auth',require('./authRoutes'))
+router.use('/api/socio',require('./socioRoutes'))
 
 
 module.exports=router
