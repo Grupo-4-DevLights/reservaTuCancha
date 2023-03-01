@@ -4,13 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
-var usuarioRoutes = require('./routes/usuarioRoutes');
-var canchaRoutes = require('./routes/canchaRoutes');
-var empresaRoutes = require('./routes/empresaRoutes');
-var reservaRoutes = require('./routes/reservaRoutes');
 
 var app = express();
 
@@ -92,21 +85,21 @@ app.set('view engine', 'pug');
 
 app.use(express.static('public'));
 
+
+//para mostrar mensajes a las peticiones de las paginas
 app.use(logger('dev'));
+
+// para que puedan ingresar datos de entradas a traves de json 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+//para gestionar las cookies con las autentificaciones
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.get('/', function(req, res) {
-  res.render('index', { mensaje: 'Este es un mensaje desde mi controlador' });
-});
-app.use('/usuarios', usuarioRoutes);
-app.use('/canchas', canchaRoutes);
-app.use('/empresas', empresaRoutes);
-app.use('/reservas', reservaRoutes);
+// Rutas
+app.use('/', require('./routes/index'));
+
 
 
 // Carga de datos

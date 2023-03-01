@@ -1,9 +1,18 @@
-var express = require('express');
-var router = express.Router();
+const router = require('express').Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
 
-module.exports = router;
+
+//rutas del controlador
+
+
+//router.use('/api/auth', require('./authRoute'));
+router.use('/api/cancha', require('./canchaRoutes'));
+router.use('/api/usuario', require('./usuarioRoutes'));
+router.use('/api/empresa', require('./empresaRoutes'))
+router.use('/api/reserva',require('./reservaRoutes'))
+router.use('/api/indexPage',require('./indexPage'))
+router.use('/api/usersPage',require('./usersPage'))
+router.use('/api/auth',require('./authRoutes'))
+
+
+module.exports=router

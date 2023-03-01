@@ -1,8 +1,14 @@
 const express = require('express');
 const router = express.Router();
+
+
 const empresaController = require('../controllers/empresaController');
 
-router.get('/', empresaController.listarEmpresas);
+//middlewares
+const esSocio = require('../middlewares/esSocio');
+
+
+router.get('/',esSocio,empresaController.listarEmpresas);
 router.post('/', empresaController.crearEmpresa);
 router.get('/:id', empresaController.mostrarEmpresa);
 router.put('/:id', empresaController.actualizarEmpresa);
