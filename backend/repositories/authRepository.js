@@ -1,14 +1,18 @@
 //importing libraries
 const bcrypt=require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const nodemailer = require("nodemailer");
+
 
 //importing config
-const {TOKEN_KEY,EXPIRES}= require('../config/env')
+const {TOKEN_KEY,EXPIRES,CORREO}= require('../config/env')
 
 //importing models
 const user = require('../models/usuario')
 
 const connection = require('../database/connection')
+
+
 
 
 //create user
@@ -28,6 +32,8 @@ const register = async ({ nombre, email, password }) => {
         let salt = bcrypt.genSaltSync(10)
         let newPassword = bcrypt.hashSync(password, salt)
         const newUser = await user.create({ nombre: nombre,email: email, password: newPassword, rol:'socio'}, { transaction: execute });
+
+        
         
 
         //create token
