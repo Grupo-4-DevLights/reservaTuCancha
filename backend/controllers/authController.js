@@ -20,34 +20,7 @@ const register = async (req, res) => {
             rol: "socio",
         });
 
-        const transporter = nodemailer.createTransport({
-            service:'gmail',
-            auth: {
-                user:'leandro.tombetta97@gmail.com',
-                pass:'dfteokfdjeizantp',
-            },
-            debug:true
-        });
-
-
-        const mailOptions = {
-            from:'leandro.tombetta97@gmail.com',
-            to: email,
-            subject: "Registro exitoso",
-            text: 'Usted se ha registrado correctamente en nuestro sitio web.',
-        };
-
-        //mandar correo
-        transporter.sendMail(mailOptions, function(error, info) {
-            if (error) {
-              console.log(error);
-            } else {
-              console.log('Email sent: ' + info.response);
-            }
-        });
-
-
-       
+        
         return res
             .status(201)
             .json({ success: true, data: newUser.newUser, token: newUser.token });

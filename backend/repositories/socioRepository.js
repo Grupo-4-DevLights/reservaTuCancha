@@ -51,7 +51,8 @@ const reservaCancha = async (id_usuario, id_cancha, fecha, hora_inicio, hora_fin
             id_cancha,
             fecha,
             hora_inicio,
-            hora_fin
+            hora_fin,
+            estado:'reservado'
         }
     });
 

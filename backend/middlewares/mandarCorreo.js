@@ -9,15 +9,15 @@ const {CORREO, MAILPASS} = require('../config/env')
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user:'leandro.tombetta97@gmail.com',
-    pass:'dfteokfdjeizantp'
+    user:'reservarcanchacr@gmail.com',
+    pass:'azs13579'
   },
   debug: true
 });
 
 function enviarCorreo(destinatario, asunto, contenido) {
   const correo = {
-    from: 'leandro.tombetta97@gmail.com',
+    from:'reservarcanchacr@gmail.com',
     to: destinatario,
     subject: asunto,
     text: contenido
