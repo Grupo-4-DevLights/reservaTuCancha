@@ -1,6 +1,9 @@
 
 
 const reserva = require('../models/reserva')
+const cancha= require('../models/cancha')
+const empresa= require('../models/empresa')
+const usuario = require('../models/usuario')
 
 //reserva una cancha en un horario especifico
 
@@ -52,14 +55,27 @@ const reservaCancha = async (id_usuario, id_cancha, fecha, hora_inicio, hora_fin
         }
     });
 
-
     if (findReserva) {
         throw new Error('La cancha ya se encuentra reservada en el horario ingresado');
     }
 
+    //buscar la empresa del usuario que se le va a asignar la reseva
+    const usuarioPropietario = await cancha.findByPk(id_cancha, {
+        include: {
+            model: empresa,
+            attributes: ['id_usuario']
+        }  
+    })
+    .then(data=>{return data.Empresa.id_usuario})
+
+    //buscar el correo del usuario propietario de la cancha
+    const correo = await usuario.findByPk(usuarioPropietario, {
+    })
+    .then(data=>{return data.email})
+
     try {
         const nuevaReserva = await reserva.create({ id_usuario, id_cancha, fecha, hora_inicio, hora_fin });
-        return nuevaReserva;
+        return {nuevaReserva, correo};
 
     } catch (error) {
         console.log(error);

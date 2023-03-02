@@ -1,12 +1,16 @@
 const nodemailer = require('nodemailer');
-const { CORREO, MAILPASS } = require('../config/env')
+const {CORREO, MAILPASS} = require('../config/env')
+
+//modelos
 
 
+
+//capa de transporte y permisos en la cuenta definida que pueda enviar mensajes a otros remitentes
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'leandro.tombetta97@gmail.com',
-    pass: 'dfteokfdjeizantp',
+    user:'leandro.tombetta97@gmail.com',
+    pass:'dfteokfdjeizantp'
   },
   debug: true
 });
@@ -29,4 +33,3 @@ function enviarCorreo(destinatario, asunto, contenido) {
 }
 
 module.exports = enviarCorreo;
-
