@@ -1,23 +1,20 @@
 const nodemailer = require('nodemailer');
 const {CORREO, MAILPASS} = require('../config/env')
 
-//modelos
-
-
 
 //capa de transporte y permisos en la cuenta definida que pueda enviar mensajes a otros remitentes
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user:'reservarcanchacr@gmail.com',
-    pass:'azs13579'
+    user:'canchaspublicascc@gmail.com',
+    pass:'mzyaytujhljflqah'
   },
   debug: true
 });
 
 function enviarCorreo(destinatario, asunto, contenido) {
   const correo = {
-    from:'reservarcanchacr@gmail.com',
+    from:'canchaspublicascc@gmail.com',
     to: destinatario,
     subject: asunto,
     text: contenido
