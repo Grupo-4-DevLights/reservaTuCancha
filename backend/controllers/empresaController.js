@@ -37,8 +37,7 @@ const mostrarEmpresa = async (req, res) => {
     }
     res.status(200).json(empresa);
   } catch (error) {
-    console.log(error);
-    res.status(500).send('Error en el servidor');
+    res.status(500).send('Error en el servidor:',error);
   }
 };
 
@@ -46,16 +45,21 @@ const mostrarEmpresa = async (req, res) => {
 const actualizarEmpresa = async (req, res) => {
   const { id } = req.params;
   const { nombre, direccion, telefono } = req.body;
+
+  const empresa = await Empresa.findByPk(id);
+  if (!empresa) {
+    return res.status(404).send('No se puede actualizar la empresa porque no existe');
+  }
+
+
   try {
-    const empresa = await Empresa.findByPk(id);
-    if (!empresa) {
-      return res.status(404).send('Empresa no encontrada');
-    }
+    
     empresa.nombre = nombre;
     empresa.direccion = direccion;
     empresa.telefono = telefono;
     await empresa.save();
     res.status(200).json(empresa);
+
   } catch (error) {
     console.log(error);
     res.status(500).send('Error en el servidor');
@@ -65,11 +69,15 @@ const actualizarEmpresa = async (req, res) => {
 // Eliminar una empresa por su ID
 const eliminarEmpresa = async (req, res) => {
   const { id } = req.params;
+  
+
+  const empresa = await Empresa.findByPk(id);
+  if (!empresa) {
+    return res.status(404).send('no puede eliminar la empresa porque no existe');
+  }
+
+
   try {
-    const empresa = await Empresa.findByPk(id);
-    if (!empresa) {
-      return res.status(404).send('Empresa no encontrada');
-    }
     await empresa.destroy();
     res.status(200).send('Empresa eliminada');
   } catch (error) {

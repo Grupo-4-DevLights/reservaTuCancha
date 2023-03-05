@@ -14,6 +14,11 @@ const listarCanchas = async (req, res) => {
 // Método para crear una nueva cancha
 const crearCancha = async (req, res) => {
   const { nombre, tipo, precio } = req.body;
+
+  if(!(nombre && tipo && precio)) {
+    res.status(400).send('faltan completar todos los campos(nombre,tipo,precio)')
+  }
+
   try {
     const cancha = await Cancha.create({
       nombre,

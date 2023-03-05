@@ -14,8 +14,11 @@ const crearUsuario = async (req, res) => {
 // Método para listar todos los usuarios
 const listarUsuarios = async (req, res) => {
   try {
-    const usuarios = await Usuario.findAll();
-    res.json(usuarios);
+    const usuarios = await Usuario.findAll({
+      attributes: ['id_usuario', 'nombre', 'email', 'rol']
+    });
+
+    res.status(200).json(usuarios);
   } catch (error) {
     console.log(error);
     res.status(500).json({ mensaje: 'Hubo un error al obtener los usuarios' });
@@ -25,15 +28,20 @@ const listarUsuarios = async (req, res) => {
 // Método para actualizar un usuario existente
 const actualizarUsuario = async (req, res) => {
   const { id } = req.params;
+  const { nombre, email,  } = req.body;
+
+  const usuario = await Usuario.findByPk(id);
+  if (!usuario) {
+    return res.status(404).json({ mensaje: 'No se encontró el usuario que quiere actualizar' });
+  }
   try {
-    const [numFilas, [usuario]] = await Usuario.update(req.body, {
-      where: { id_usuario: id },
-      returning: true
-    });
-    if (numFilas === 0) {
-      return res.status(404).json({ mensaje: 'No se encontró el usuario' });
-    }
-    res.json(usuario);
+    usuario.nombre = nombre;
+    usuario.email = email;
+    usuario.rol = rol;
+    await usuario.save();
+    res.status(200).json({messaje: 'se ha actualizado el usuario correctamente'});
+   
+
   } catch (error) {
     console.log(error);
     res.status(500).json({ mensaje: 'Hubo un error al actualizar el usuario' });

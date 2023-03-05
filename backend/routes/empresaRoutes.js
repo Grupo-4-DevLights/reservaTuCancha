@@ -8,7 +8,7 @@ const empresaController = require('../controllers/empresaController');
 const esSocio = require('../middlewares/esSocio');
 
 
-router.get('/',esSocio,empresaController.listarEmpresas);
+router.get('/',empresaController.listarEmpresas);
 router.post('/', empresaController.crearEmpresa);
 router.get('/:id', empresaController.mostrarEmpresa);
 router.put('/:id', empresaController.actualizarEmpresa);
