@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import jwt_decode from 'jwt-decode'
-import UserContext from './userContext'
 
-
+const AppContext = createContext();
 
 function UserProvider ({children}) {
     const [user, setUser] = useState();
@@ -19,9 +18,9 @@ function UserProvider ({children}) {
     }, [])
 
     return (
-        <UserContext.Provider value={{user , setUser , isLoading}}>
+        <AppContext.Provider value={{user , setUser , isLoading}}>
             {children}
-        </UserContext.Provider>
+        </AppContext.Provider>
     )
 }
 
@@ -29,7 +28,7 @@ export default UserProvider;
 
 
 export const useAppContext = () => {
-    const appContext = useContext(UserContext);
+    const appContext = useContext(AppContext);
 
     if (appContext === undefined){
         throw Error('AppContext tiene que estar definido en APP.JS');

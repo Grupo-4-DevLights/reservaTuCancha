@@ -1,21 +1,22 @@
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import UserProvider, { useAppContext } from "../Services/Authentication";
-import UserContext from "../Services/userContext";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppContext } from "../Services/Authentication";
 
 export function NavBar() {
   const navigate = useNavigate();
-  const user2 = useContext(UserContext);
   const {user, setUser} = useAppContext();
-  if(user2){
-    console.log("user context 1" ,user2.user)
-    console.log("user context 2" , user)
-  }
 
+  // todo => Ver de utilizar el contexto y no el local storage
+  // const user2 = localStorage.getItem('token');
+  
   const logoutSubmit = ()=>{
     localStorage.removeItem('token');
     setUser(undefined)
-    navigate("/login")
+    navigate("/")
+  }
+
+  const SiginSubmit = ()=>{
+    navigate("/ingresar")
   }
 
   return (
@@ -26,15 +27,24 @@ export function NavBar() {
             <img className="h-12 w-12" src="soccer.ico" alt="logo" />
             <h1 className="text-2xl text-color1 ml-2">DevSports</h1>
           </div>
-          
           {/* // This is the div for buttons */}
-          <div>
-          <button className=" bg-color5 p-3 rounded-lg hover:bg-color2 mr-2">
-              Boton1
-            </button>
-            <button className=" bg-color5 p-3 rounded-lg hover:bg-color2 mr-2" onClick={logoutSubmit}>
-              SALIR
-            </button>
+
+          <div className="space-x-5">
+            <Link to="/">Inicio</Link>
+            {!user && (
+              <button className=" bg-color5 p-3 rounded-lg hover:bg-color2 mr-2" onClick={SiginSubmit}>
+               Iniciar Sesion
+              </button>
+            )}
+            {user && (
+              <>
+                <Link to="/perfil">Perfil</Link>
+                <button className=" bg-color5 p-3 rounded-lg hover:bg-color2 mr-2" onClick={logoutSubmit}>
+                SALIR
+                </button>
+              </>
+            )}
+            
           </div>
  
       </nav>
