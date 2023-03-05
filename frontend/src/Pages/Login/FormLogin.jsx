@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { loginUser } from '../../Services/Users';
 
 export function FormLogin() {
@@ -18,7 +18,7 @@ export function FormLogin() {
                 setError(data.message);
             }else{
                 window.localStorage.setItem('token', data.token);
-                navigate('/');
+                navigate('/dashboard');
             }
         })
     }
