@@ -3,19 +3,18 @@ import { useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../Services/Authentication'
 
 export  function IndexDashboard() {
-  const {user, isLoading} = useAppContext()
+  const {user, isUserLoaded} = useAppContext()
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("Dashboard", isLoading)
-    if(!isLoading){
+    if(isUserLoaded){
       if(user){
-        return navigate("/perfil")
+        navigate("/perfil")
       }else{
-        return navigate("/ingresar")
+        navigate("/ingresar")
       }
     }
-  },[isLoading])
+  },[isUserLoaded])
 
 
 }

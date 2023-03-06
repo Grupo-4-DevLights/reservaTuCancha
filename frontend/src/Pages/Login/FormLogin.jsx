@@ -1,26 +1,42 @@
-import React, { useState } from 'react'
+import React, {  useState } from 'react'
 import {  useNavigate } from 'react-router-dom';
+import {  decodificar, useAppContext } from '../../Services/Authentication';
 import { loginUser } from '../../Services/Users';
 
 export function FormLogin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const {setUser} = useAppContext();
 
     const navigate = useNavigate();
     async function onFormSubmit (event) {
         event.preventDefault();
+        
         const data = await loginUser({
-            email,
-            password
-        }).then((data) => {
-            if(!data.success){
-                setError(data.message);
-            }else{
-                window.localStorage.setItem('token', data.token);
-                navigate('/dashboard');
-            }
+            email, password
         })
+        window.localStorage.setItem('token', data.token);
+        setUser(decodificar(data.token))
+        console.log(data)
+        navigate('/perfil');
+
+
+
+
+
+        // event.preventDefault();
+        // const data = await loginUser({
+        //     email,
+        //     password
+        // }).then((data) => {
+        //     if(!data.success){
+        //         setError(data.message);
+        //     }else{
+        //         window.localStorage.setItem('token', data.token);
+        //         navigate('/dashboard');
+        //     }
+        // })
     }
   return (
     <>
