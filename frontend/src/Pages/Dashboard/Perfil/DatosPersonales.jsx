@@ -8,9 +8,9 @@ export function DatosPersonales() {
     <>
     <div className="container mx-auto h-screen flex text-center">
             <h3 className='text-xl'>Datos Personales</h3>
-            <div className="grid grid-colums-2">
+            <div className="grid grid-colums-1">
                 <p>Nombre</p>
-
+                <input type="text" />
             </div>
     </div>
     </>

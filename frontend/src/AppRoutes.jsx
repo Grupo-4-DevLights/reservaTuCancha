@@ -6,20 +6,19 @@ import { IndexRegister } from './Pages/Register/_IndexRegister'
 import { IndexDashboard } from './Pages/Dashboard/_IndexDashboard'
 import { Profile } from './Pages/Dashboard/Perfil/Profile'
 import { IndexReserva } from './Pages/Reserva/_IndexReserva'
+import { useEffect, useState } from 'react'
 
 export default function AppRoutes() {
     const { user } = useAppContext();
-  
-
     return (
         <>
             <BrowserRouter >
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/dashboard" element={<IndexDashboard />} />
-                    {user  && <Route path="/perfil" element={<Profile />} />}
-                    {user === undefined && <Route path="/ingresar" element={<IndexLogin />} />}
-                    {user === undefined && <Route path="/registro" element={<IndexRegister />} />}
+                    {user && <Route path="/perfil" element={<Profile />} />}
+                    <Route path="/ingresar" element={<IndexLogin />}/>
+                    {!user && <Route path="/ingresar" element={<IndexRegister />}/>}
                     <Route path="/reserva" element={<IndexReserva />} />
                     <Route path='*' element={<h1>No existe la ruta</h1>} />
 
@@ -27,8 +26,6 @@ export default function AppRoutes() {
             </BrowserRouter>
         </>
     )
-
-
 }
 
 
