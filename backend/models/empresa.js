@@ -20,10 +20,6 @@ const Empresa = sequelize.define('Empresa', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  link_pago: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
   imagen: {
     type: Sequelize.STRING,
     allowNull: true
