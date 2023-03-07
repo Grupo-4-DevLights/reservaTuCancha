@@ -11,21 +11,43 @@ const listarEmpresas = async (req, res) => {
   }
 };
 
+
 // Crear una nueva empresa
 const crearEmpresa = async (req, res) => {
-  const { nombre, direccion, telefono } = req.body;
+  const { nombre, direccion, telefono,imagen,id_usuario } = req.body;
+
+  if(!(nombre && direccion && telefono && imagen && id_usuario)){
+    return res.status(400).send('deben estar todos los datos(nombre,direccion,telefono,imagen)');
+  }
+
+  //verificar is existe el usuario registrado
+  const buscarUsuario= await Empresa.findOne({
+    where:{
+      id_usuario
+    }
+  })
+
+  if(buscarUsuario){
+    return res.status(400).send('el usuario ya tiene una empresa registrada');
+  }
+
   try {
     const nuevaEmpresa = await Empresa.create({
       nombre,
       direccion,
-      telefono
+      telefono,
+      imagen,
+      id_usuario
     });
+
     res.status(201).json(nuevaEmpresa);
+
   } catch (error) {
     console.log(error);
     res.status(500).send('Error en el servidor');
   }
 };
+
 
 // Mostrar una empresa por su ID
 const mostrarEmpresa = async (req, res) => {

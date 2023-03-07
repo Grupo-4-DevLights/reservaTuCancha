@@ -5,7 +5,7 @@ const reserva = require('../models/reserva');
 const cancha = require('../models/cancha');
 
 // Ejecutar la tarea programada diariamente a las 00:00
-cron.schedule("7 20 * * *", async () => {
+cron.schedule("10 13 * * *", async () => {
   console.log("Ejecutando tarea programada");
 
 

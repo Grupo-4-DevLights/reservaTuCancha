@@ -36,7 +36,7 @@ const Reserva = sequelize.define('Reserva', {
   },
   id_usuario: {
     type: Sequelize.INTEGER,
-    allowNull: false,
+    allowNull: true,
     references: {
       model: Usuario,
       key: 'id_usuario'
