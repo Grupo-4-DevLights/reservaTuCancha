@@ -26,65 +26,7 @@ Reserva.belongsTo(Cancha, { foreignKey: 'id_cancha' });
 Empresa.belongsTo(Usuario, { foreignKey: 'id_empresa' });
 Usuario.hasOne(Empresa, { foreignKey: 'id_usuario' });
 
-// Cancha.belongsTo(Empresa, { 
-//   foreignKey: {
-//     name: 'id_cancha',
-//     allowNull: false,
-//     onDelete: 'CASCADE',
-//     onUpdate: 'CASCADE'
-//   }
-// });
 
-// Cancha.hasMany(Reserva, { foreignKey: 'id_cancha' });
-
-// Empresa.belongsTo(Usuario, { 
-//   foreignKey: {
-//   name: 'id_empresa',
-//   allowNull: false
-// } 
-// });
-
-// Empresa.belongsTo(Usuario, { foreignKey: 'id_empresa' });
-
-// Empresa.hasMany(Cancha, { foreignKey: 'id_empresa' });
-
-// Reserva.belongsTo(Usuario, {
-//   foreignKey: {
-//     name: 'id_reserva',
-//     allowNull: false,
-//     onDelete: 'CASCADE',
-//     onUpdate: 'CASCADE'
-//   }
-// });
-
-// Reserva.belongsTo(Cancha, {
-//   foreignKey: {
-//     name: 'id_reserva',
-//     allowNull: false,
-//     onDelete: 'CASCADE',
-//     onUpdate: 'CASCADE'
-//   }
-// });
-
-// Usuario.hasOne(Empresa, {
-//   foreignKey: {    
-//     name: 'id_usuario',
-//     allowNull: false,
-//     unique: true,
-//     onDelete: 'CASCADE' // eliminar empresa asociada si se elimina el usuario
-//   }
-// });
-
-// Usuario.hasMany(Reserva, { foreignKey: 'id_usuario' });
-
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
-
-// Establecer el motor de vistas
-app.set('view engine', 'pug');
-
-app.use(express.static('public'));
 
 
 //para mostrar mensajes a las peticiones de las paginas
@@ -100,6 +42,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Rutas
 app.use('/', require('./routes/index'));
+
+
+//importar tarea programada
+const tareaProgramada = require('./database/tareaProgramada');
 
 
 
