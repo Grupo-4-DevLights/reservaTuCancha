@@ -1,13 +1,11 @@
 import AppRoutes from "./AppRoutes"
-import { NavBar } from "./Components/NavBar"
-import UserProvider from "./Services/Authentication"
+import UserProvider from "./context/userContext"
 
 function App() {
   return (
     <UserProvider>
       <AppRoutes />
     </UserProvider>
-
   )
 }
 

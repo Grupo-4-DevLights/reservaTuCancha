@@ -1,22 +1,24 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useAppContext } from '../../Services/Authentication';
+import { useAppContext } from '../../context/userContext';
 import { FormLogin } from './FormLogin'
 
 export  function IndexLogin() {
   const navigate = useNavigate();
-  const { user , isLoading} = useAppContext();
+  const { user , isLoggedIn} = useAppContext();
 
 
   useEffect(() => {
-    if (isLoading && user) {
+    if (isLoggedIn && user) {
       navigate('/');
     }
   }, [user, navigate]);
 
   return (
     <>
-        <FormLogin />
+      <div className="h-screen justify-center items-center flex">
+          <FormLogin />
+      </div>
     </>
   )
 }

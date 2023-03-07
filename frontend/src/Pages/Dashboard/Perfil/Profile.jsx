@@ -1,12 +1,13 @@
 import React from 'react'
-import { NavBar } from '../../../Components/NavBar'
-import { DatosPersonales } from './DatosPersonales'
+import { FormAddProfile } from './admin/FormAddProfile'
+import {IndexSocio} from './socio/_IndexSocio'
 
 export  function Profile() {
+  
   return (
   <>
-    <NavBar />
-    <DatosPersonales/>
+    <IndexSocio/>
+    <FormAddProfile/>
   </>
   )
 }

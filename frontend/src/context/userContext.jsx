@@ -1,23 +1,24 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import jwt_decode from 'jwt-decode'
 
-export const AppContext = createContext();
+const AppContext = createContext();
 
 function UserProvider ({children}) {
     const [user, setUser] = useState();
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  
     useEffect(()=> {
         const token = localStorage.getItem('token');
-        if (!isLoading) {
+        if (token) {
+            setIsLoggedIn(true);
             setUser(decodificar(token));
         }
-        setIsLoading(false);
 
     }, [])
     
     return (
-        <AppContext.Provider value={{user , setUser , isLoading}}>
+        <AppContext.Provider value={{user , setUser , isLoggedIn, setIsLoggedIn}}>
             {children}
         </AppContext.Provider>
     )
