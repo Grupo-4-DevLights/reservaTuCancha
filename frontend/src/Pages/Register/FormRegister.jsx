@@ -1,28 +1,37 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { registerUser } from "../../Services/Users";
+import ErrorModal from "./ErrorModal";
 import RegisterModal from "./RegisterModal";
 
 export function FormRegister() {
   const [showModal, setShowModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
   const [nombre, setNombre] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [rePassword, setrePassword] = useState();
 
 
   const handleModalClose = () => {
     setShowModal(false); // Ocultar la modal cuando se cierra
   };
 
+  const handleErrorModalClose = () => {
+    setShowErrorModal(false); // Ocultar la modal cuando se cierra
+  };
+
   async function onFormSubmit(event) {
     event.preventDefault();
-
-    const data = await registerUser({
+    if (password !== rePassword) {
+      setShowErrorModal(true)
+    } else {    const data = await registerUser({
       nombre,
       email,
       password,
     });
-    setShowModal(true);
+    setShowModal(true);}
+
   }
 
   return (
@@ -60,7 +69,7 @@ export function FormRegister() {
             <input
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-              type="text"
+              type="email"
               placeholder="example@mail.com"
               onChange={(event) => setEmail(event.target.value)}
             />
@@ -80,14 +89,30 @@ export function FormRegister() {
               onChange={(event) => setPassword(event.target.value)}
             />
           </div>
+          <div className="mb-4">
+            <label
+              htmlFor="repassword"
+              className="block mb-2 font-bold text-gray-800"
+            >
+              Repetir Contraseña
+            </label>
+            <input
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+              type="password"
+              placeholder="contraEpica123"
+              onChange={(event) => setrePassword(event.target.value)}
+            />
+          </div>
           <button
-            className="mt-5 w-full rounded-lg px-6 py-3 bg-gradient-to-r from-pink-400 to-purple-600 text-white hover:from-pink-500 hover:to-purple-700"
+            className="mt-5 w-full rounded-lg px-6 py-3 bg-gradient-to-r from-black text-white hover:to-black"
             type="submit"
           >
             Registrarme
           </button>
   
           <RegisterModal isOpen={showModal} onClose={handleModalClose} />
+          <ErrorModal isOpen={showErrorModal} onClose={handleErrorModalClose} />
           <h1 className="mt-5 font-bold text-center text-c w-full">Ya tienes cuente <NavLink to="/ingresar" className="text-green-600">Ingresar</NavLink></h1>
         </form>
       </div>

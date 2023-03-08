@@ -33,38 +33,50 @@ export function FormLogin() {
           onSubmit={onFormSubmit}
           className="p-4 flex-wrap w-1/3 mx-auto bg-white shadow-md rounded-lg"
         >
-          <h3 className="text-3xl font-bold text-center w-full mb-6">Iniciar Sesion</h3>
+          <h3 className="text-3xl font-bold text-center w-full mb-6">
+            Iniciar Sesion
+          </h3>
           <div className="mb-4">
-          <label className="block mb-2 font-bold text-gray-800" id="email">
-            Email
-          </label>
-          <input
-            type="text"
-            placeholder="example@mail.com"
-            id="email"
-            onChange={(event) => setEmail(event.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-          />
+            <label className="block mb-2 font-bold text-gray-800" id="email">
+              Email
+            </label>
+            <input
+              required
+              type="email"
+              placeholder="example@mail.com"
+              id="email"
+              onChange={(event) => setEmail(event.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+            />
           </div>
           <div className="mb-4">
-          <label className="block mb-2 font-bold text-gray-800" id="contrasena">
-            Contraseña
-          </label>
-          <input
-            type="password"
-            placeholder="contraEpica123"
-            id="contrasena"
-            onChange={(event) => setPassword(event.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-          />
+            <label
+              className="block mb-2 font-bold text-gray-800"
+              id="contrasena"
+            >
+              Contraseña
+            </label>
+            <input
+              required
+              type="password"
+              placeholder="contraEpica123"
+              id="contrasena"
+              onChange={(event) => setPassword(event.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+            />
           </div>
           <button
-            className="mt-5 w-full rounded-lg px-6 py-3 bg-gradient-to-r from-pink-400 to-purple-600 text-white hover:from-pink-500 hover:to-purple-700"
+            className="mt-5 w-full rounded-lg px-6 py-3 bg-gradient-to-r from-black text-white hover:to-black"
             type="submit"
           >
             Ingresar
           </button>
-          <h1 className="mt-5 font-bold text-center text-c w-full">No tienes cuenta? <NavLink to="/registrar" className="text-green-600">Registrarte</NavLink></h1>
+          <h1 className="mt-5 font-bold text-center text-c w-full">
+            No tienes cuenta?{" "}
+            <NavLink to="/registrar" className="text-green-600">
+              Registrarte
+            </NavLink>
+          </h1>
         </form>
 
         <div className="w-full">
