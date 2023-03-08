@@ -113,7 +113,7 @@ export function FormRegister() {
   
           <RegisterModal isOpen={showModal} onClose={handleModalClose} />
           <ErrorModal isOpen={showErrorModal} onClose={handleErrorModalClose} />
-          <h1 className="mt-5 font-bold text-center text-c w-full">Ya tienes cuente <NavLink to="/ingresar" className="text-green-600">Ingresar</NavLink></h1>
+          <h1 className="mt-5 font-bold text-center text-c w-full">Ya tienes cuenta <NavLink to="/ingresar" className="text-green-600">Ingresar</NavLink></h1>
         </form>
       </div>
     </>
