@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { registerUser } from "../../Services/Users";
-import { useNavigate } from "react-router-dom";
 import RegisterModal from "./RegisterModal";
 
 export function FormRegister() {
@@ -8,7 +8,7 @@ export function FormRegister() {
   const [nombre, setNombre] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const navigate = useNavigate();
+
 
   const handleModalClose = () => {
     setShowModal(false); // Ocultar la modal cuando se cierra
@@ -86,7 +86,9 @@ export function FormRegister() {
           >
             Registrarme
           </button>
+  
           <RegisterModal isOpen={showModal} onClose={handleModalClose} />
+          <h1 className="mt-5 font-bold text-center text-c w-full">Ya tienes cuente <NavLink to="/ingresar" className="text-green-600">Ingresar</NavLink></h1>
         </form>
       </div>
     </>

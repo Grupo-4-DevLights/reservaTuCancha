@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { decodificar, useAppContext } from "../../context/userContext";
 import { loginUser } from "../../Services/Users";
 
@@ -64,6 +64,7 @@ export function FormLogin() {
           >
             Ingresar
           </button>
+          <h1 className="mt-5 font-bold text-center text-c w-full">No tienes cuenta? <NavLink to="/registrar" className="text-green-600">Registrarte</NavLink></h1>
         </form>
 
         <div className="w-full">
