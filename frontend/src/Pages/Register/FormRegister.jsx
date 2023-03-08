@@ -3,13 +3,12 @@ import { registerUser } from "../../Services/Users";
 import { useNavigate } from "react-router-dom";
 import RegisterModal from "./RegisterModal";
 
-
 export function FormRegister() {
   const [showModal, setShowModal] = useState(false);
   const [nombre, setNombre] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleModalClose = () => {
     setShowModal(false); // Ocultar la modal cuando se cierra
@@ -21,16 +20,21 @@ export function FormRegister() {
     const data = await registerUser({
       nombre,
       email,
-      password
+      password,
     });
     setShowModal(true);
   }
 
   return (
     <>
-      <div className="flex w-screen h-screen flex-col items-center">
-        <h1 className="text-[40px] font-bold font-sans m-10">Registrate gratis😎</h1>
-        <form onSubmit={onFormSubmit} className="p-4 w-[400px] mx-auto">
+      <div className="flex w-screen h-screen flex-col justify-center items-center bg-gray-200">
+        <form
+          onSubmit={onFormSubmit}
+          className="p-4 flex-wrap w-1/3 mx-auto bg-white shadow-md rounded-lg"
+        >
+          <h3 className="text-3xl font-bold text-center w-full mb-6">
+            Registrarse
+          </h3>
           <div className="mb-4">
             <label
               htmlFor="name"
@@ -57,7 +61,7 @@ export function FormRegister() {
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               type="text"
-              placeholder="email@email.com"
+              placeholder="email@example.com"
               onChange={(event) => setEmail(event.target.value)}
             />
           </div>
@@ -77,7 +81,7 @@ export function FormRegister() {
             />
           </div>
           <button
-          className="mt-5 w-full rounded-lg px-6 py-3 bg-gradient-to-r from-pink-400 to-purple-600 text-white hover:from-pink-500 hover:to-purple-700"
+            className="mt-5 w-full rounded-lg px-6 py-3 bg-gradient-to-r from-pink-400 to-purple-600 text-white hover:from-pink-500 hover:to-purple-700"
             type="submit"
           >
             Registrarme
