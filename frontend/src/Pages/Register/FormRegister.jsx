@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { registerUser } from "../../Services/Users";
 import { useNavigate } from "react-router-dom";
+import RegisterModal from "./RegisterModal";
+
 
 export function FormRegister() {
+  const [showModal, setShowModal] = useState(false);
   const [nombre, setNombre] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate()
+
+  const handleModalClose = () => {
+    setShowModal(false); // Ocultar la modal cuando se cierra
+  };
 
   async function onFormSubmit(event) {
     event.preventDefault();
@@ -16,9 +23,7 @@ export function FormRegister() {
       email,
       password
     });
-    alert('Sos un capo te registraste')
-    navigate("/ingresar")
-    console.log('hola')
+    setShowModal(true);
   }
 
   return (
@@ -77,6 +82,7 @@ export function FormRegister() {
           >
             Registrarme
           </button>
+          <RegisterModal isOpen={showModal} onClose={handleModalClose} />
         </form>
       </div>
     </>
