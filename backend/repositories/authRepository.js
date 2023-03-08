@@ -18,12 +18,12 @@ const connection = require('../database/connection')
 //create user
 const register = async ({ nombre, email, password }) => {
     if (!(nombre && password && email)) {
-        throw new Error('los campos no pueden estar vacios');
+        throw new Error('Los campos no pueden estar vacios');
     }
 
     const existingUser = await user.findOne({ where: { email: email } });
     if (existingUser) {
-        throw new Error("el email registrado ya existe")
+        throw new Error("El email registrado ya existe")
     }
 
     const execute = await connection.transaction()
@@ -63,7 +63,7 @@ const register = async ({ nombre, email, password }) => {
 const login = async(email, password) => {
 
     if(!(email && password)) {
-        throw new Error('los campos email y password no pueden estar vacios');
+        throw new Error('Los campos email y password no pueden estar vacios');
     }
 
     const userFound = await user.findOne({where:{email: email}})
@@ -75,7 +75,7 @@ const login = async(email, password) => {
     const verifyPassword = bcrypt.compareSync(password,userFound.password)
 
     if (!verifyPassword) {
-        throw new Error('el password es incorrecto')
+        throw new Error('La contraseña es incorrecta')
     }
 
     const token = jwt.sign(

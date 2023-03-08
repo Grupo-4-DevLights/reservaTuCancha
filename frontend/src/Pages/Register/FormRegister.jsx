@@ -12,7 +12,6 @@ export function FormRegister() {
   const [password, setPassword] = useState();
   const [rePassword, setrePassword] = useState();
 
-
   const handleModalClose = () => {
     setShowModal(false); // Ocultar la modal cuando se cierra
   };
@@ -24,14 +23,15 @@ export function FormRegister() {
   async function onFormSubmit(event) {
     event.preventDefault();
     if (password !== rePassword) {
-      setShowErrorModal(true)
-    } else {    const data = await registerUser({
-      nombre,
-      email,
-      password,
-    });
-    setShowModal(true);}
-
+      setShowErrorModal(true);
+    } else {
+      const data = await registerUser({
+        nombre,
+        email,
+        password,
+      });
+      setShowModal(true);
+    }
   }
 
   return (
@@ -52,9 +52,11 @@ export function FormRegister() {
               Nombre
             </label>
             <input
+              autoFocus
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               type="text"
+              value={nombre}
               placeholder="Juanito Carlos"
               onChange={(event) => setNombre(event.target.value)}
             />
@@ -70,6 +72,7 @@ export function FormRegister() {
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               type="email"
+              value={email}
               placeholder="example@mail.com"
               onChange={(event) => setEmail(event.target.value)}
             />
@@ -85,6 +88,7 @@ export function FormRegister() {
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               type="password"
+              value={password}
               placeholder="contraEpica123"
               onChange={(event) => setPassword(event.target.value)}
             />
@@ -100,6 +104,7 @@ export function FormRegister() {
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               type="password"
+              value={rePassword}
               placeholder="contraEpica123"
               onChange={(event) => setrePassword(event.target.value)}
             />
@@ -110,10 +115,15 @@ export function FormRegister() {
           >
             Registrarme
           </button>
-  
+
           <RegisterModal isOpen={showModal} onClose={handleModalClose} />
           <ErrorModal isOpen={showErrorModal} onClose={handleErrorModalClose} />
-          <h1 className="mt-5 font-bold text-center text-c w-full">Ya tienes cuenta <NavLink to="/ingresar" className="text-green-600">Ingresar</NavLink></h1>
+          <h1 className="mt-5 font-bold text-center text-c w-full">
+            Ya tienes cuenta{" "}
+            <NavLink to="/ingresar" className="text-green-600">
+              Ingresar
+            </NavLink>
+          </h1>
         </form>
       </div>
     </>

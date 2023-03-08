@@ -41,13 +41,18 @@ export function FormLogin() {
               Email
             </label>
             <input
-              required
+              autoFocus
+              value={email}
+              
               type="email"
               placeholder="example@mail.com"
               id="email"
               onChange={(event) => setEmail(event.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
             />
+          </div>
+          <div className="w-full">
+            <p className="text-red-500 font-bold text-center uppercase">{error}</p>
           </div>
           <div className="mb-4">
             <label
@@ -57,7 +62,8 @@ export function FormLogin() {
               Contraseña
             </label>
             <input
-              required
+              value={password}
+              
               type="password"
               placeholder="contraEpica123"
               id="contrasena"
@@ -78,10 +84,6 @@ export function FormLogin() {
             </NavLink>
           </h1>
         </form>
-
-        <div className="w-full">
-          <p className="text-red-500 uppercase">{error}</p>
-        </div>
       </div>
     </>
   );
