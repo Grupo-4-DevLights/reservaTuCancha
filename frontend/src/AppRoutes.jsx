@@ -9,6 +9,13 @@ import { IndexReserva } from './Pages/Reserva/_IndexReserva'
 import { PaginaDeError } from './Pages/PaginaDeError'
 import { PaginaDeCarga } from './Pages/PaginaDeCarga'
 
+//verificar disponibilidad de canchas y reservar
+import { VisualizarHorarios } from './Pages/Socio/VisualizarHorarios'
+import { VisualizarEmpresas } from './Pages/Socio/VisualizarEmpresas'
+import { VisualizarCanchas } from './Pages/Socio/VisualizarCanchas'
+import { Calendario } from './Test/HorariosDisponibles'
+//import { RegistrarReserva } from './Pages/Socio/RegistrarReserva'
+
 
 export default function AppRoutes() {
     const {  user,  isLoggedIn} = useAppContext();
@@ -28,6 +35,10 @@ export default function AppRoutes() {
                     <Route path="/ingresar" element={!isLoggedIn ? <IndexLogin /> : <Navigate to="/perfil" />} />
                     <Route path="/registrar" element={!isLoggedIn ? <IndexRegister />: <Navigate to="/perfil"/>} />
                     <Route path="/reserva" element={<IndexReserva />} />
+                    <Route path='/socio/elegirempresa' element={<VisualizarEmpresas/>}/>
+                    <Route path="/socio/elegircancha/:id/" element={<VisualizarCanchas/>} />
+                    <Route path="/socio/elegirhorario/:id/" element={<VisualizarHorarios/>} />
+                    <Route path="/horariosdisponibles" element={<Calendario/>}/>
                     {isLoggedIn && <Route path='*' element={<PaginaDeError />} />}
                 </Routes>
             </BrowserRouter>

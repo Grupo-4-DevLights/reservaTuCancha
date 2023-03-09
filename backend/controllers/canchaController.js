@@ -93,24 +93,28 @@ const eliminarCancha = async (req, res) => {
 const disponibilidadCancha = async (req,res) => {
   const {id} = req.params
 
+  console.log(id)
   if (!id) {
     throw new Error('El id no existe');
   }
 
-  //fecha de hoy
-  const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(today.getDate());
-
-  const fecha = (tomorrow.toISOString().slice(0, 10))
+// Crea una nueva instancia de la fecha actual
+let Fechas = new Date();
+// Obtiene la hora actual en UTC (hora local - desfase horario)
+const horaUTC = Fechas.getUTCHours();
+// Transforma la fecha a UTC-3
+Fechas.setUTCHours(horaUTC - 3);
+const fechaHoy = (Fechas.toISOString().slice(0, 10)) // Imprime la fecha en formato ISO 8601
 
   try {
     const disponibilidad = await reserva.findAll({
       where: {
         id_cancha:id,
-        fecha,
+        fecha:fechaHoy,
         estado: 'disponible'
-      }
+      },
+      order: [['hora_inicio', 'ASC']],
+      order: [['hora_fin', 'ASC']]
     });
 
     res.status(200).json(disponibilidad);

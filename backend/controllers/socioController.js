@@ -1,5 +1,6 @@
 
 const socioRepository= require('../repositories/socioRepository')
+const misreservas = require('../models/reserva');
 
 
 // enviar correo
@@ -13,30 +14,34 @@ const reservarCancha= async (req, res) => {
         const reserva = await socioRepository.reservaCancha(id_usuario, id_cancha, fecha, hora_inicio, hora_fin);
 
         //mandar correo
-        enviarCorreo(reserva.correo,'reserva solicitada', 'se ha hecho una reserva en su cancha')
-        res.status(201).json({reserva:reserva.nuevaReserva});
+        enviarCorreo(reserva.correo,'reserva solicitada', `se ha hecho una reserva en su cancha numero ${id_cancha} para la hora de ${hora_inicio} hasta las ${hora_fin}`)
+        res.status(201).json({message:'se han reservado correctamente en los horarios solicitados'});
     } catch (error) {
         console.log(error)
         res.status(400).json({success:false, message:error.message})
     }
 }
 
-// disponibilidad
-
-const disponibilidadCancha= async (req, res) => {
+const VisualizarReservas= async (req, res) => {
     try {
-
-        const id_cancha  = (req.params).id;
-        const disponibilidad = await socioRepository.disponibilidadCancha(id_cancha);
-        
-        res.status(200).json(disponibilidad);
+        const { id_usuario } = req.params;
+        const reservas = await misreservas.findAll(
+            {
+                where: {
+                    id_usuario: id_usuario
+                }
+            }
+        )
+        res.status(201).json(reservas);
     } catch (error) {
         console.log(error)
         res.status(400).json({success:false, message:error.message})
     }
 }
+
+
 
 module.exports = {
     reservarCancha,
-    disponibilidadCancha
+    VisualizarReservas
 }

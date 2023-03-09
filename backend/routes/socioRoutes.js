@@ -1,9 +1,11 @@
 
 const express = require('express');
 const router = express.Router();
-const {reservarCancha } = require('../controllers/socioController');
+const {reservarCancha,VisualizarReservas } = require('../controllers/socioController');
 
 router.post('/', reservarCancha);
+router.get('/misreservas/:id_usuario', VisualizarReservas);
+
 
 
 

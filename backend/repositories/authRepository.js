@@ -33,8 +33,6 @@ const register = async ({ nombre, email, password }) => {
         let newPassword = bcrypt.hashSync(password, salt)
         const newUser = await user.create({ nombre: nombre,email: email, password: newPassword, rol:'socio'}, { transaction: execute });
 
-        
-        
 
         //create token
         const token = jwt.sign(
@@ -79,7 +77,7 @@ const login = async(email, password) => {
     }
 
     const token = jwt.sign(
-        { id: userFound.id, nombre:userFound.nombre,email:userFound.email,rol:userFound.rol },
+        { id_usuario: userFound.id_usuario, nombre:userFound.nombre,email:userFound.email,rol:userFound.rol },
         TOKEN_KEY, 
         {
         expiresIn: 86400, // 24 hours

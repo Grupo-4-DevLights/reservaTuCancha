@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer');
 const {CORREO, MAILPASS} = require('../config/env')
 
 
+
 //capa de transporte y permisos en la cuenta definida que pueda enviar mensajes a otros remitentes
 const transporter = nodemailer.createTransport({
   service: 'gmail',
