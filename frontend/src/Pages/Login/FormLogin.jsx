@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { NavBar } from "../../Components/NavBar";
 import { decodificar, useAppContext } from "../../context/userContext";
 import { loginUser } from "../../Services/Users";
 
@@ -28,10 +29,11 @@ export function FormLogin() {
   }
   return (
     <>
-      <div className="flex w-screen h-screen flex-col items-center justify-center bg-gray-200">
+      <NavBar />
+      <div className="flex w-screen h-screen flex-col  items-center bg-gray-200">
         <form
           onSubmit={onFormSubmit}
-          className="p-4 flex-wrap w-1/3 mx-auto bg-white shadow-md rounded-lg"
+          className="p-4 flex-wrap mx-auto bg-white shadow-md rounded-lg min-w-[300px] w-1/3 my-20"
         >
           <h3 className="text-3xl font-bold text-center w-full mb-6">
             Iniciar Sesion
@@ -43,7 +45,6 @@ export function FormLogin() {
             <input
               autoFocus
               value={email}
-              
               type="email"
               placeholder="example@mail.com"
               id="email"
@@ -52,7 +53,9 @@ export function FormLogin() {
             />
           </div>
           <div className="w-full">
-            <p className="text-red-500 font-bold text-center uppercase">{error}</p>
+            <p className="text-red-500 font-bold text-center uppercase">
+              {error}
+            </p>
           </div>
           <div className="mb-4">
             <label
@@ -63,7 +66,6 @@ export function FormLogin() {
             </label>
             <input
               value={password}
-              
               type="password"
               placeholder="contraEpica123"
               id="contrasena"

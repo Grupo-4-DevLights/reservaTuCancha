@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { NavBar } from "../../Components/NavBar";
 import { registerUser } from "../../Services/Users";
 import ErrorModal from "./ErrorModal";
 import RegisterModal from "./RegisterModal";
@@ -13,11 +14,11 @@ export function FormRegister() {
   const [rePassword, setrePassword] = useState();
 
   const handleModalClose = () => {
-    setShowModal(false); // Ocultar la modal cuando se cierra
+    setShowModal(false);
   };
 
   const handleErrorModalClose = () => {
-    setShowErrorModal(false); // Ocultar la modal cuando se cierra
+    setShowErrorModal(false);
   };
 
   async function onFormSubmit(event) {
@@ -36,10 +37,11 @@ export function FormRegister() {
 
   return (
     <>
-      <div className="flex w-screen h-screen flex-col justify-center items-center bg-gray-200">
+      <NavBar />
+      <div className="flex w-screen h-screen flex-col items-center bg-gray-200">
         <form
           onSubmit={onFormSubmit}
-          className="p-4 flex-wrap w-1/3 mx-auto bg-white shadow-md rounded-lg"
+          className="p-4 flex-wrap mx-auto bg-white shadow-md rounded-lg min-w-[300px] w-1/3 my-20"
         >
           <h3 className="text-3xl font-bold text-center w-full mb-6">
             Registrarse

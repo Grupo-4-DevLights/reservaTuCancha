@@ -18,7 +18,7 @@ export function Hero(){
             </div>
           </div>
         </div>
-        <div className="flex justify-center  items-center">
+        <div className="flex justify-center  items-center ">
           <img className="h-[80vh] w-[40vw] mr-24" src="logo_hp.svg" alt="logo" />
         </div>
       </div>
