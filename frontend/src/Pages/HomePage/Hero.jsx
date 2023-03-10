@@ -1,7 +1,7 @@
 export function Hero(){
   return(
       <div>
-      <div className="h-[100vh] sm:grid grid-cols-2 items-center bg-gradient-to-tr from-emerald-800 to-emerald-400">
+      <div className="h-[100vh] mt-10 sm:grid grid-cols-2 items-center bg-gradient-to-tr from-emerald-800 to-emerald-400">
       <div className="flex justify-center items-center flex-col">
         <div className="w-[70%]">
           <h1 className="text-5xl text-white mb-8 hidden sm:flex font-sans font-bold">Reserva tu cancha😎</h1>
@@ -16,7 +16,7 @@ export function Hero(){
         </div>
       </div>
       <div className="justify-center items-center hidden sm:flex">
-        <img className="w-[35vw] h-[50vh] mr-20" src="sports.png" alt="logo" />
+        <img className="mr-20" src="logo.svg" alt="logo" />
       </div>
     </div>
       </div>

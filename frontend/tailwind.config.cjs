@@ -4,7 +4,9 @@ module.exports = {
   "./src/**/*.{js,ts,jsx,tsx}",
 ],
   theme: {
-
+    screens: {
+      'sm': '670px'
+    },
     // colors: {	
     //   color1: "#333232",
     //   color2: "#fb8351",
