@@ -5,18 +5,22 @@ const reserva = require('../models/reserva');
 const cancha = require('../models/cancha');
 
 // Ejecutar la tarea programada diariamente a las 00:00
-cron.schedule("10 13 * * *", async () => {
+cron.schedule("32 16 * * *", async () => {
   console.log("Ejecutando tarea programada");
 
 
   const horasDisponibles = ['14:00:00', '14:30:00', '15:00:00', '15:30:00','16:00:00', '16:30:00', '17:00:00', '17:30:00','18:00:00', '18:30:00', '19:00:00', '19:30:00','20:00:00'];
 
-  // Agregar un día
-  const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(today.getDate() - 1);
+   // Crea una nueva instancia de la fecha actual
+   let Fechas = new Date();
 
-  const fechaHoy = (tomorrow.toISOString().slice(0, 10))
+   // Obtiene la hora actual en UTC (hora local - desfase horario)
+   const horaUTC = Fechas.getUTCHours();
+   
+   // Transforma la fecha a UTC-3
+   Fechas.setUTCHours(horaUTC - 3);
+   const fechaHoy = (Fechas.toISOString().slice(0, 10)) // Imprime la fecha en formato ISO 8601
+ 
 
   //buscar todas las canchas que tenemos
 
