@@ -1,6 +1,5 @@
 import React from 'react'
-import { FormRegister } from './FormRegister'
-
+import { FormRegister } from '../Components/Register/FormRegister'
 export  function IndexRegister() {
   return (
     <>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { NavBar } from "../../Components/NavBar";
+import { NavBar } from "../NavBar";
 import { decodificar, useAppContext } from "../../context/userContext";
 import { loginUser } from "../../Services/Users";
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useAppContext } from '../../../../context/userContext'
+import { useAppContext } from '../../context/userContext';
 
 export function DatosPersonales() {
     const {user} = useAppContext();

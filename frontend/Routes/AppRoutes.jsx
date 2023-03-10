@@ -1,18 +1,19 @@
-import { HomePage } from './Pages/HomePage/_IndexHomePage'
+import { HomePage } from '../src/Pages/_IndexHomePage'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import  { useAppContext } from './context/userContext'
-import { IndexLogin } from './Pages/Login/_IndexLogin'
-import { IndexRegister } from './Pages/Register/_IndexRegister'
-import { IndexDashboard } from './Pages/Dashboard/_IndexDashboard'
-import { Profile } from './Pages/Dashboard/Perfil/Profile'
-import { IndexReserva } from './Pages/Reserva/_IndexReserva'
-import { PaginaDeError } from './Pages/PaginaDeError'
-import { PaginaDeCarga } from './Pages/PaginaDeCarga'
+import  { useAppContext } from '../src/context/userContext'
+import { IndexLogin } from '../src/Pages/_IndexLogin'
+import { IndexRegister } from '../src/Pages/_IndexRegister'
+import { IndexDashboard } from './RouteProfile'
+import { IndexProfile } from '../src/Pages/_IndexProfile'
+import { PaginaDeError } from '../src/Pages/PaginaDeError'
+import { PaginaDeCarga } from '../src/Pages/PaginaDeCarga'
+import { IndexReserva } from '../src/Pages/_IndexReserva'
 
 //verificar disponibilidad de canchas y reservar
-import { VisualizarHorarios } from './Pages/Socio/VisualizarHorarios'
-import { VisualizarEmpresas } from './Pages/Socio/VisualizarEmpresas'
-import { VisualizarCanchas } from './Pages/Socio/VisualizarCanchas'
+import { VisualizarHorarios } from '../src/Components/Socio/VisualizarHorarios'
+import { VisualizarEmpresas } from '../src/Components/Socio/VisualizarEmpresas'
+import { VisualizarCanchas } from '../src/Components/Socio/VisualizarCanchas'
+
 //import { RegistrarReserva } from './Pages/Socio/RegistrarReserva'
 
 
@@ -30,7 +31,7 @@ export default function AppRoutes() {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/dashboard" element={<IndexDashboard />} />
-                    {isLoggedIn && <Route path="/perfil" element={user ? <Profile /> : <Navigate to="/login" /> } />}
+                    {isLoggedIn && <Route path="/perfil" element={user ? <IndexProfile /> : <Navigate to="/login" /> } />}
                     <Route path="/ingresar" element={!isLoggedIn ? <IndexLogin /> : <Navigate to="/perfil" />} />
                     <Route path="/registrar" element={!isLoggedIn ? <IndexRegister />: <Navigate to="/perfil"/>} />
                     <Route path="/reserva" element={<IndexReserva />} />

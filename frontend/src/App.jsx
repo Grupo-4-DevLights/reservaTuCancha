@@ -1,4 +1,4 @@
-import AppRoutes from "./AppRoutes"
+import AppRoutes from "/Routes/AppRoutes"
 import UserProvider from "./context/userContext"
 
 function App() {
