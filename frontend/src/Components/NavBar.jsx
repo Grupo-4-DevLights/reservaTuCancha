@@ -31,7 +31,7 @@ export function NavBar() {
 
   return (
     <>
-      <div className="bg-white shadow-lg bg-transparent-300 fixed w-full top-0">
+      <div className="bg-white bg-opacity-90 shadow-lg bg-transparent-300 sm:fixed w-full top-0">
         <nav className="flex text-black px-12 py-3 justify-between items-center">
           <div className="flex items-center">
             <Link to="/" className="text-2xl font-bold">
@@ -90,7 +90,7 @@ export function NavBar() {
               </div>
             </div>
           </div>
-          <div className="absolute inset-y-0 right-1 flex items-center sm:hidden">
+          <div className="fixed right-1 flex items-center sm:hidden">
             <button
               className="inline-flex items-center justify-center p-2 rounded-md bg-emerald-500 text-white hover:text-white hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-expanded={isOpen}
