@@ -21,22 +21,21 @@ const reservarCancha= async (req, res) => {
     }
 }
 
-// disponibilidad
 
-const disponibilidadCancha= async (req, res) => {
+const VisualizarReservas= async (req, res) => {
     try {
-
-        const id_cancha  = (req.params).id;
-        const disponibilidad = await socioRepository.disponibilidadCancha(id_cancha);
-        
-        res.status(200).json(disponibilidad);
+        const { id } = req.params;
+        const reservas = await socioRepository.verReservas(id);
+        res.status(200).json(reservas);
     } catch (error) {
         console.log(error)
         res.status(400).json({success:false, message:error.message})
     }
 }
 
+
+
 module.exports = {
     reservarCancha,
-    disponibilidadCancha
+    VisualizarReservas
 }

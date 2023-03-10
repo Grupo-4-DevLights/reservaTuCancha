@@ -16,7 +16,7 @@ export  function IndexLogin() {
 
   return (
     <>
-      <div className="h-screen justify-center items-center flex">
+      <div>
           <FormLogin />
       </div>
     </>

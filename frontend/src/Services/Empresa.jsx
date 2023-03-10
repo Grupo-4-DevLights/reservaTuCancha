@@ -20,4 +20,4 @@ export async function obtenerEmpresas(empresa) {
     })
     const data = await response.json();
     return data;
-    }
+}
