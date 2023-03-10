@@ -131,7 +131,7 @@ export function NavBar() {
           </div>
         </nav>
         <div className={`${isOpen ? "block" : "hidden"} sm:hidden`}>
-          <div className="px-2 pt-2 pb-3 space-y-1 absolute w-full text-center bg-emerald-300">
+          <div className="px-2 pt-2 pb-3 space-y-1 absolute w-full text-center bg-emerald-300 bg-opacity-90">
             <Link
               to="/"
               className="text-white w-full block hover:bg-emerald-400 font-sans  p-2 rounded-md font-bold "
