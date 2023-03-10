@@ -131,23 +131,23 @@ export function NavBar() {
           </div>
         </nav>
         <div className={`${isOpen ? "block" : "hidden"} sm:hidden`}>
-          <div className="px-2 pt-2 pb-3 space-y-1 absolute w-full text-center">
+          <div className="px-2 pt-2 pb-3 space-y-1 absolute w-full text-center bg-emerald-300">
             <Link
               to="/"
-              className="w-full block bg-opacity-80 hover:bg-emerald-900 font-sans bg-emerald-700 p-2 rounded-md text-white font-bold"
+              className="text-white w-full block hover:bg-emerald-400 font-sans  p-2 rounded-md font-bold "
             >
               Inicio
             </Link>
             {!user && (
               <>
                 <button
-                  className=" w-full block bg-opacity-80 hover:bg-emerald-900 font-sans bg-emerald-700 p-2 rounded-md text-white font-bold"
+                  className="text-white w-full block hover:bg-emerald-400 font-sans p-2 rounded-md font-bold "
                   onClick={SiginSubmit}
                 >
                   Iniciar Sesion
                 </button>
                 <button
-                  className="w-full block bg-opacity-80 hover:bg-emerald-900 font-sans bg-emerald-700 p-2 rounded-md text-white font-bold"
+                  className="text-white w-full block hover:bg-emerald-400 font-sans  p-2 rounded-md font-bold "
                   onClick={RegistrarSubmit}
                 >
                   Registrarse
@@ -158,12 +158,12 @@ export function NavBar() {
               <>
                 <Link
                   to="/perfil"
-                  className="w-full block bg-opacity-80 hover:bg-emerald-900 font-sans bg-emerald-700 p-2 rounded-md text-white font-bold"
+                  className="text-white w-full block hover:bg-emerald-400 font-sans bg-emerald-500 p-2 rounded-md font-bold border-white border-2"
                 >
                   Perfil
                 </Link>
                 <button
-                  className="w-full block bg-opacity-80 hover:bg-emerald-900 font-sans bg-emerald-700 p-2 rounded-md text-white font-bold"
+                  className="text-white w-full block hover:bg-emerald-400 font-sans bg-emerald-500 p-2 rounded-md font-bold border-white border-2"
                   onClick={logoutSubmit}
                 >
                   Salir
