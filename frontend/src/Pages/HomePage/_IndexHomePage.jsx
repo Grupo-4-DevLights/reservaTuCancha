@@ -6,7 +6,6 @@ export function HomePage() {
   <>
     <NavBar />
     <Hero />
-    <Hero />
   </>
   );
 }

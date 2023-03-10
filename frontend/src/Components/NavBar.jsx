@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/userContext";
 
@@ -8,7 +8,9 @@ export function NavBar() {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
   const navigate = useNavigate();
+
   const { user, setUser, setIsLoggedIn } = useAppContext();
 
   const logoutSubmit = () => {
@@ -16,7 +18,7 @@ export function NavBar() {
     setUser(undefined);
     setIsLoggedIn(false);
     navigate("/ingresar");
-    setIsOpen(!isOpen)
+    setIsOpen(!isOpen);
   };
 
   const SiginSubmit = () => {
@@ -29,10 +31,10 @@ export function NavBar() {
 
   return (
     <>
-      <div className="sticky top-0">
-        <nav className="flex bg-gray-800 text-white px-12 py-3 justify-between items-center">
+      <div className="bg-white shadow-lg bg-transparent-300 fixed w-full top-0">
+        <nav className="flex text-black px-12 py-3 justify-between items-center">
           <div className="flex items-center">
-            <Link to="/" className="text-white text-2xl font-bold">
+            <Link to="/" className="text-2xl font-bold">
               <div className="flex items-center">
                 <img
                   className=" h-16 w-16 mr-3 hidden sm:block sm:ml-6"
@@ -45,38 +47,27 @@ export function NavBar() {
           </div>
           <div className="hidden sm:block sm:ml-6">
             {user && (
-              <h1
-                className={`text-WHITE text-2xl font-sans uppercase px-2 py-1 rounded-lg `}
-              >
-                {user.rol}
+              <h1 className="text-WHITE text-2xl font-sans px-2 py-1 rounded-lg flex">
+                Bienvenido, <p className="capitalize ml-2">{user.nombre}.</p>
               </h1>
-              //  ${
-              //   user.rol === "socio"
-              //     ? "bg-cyan-300"
-              //     : user.rol === "admin"
-              //     ? "bg-green-300"
-              //     : user.rol === "empresa"
-              //     ? "bg-blue-300"
-              //     : "bg-transparent"
-              // }
             )}
           </div>
           <div className="hidden sm:block sm:ml-6">
             <div className="flex space-x-4">
               <div className="space-x-5">
-                <Link to="/" className="hover:underline font-sans">
+                <Link to="/" className="hover:underline font-sans font-bold">
                   Inicio
                 </Link>
                 {!user && (
                   <>
                     <button
-                      className="hover:underline font-sans"
+                      className="hover:bg-emerald-600 font-sans bg-emerald-500 p-2 rounded-md text-white font-bold"
                       onClick={SiginSubmit}
                     >
                       Iniciar Sesion
                     </button>
                     <button
-                      className="hover:underline font-sans"
+                      className="hover:bg-emerald-600 font-sans bg-emerald-500 p-2 rounded-md text-white font-bold"
                       onClick={RegistrarSubmit}
                     >
                       Registrarse
