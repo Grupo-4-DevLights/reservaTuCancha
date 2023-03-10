@@ -130,7 +130,7 @@ export function NavBar() {
             </button>
           </div>
         </nav>
-        <div className={`${isOpen ? "block" : "hidden"} sm:hidden`}>
+        <div className={`${isOpen ? "fixed w-full" : "hidden"} sm:hidden`}>
           <div className="px-2 pt-2 pb-3 space-y-1 absolute w-full text-center bg-emerald-300 bg-opacity-90">
             <Link
               to="/"

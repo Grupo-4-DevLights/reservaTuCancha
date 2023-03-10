@@ -1,7 +1,7 @@
 export function Hero(){
   return(
       <div>
-      <div className="h-[100vh] sm:grid grid-cols-2 items-center bg-gradient-to-tr from-emerald-800 to-emerald-400">
+      <div className="h-[150vh] sm:grid grid-cols-2 items-center bg-gradient-to-tr from-emerald-800 to-emerald-400">
       <div className="flex justify-center items-center flex-col">
         <div className="w-[70%]">
           <h1 className="text-5xl text-white mb-8 hidden sm:flex font-sans font-bold">Reserva tu cancha😎</h1>
