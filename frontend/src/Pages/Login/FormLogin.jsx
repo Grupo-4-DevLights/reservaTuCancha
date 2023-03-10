@@ -30,10 +30,10 @@ export function FormLogin() {
   return (
     <>
       <NavBar />
-      <div className="flex w-screen h-screen flex-col  items-center bg-gray-200">
+      <div className="flex justify-center w-screen h-screen flex-col items-center bg-gray-200">
         <form
           onSubmit={onFormSubmit}
-          className="p-4 flex-wrap mx-auto bg-white shadow-md rounded-lg min-w-[300px] w-1/3 my-20"
+          className="p-4 flex-wrap mx-auto bg-white shadow-md rounded-lg min-w-[300px] w-1/3"
         >
           <h3 className="text-3xl font-bold text-center w-full mb-6">
             Iniciar Sesion
@@ -74,7 +74,7 @@ export function FormLogin() {
             />
           </div>
           <button
-            className="mt-5 w-full rounded-lg px-6 py-3 bg-gradient-to-r from-black text-white hover:to-black"
+            className="font-bold mt-5 w-full rounded-lg px-6 py-3 bg-gradient-to-tr from-emerald-500 to-emerald-700 hover:to-green-500 text-white"
             type="submit"
           >
             Ingresar

@@ -1,25 +1,22 @@
 export function Hero(){
   return(
       <div>
-      <div className="bg-color1 h-[80vh] grid grid-cols-2 items-center">
+      <div className="h-[100vh] sm:grid grid-cols-2 items-center bg-gradient-to-tr from-emerald-800 to-emerald-400">
       <div className="flex justify-center items-center flex-col">
-        <div className="w-[60%]">
-          <h1 className="text-6xl text-color2 mb-8">Reserva tu cancha</h1>
-          <h1 className="text-2xl text-color2 mb-8">
-            Busca tu deporte, selecciona tu cancha favorita, tus horarios y reservala for free!😎
+        <div className="w-[70%]">
+          <h1 className="text-5xl text-white mb-8 hidden sm:flex font-sans font-bold">Reserva tu cancha😎</h1>
+          <h1 className="text-2xl text-white mb-8 mt-10 sm:mt-0">
+            Busca tu deporte, selecciona tu cancha, y reservala.
           </h1>
           <div className="flex">
-            <button className=" bg-color3 p-3 rounded-lg hover:bg-color5 mr-2">
-              Ver canchas
-            </button>
-            <button className=" bg-color3 p-3 rounded-lg hover:bg-color5">
-              Ver canchas
+            <button className="hover:bg-emerald-600 font-sans bg-emerald-500 p-4 font-bold text-xl rounded-md text-white">
+              Ver deportes
             </button>
           </div>
         </div>
       </div>
-      <div className="flex justify-center  items-center ">
-        <img className="h-[80vh] w-[40vw] mr-24" src="logo_hp.svg" alt="logo" />
+      <div className="justify-center items-center hidden sm:flex">
+        <img className="w-[35vw] h-[50vh] mr-20" src="sports.png" alt="logo" />
       </div>
     </div>
       </div>
