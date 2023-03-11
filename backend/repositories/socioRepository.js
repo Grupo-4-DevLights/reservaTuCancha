@@ -23,6 +23,22 @@ const reservaCancha = async (
   if (hora_inicio >= hora_fin) {
     throw new Error("La hora de inicio debe ser menor a la hora de fin");
   }
+
+  //verificar si han hecho una reserva
+  const reservaUsuario = await reserva.findOne({
+    where: {
+      estado: "reservado",
+      hora_inicio: {
+        [Op.between]: [hora_inicio, hora_fin],
+    }},
+  })
+
+  if(reservaUsuario){
+    throw new Error('ya tiene una reserva en ese horario');
+  }
+
+
+
   // Crea una nueva instancia de la fecha actual
   let Fechas = new Date();
 
