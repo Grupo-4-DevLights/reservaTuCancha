@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppContext } from '../../context/userContext';
 
-export  function Aside() {
+export  function Aside({children}) {
     const {user} = useAppContext();
   return (
     <>
@@ -17,8 +17,8 @@ export  function Aside() {
         )}
     
     </div>
-    <div className="flex justify-center items-center ">
-            <a href="">Listar Usuarios</a>
+    <div className="flex justify-center items-center text-2xl space-y-7 ">
+           {children}
     </div>
 
     </div>

@@ -1,110 +1,74 @@
-const Empresa = require('../models/empresa');
+const empresaRepository = require("../repositories/empresaRepository");
 
 // Listar todas las empresas
 const listarEmpresas = async (req, res) => {
   try {
-    const empresas = await Empresa.findAll();
+    const empresas = await empresaRepository.listarEmpresas();
     res.status(200).json(empresas);
   } catch (error) {
     console.log(error);
-    res.status(500).send('Error en el servidor');
+    res.status(4001).json({ error: message.error });
   }
 };
 
-
 // Crear una nueva empresa
 const crearEmpresa = async (req, res) => {
-  const { nombre, direccion, telefono,imagen,id_usuario } = req.body;
-
-  if(!(nombre && direccion && telefono && imagen && id_usuario)){
-    return res.status(400).send('deben estar todos los datos(nombre,direccion,telefono,imagen)');
-  }
-
-  //verificar is existe el usuario registrado
-  const buscarUsuario= await Empresa.findOne({
-    where:{
-      id_usuario
-    }
-  })
-
-  if(buscarUsuario){
-    return res.status(400).send('el usuario ya tiene una empresa registrada');
-  }
+  const { nombre, direccion, telefono, imagen, id_usuario } = req.body;
 
   try {
-    const nuevaEmpresa = await Empresa.create({
+    const nuevaEmpresa = await empresaRepository.crearEmpresa(
       nombre,
       direccion,
       telefono,
       imagen,
       id_usuario
-    });
-
+    );
     res.status(201).json(nuevaEmpresa);
-
   } catch (error) {
     console.log(error);
-    res.status(500).send('Error en el servidor');
+    res.status(400).json({ error: error.message });
   }
 };
-
 
 // Mostrar una empresa por su ID
 const mostrarEmpresa = async (req, res) => {
   const { id } = req.params;
   try {
-    const empresa = await Empresa.findByPk(id);
-    if (!empresa) {
-      return res.status(404).send('Empresa no encontrada');
-    }
+    const empresa = await empresaRepository.mostrarEmpresa(id);
+   
     res.status(200).json(empresa);
   } catch (error) {
-    res.status(500).send('Error en el servidor:',error);
+    res.status(400).json({error:error.message})
   }
 };
 
 // Actualizar una empresa por su ID
 const actualizarEmpresa = async (req, res) => {
   const { id } = req.params;
-  const { nombre, direccion, telefono } = req.body;
+  const { nombre, direccion, telefono,imagen } = req.body;
 
-  const empresa = await Empresa.findByPk(id);
-  if (!empresa) {
-    return res.status(404).send('No se puede actualizar la empresa porque no existe');
-  }
-
+  
 
   try {
-    
-    empresa.nombre = nombre;
-    empresa.direccion = direccion;
-    empresa.telefono = telefono;
-    await empresa.save();
+    const empresa = await empresaRepository.actualizarEmpresa(id,nombre,direccion,telefono,imagen)
     res.status(200).json(empresa);
-
   } catch (error) {
     console.log(error);
-    res.status(500).send('Error en el servidor');
+    res.status(400).json({error:error.message})
   }
 };
 
 // Eliminar una empresa por su ID
 const eliminarEmpresa = async (req, res) => {
   const { id } = req.params;
-  
-
-  const empresa = await Empresa.findByPk(id);
-  if (!empresa) {
-    return res.status(404).send('no puede eliminar la empresa porque no existe');
-  }
 
 
   try {
-    await empresa.destroy();
-    res.status(200).send('Empresa eliminada');
+    await empresaRepository.eliminarEmpresa(id);
+    res.status(200).json({message:"Empresa eliminada correctamente"})
   } catch (error) {
     console.log(error);
-    res.status(500).send('Error en el servidor');
+    res.status(400).json({error:error.message})
   }
 };
 

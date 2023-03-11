@@ -1,0 +1,63 @@
+const propietarioRepository= require('../repositories/propietarioRepository')
+
+
+// listar todos las reservas en estado pendiente con su cancha particular
+
+const listarReservasPendientes = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const reservas = await propietarioRepository.listarReservasPendientes(id);
+        res.status(200).json(reservas);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({message:error.message});
+    }
+}
+
+// listar todos las reservas en estado confirmado con su cancha particular
+
+const listarReservasConfirmadas = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const reservas = await propietarioRepository.listarReservasConfirmadas(id);
+        res.status(200).json(reservas);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({message:error.message});
+    }
+}
+
+// cambiar la reserva a confirmado de una  reserva especifica
+
+const confirmarReserva = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const reserva = await propietarioRepository.confirmarReserva(id);
+        res.status(200).json({menssaje:'Se ha confirmado la reservado exitosamente'});
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({message:error.message});
+    }
+}
+
+// cambiar la reserva a cancelado de una reserva especifica
+
+const cancelarReserva = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const reserva = await propietarioRepository.cancelarReserva(id);
+        res.status(200).json({menssaje:'Se ha cancelado la reservado exitosamente'});
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({message:error.message});
+    }
+}
+
+
+module.exports = {
+    listarReservasPendientes,
+    listarReservasConfirmadas,
+    confirmarReserva,
+    cancelarReserva
+}
+
