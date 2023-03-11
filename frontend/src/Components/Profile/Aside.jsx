@@ -5,6 +5,7 @@ export  function Aside() {
     const {user} = useAppContext();
   return (
     <>
+    <div className="h-full">
     <div className="mb-3">
         {user && (
             <>
@@ -16,9 +17,12 @@ export  function Aside() {
         )}
     
     </div>
-    <div className="flex">
+    <div className="flex justify-center items-center ">
             <a href="">Listar Usuarios</a>
     </div>
+
+    </div>
+    
    
 
     </>
