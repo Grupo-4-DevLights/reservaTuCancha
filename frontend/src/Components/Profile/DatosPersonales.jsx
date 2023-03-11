@@ -15,8 +15,8 @@ export function DatosPersonales() {
 
   return (
     <>
-    <div className="container mx-auto h-screen flex flex-col justify-center items-center text-center">
-            <h3 className='text-4xl my-8'>Datos Personales</h3>
+    <div className="flex flex-col text-center">
+            <h3 className='text-4xl mb-8'>Datos Personales</h3>
             <div className="flex gap-4 flex-col">
               <div className="flex gap-4">
                   <p>Nombre</p>

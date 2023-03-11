@@ -1,10 +1,10 @@
 import React from 'react'
-import imagenRoute from '../../../assets/jugador-futbol.png'
+import imagenRoute from '../../Pages/assets/jugador-futbol.png'
 
 export function ImagenYrecursos() {
   return (
     <>
-        <div className="flex flex-wrap gap-4 flex-col justify-center items-center h-screen">
+        <div className="flex flex-wrap gap-4 flex-col">
             <div className=' rounded-full border border-gray-300 overflow-hidden w-[8vw] h-[16vh] p-4 flex'>
                 <img src={imagenRoute} className="" />            
             </div>

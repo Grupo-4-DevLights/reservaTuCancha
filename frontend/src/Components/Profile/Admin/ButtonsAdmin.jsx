@@ -3,10 +3,12 @@ import { NavLink } from 'react-router-dom'
 
 export default function ButtonsAdmin() {
     return (
-        <div>
-            <li><NavLink to="/perfil">Modificar Perfil</NavLink></li>
-            <li><NavLink to="/lista-socios">Socios</NavLink></li>
-            <li><NavLink to="/empresas">Empresas</NavLink></li>
-        </div>
+        <>
+            <div className="flex flex-col text-center">
+                <NavLink to="/perfil">Modificar Perfil</NavLink>
+                <NavLink to="/listar-socios">Socios</NavLink>
+                <NavLink to="/lista-empresas">Empresas</NavLink>
+            </div>
+        </>
       )
 }

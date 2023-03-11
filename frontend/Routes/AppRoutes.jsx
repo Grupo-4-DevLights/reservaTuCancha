@@ -4,7 +4,7 @@ import  { useAppContext } from '../src/context/userContext'
 import { IndexLogin } from '../src/Pages/_IndexLogin'
 import { IndexRegister } from '../src/Pages/_IndexRegister'
 import { IndexDashboard } from './RouteProfile'
-import { IndexProfile } from '../src/Pages/_IndexProfileSocio'
+import { IndexProfile } from '../src/Pages/_IndexProfile'
 import { PaginaDeError } from '../src/Pages/PaginaDeError'
 import { PaginaDeCarga } from '../src/Pages/PaginaDeCarga'
 import { IndexReserva } from '../src/Pages/_IndexReserva'
@@ -13,6 +13,7 @@ import { IndexReserva } from '../src/Pages/_IndexReserva'
 import { VisualizarHorarios } from '../src/Components/Socio/VisualizarHorarios'
 import { VisualizarEmpresas } from '../src/Components/Socio/VisualizarEmpresas'
 import { VisualizarCanchas } from '../src/Components/Socio/VisualizarCanchas'
+import ListarSociosPage from '../src/Pages/_ListarSocios'
 
 //import { RegistrarReserva } from './Pages/Socio/RegistrarReserva'
 
@@ -35,6 +36,7 @@ export default function AppRoutes() {
                     <Route path="/ingresar" element={!isLoggedIn ? <IndexLogin /> : <Navigate to="/perfil" />} />
                     <Route path="/registrar" element={!isLoggedIn ? <IndexRegister />: <Navigate to="/perfil"/>} />
                     <Route path="/reserva" element={<IndexReserva />} />
+                    <Route path='/listar-socios' element={isLoggedIn ? ( user.rol === "administrador" ? <ListarSociosPage/> : <Navigate to="/perfil"/>) : <Navigate to="/login"/>}/>
                     <Route path='/socio/elegirempresa' element={<VisualizarEmpresas/>}/>
                     <Route path="/socio/elegircancha/:id/" element={<VisualizarCanchas/>} />
                     <Route path="/socio/elegirhorario/:id/" element={<VisualizarHorarios/>} />
