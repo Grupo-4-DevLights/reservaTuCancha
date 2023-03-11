@@ -31,14 +31,16 @@ export function NavBar() {
     navigate("/registrar");
   };
 
-
   return (
     <>
       <div className="flex justify-center items-center h-[64px] sm:h-[64px] sm2:h-[88px]">
-      <EmptyComponent />
+        <EmptyComponent />
       </div>
-      <div id="navbar" className="bg-white bg-opacity-90 shadow-lg bg-transparent-300 fixed w-full top-0">
-      <nav className="flex text-black px-12 py-3 justify-between items-center">
+      <div
+        id="navbar"
+        className="bg-white bg-opacity-90 shadow-lg bg-transparent-300 fixed w-full top-0"
+      >
+        <nav className="flex text-black px-12 py-3 justify-between items-center">
           <div className="flex items-center">
             <Link to="/" className="text-2xl font-bold">
               <div className="flex items-center">
@@ -48,17 +50,23 @@ export function NavBar() {
                   alt="logo"
                 />
                 DevSports
-                <h1 className="text-WHITE text-2xl font-sans px-2 py-1 rounded-lg flex sm2:hidden">
-                <p className="capitalize ml-2 font-medium text-emerald-700">{user.nombre}.</p>
-              </h1>
+                {user && (
+                  <h1 className="text-2xl font-sans px-2 py-1 rounded-lg flex sm2:hidden">
+                    <p className="capitalize ml-2 font-medium text-emerald-700">
+                      {user.nombre}
+                    </p>
+                  </h1>
+                )}
               </div>
-              
             </Link>
           </div>
           <div className="hidden sm:block sm:ml-6">
             {user && (
-              <h1 className="text-WHITE text-2xl font-sans px-2 py-1 rounded-lg hidden sm2:flex">
-                Bienvenido, <p className="capitalize ml-2 font-medium text-emerald-700">{user.nombre}.</p>
+              <h1 className="text-2xl font-sans px-2 py-1 rounded-lg hidden sm2:flex">
+                Bienvenido,{" "}
+                <p className="capitalize ml-2 font-medium text-emerald-700">
+                  {user.nombre}.
+                </p>
               </h1>
             )}
           </div>
@@ -86,7 +94,10 @@ export function NavBar() {
                 )}
                 {user && (
                   <>
-                    <Link to="/perfil" className="hover:bg-emerald-600 font-sans bg-emerald-500 p-2 rounded-md text-white font-bold">
+                    <Link
+                      to="/perfil"
+                      className="hover:bg-emerald-600 font-sans bg-emerald-500 p-2 rounded-md text-white font-bold"
+                    >
                       Perfil
                     </Link>
                     <button
