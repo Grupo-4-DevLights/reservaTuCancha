@@ -21,17 +21,20 @@ const register = async ({ nombre, email, password }) => {
         throw new Error('Los campos no pueden estar vacios');
     }
 
-    const existingUser = await user.findOne({ where: { email: email } });
+    const existingUser = await user.findOne({ where: { email: email} });
+
     if (existingUser) {
         throw new Error("El email registrado ya existe")
     }
 
+
+
     const execute = await connection.transaction()
 
     try {
-        let salt = bcrypt.genSaltSync(10)
-        let newPassword = bcrypt.hashSync(password, salt)
-        const newUser = await user.create({ nombre: nombre,email: email, password: newPassword, rol:'socio'}, { transaction: execute });
+        //let salt = bcrypt.genSaltSync(10)
+        //let newPassword = bcrypt.hashSync(password, salt)
+        const newUser = await user.create({ nombre: nombre,email: email, password, rol:'socio'}, { transaction: execute });
 
         
         
@@ -72,11 +75,15 @@ const login = async(email, password) => {
         throw new Error(`El email no existe`)
     }
 
-    const verifyPassword = bcrypt.compareSync(password,userFound.password)
+    //const verifyPassword = bcrypt.compareSync(password,userFound.password)
 
-    if (!verifyPassword) {
-        throw new Error('La contraseña es incorrecta')
+    //verificar password
+    if(password !== userFound.password){
+        throw new Error(`La contraseña es incorrecta`)
     }
+
+
+
 
     const token = jwt.sign(
         { id: userFound.id, nombre:userFound.nombre,email:userFound.email,rol:userFound.rol },
