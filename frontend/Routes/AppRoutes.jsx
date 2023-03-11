@@ -36,7 +36,7 @@ export default function AppRoutes() {
                     <Route path="/ingresar" element={!isLoggedIn ? <IndexLogin /> : <Navigate to="/perfil" />} />
                     <Route path="/registrar" element={!isLoggedIn ? <IndexRegister />: <Navigate to="/perfil"/>} />
                     <Route path="/reserva" element={<IndexReserva />} />
-                    <Route path='/listar-socios' element={isLoggedIn ? ( user.rol === "administrador" ? <ListarSociosPage/> : <Navigate to="/perfil"/>) : <Navigate to="/login"/>}/>
+                    <Route path='/listar-socios' element={<ListarSociosPage/>}/>
                     <Route path='/socio/elegirempresa' element={<VisualizarEmpresas/>}/>
                     <Route path="/socio/elegircancha/:id/" element={<VisualizarCanchas/>} />
                     <Route path="/socio/elegirhorario/:id/" element={<VisualizarHorarios/>} />
