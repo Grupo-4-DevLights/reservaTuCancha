@@ -19,7 +19,6 @@ export function ListarSocios() {
   const [user, setUser] = useState(initialUser);
   const [modify, setModify] = useState(false);
 
-
   useEffect(() => {
     obtenerSocios()
       .then((data) => {
@@ -31,7 +30,7 @@ export function ListarSocios() {
   }, [modify]);
 
   const handleEditUser = (row) => {
-    setModify(true)
+    setModify(true);
     setUser(row);
   };
 
@@ -50,22 +49,16 @@ export function ListarSocios() {
   return (
     <>
       <div className="flex flex-col ">
-        <div className="flex justify-center  text-center text-3xl font-bold w-full mb-8">
+        <div className="flex justify-center text-center text-3xl font-bold w-full mb-4">
           <h1>Listar Usuarios</h1>
         </div>
-        <div className="flex">
-          <TableLayout
-            data={socios}
-            onEditUser={handleEditUser}
-            onDeleteUser={handleDeleteUser}
-          />
-        </div>
-
+        <TableLayout
+          data={socios}
+          onEditUser={handleEditUser}
+          onDeleteUser={handleDeleteUser}
+        />
         {modify && (
           <>
-            <div className="flex justify-center mt-8 text-center text-3xl font-bold w-full mb-8">
-              <h1>Modificar Usuario</h1>
-            </div>
             <div className="flex">
               <FormEditUser onSaveUser={handleSaveUser} user={user} />
             </div>

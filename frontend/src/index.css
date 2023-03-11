@@ -10,6 +10,14 @@
   width: 100%;
 }
 
+table{
+  border-collapse: collapse !important;
+}
+td{
+  border-bottom: 1px solid green !important;
+  padding: 10px 0 !important;
+
+}
 body{
     font-family: 'Roboto', sans-serif;
 }

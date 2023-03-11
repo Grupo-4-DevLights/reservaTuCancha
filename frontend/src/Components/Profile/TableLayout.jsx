@@ -5,7 +5,7 @@ export default function TableLayout({ data, onEditUser, onDeleteUser }) {
   return (
     <>
       {data && data.length > 0 && (
-        <table className="border-collapse table-fixed w-full text-sm text-center">
+        <table className="table-fixed w-full text-sm text-center">
           <thead>
             <tr className="text-xl">
               {Object.keys(data[0]).map((title, index) => (
@@ -17,23 +17,25 @@ export default function TableLayout({ data, onEditUser, onDeleteUser }) {
             {data.map((row, index) => (
               <React.Fragment key={index}>
                 {row.rol === "administrador" ? null : (
-                  <tr className="text-lg">
+                  <tr className="row text-lg bg-emerald-100 hover:bg-gray-300">
                     {Object.values(row).map((item, index) => (
-                      <td key={index}>{item}</td>
+                      <td className="break-words " key={index}>{item}</td>
                     ))}
                     <td>
                       <button
-                        className="bg-red-500"
+                        className="bg-emerald-500 rounded-md font-medium font-sans text-white p-1 mx-2 my-1"
                         onClick={() => onEditUser(row)}
                       >
                         Modificar
                       </button>
-                      <a
-                        className="bg-red-500 mx-2"
+                      </td>
+                      <td>
+                      <button
+                        className="bg-red-500 rounded-md font-medium font-sans text-white p-1 mx-2 my-1"
                         onClick={() => onDeleteUser(row)}
                       >
                         Eliminar
-                      </a>
+                      </button>
                     </td>
                   </tr>
                 )}
@@ -42,6 +44,7 @@ export default function TableLayout({ data, onEditUser, onDeleteUser }) {
           </tbody>
         </table>
       )}
+      
     </>
   );
 }

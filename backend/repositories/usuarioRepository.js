@@ -15,7 +15,7 @@ const listarUsuarios = async ()=>{
 //actualizar un usuario
 
 
-const actualizarUsuario = async (id_usuario, nombre, email, rol)=>{
+const actualizarUsuario = async (id_usuario, nombre, email, rol, password)=>{
     const buscarUsuario = await usuario.findByPk(id_usuario);
 
     if(!buscarUsuario){
@@ -26,7 +26,8 @@ const actualizarUsuario = async (id_usuario, nombre, email, rol)=>{
         const usuarioActualizado = await buscarUsuario.update({
             nombre,
             email,
-            rol
+            rol,
+            password
         })
 
         return usuarioActualizado;

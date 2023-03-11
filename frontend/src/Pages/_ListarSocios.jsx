@@ -8,7 +8,7 @@ export default function ListarSociosPage() {
         <>
             <NavBar/>
             <LayoutProfile>
-                <div className="flex h-screen content-start w-3/4">
+                <div className="w-3/4">
                   <ListarSocios />
                 </div>
             </LayoutProfile>
