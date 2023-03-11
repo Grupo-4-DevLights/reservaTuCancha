@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/userContext";
 
 export function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [showNavbar, setShowNavbar] = useState(true);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
+  const EmptyComponent = () => {
+    return <div className="h-10 w-10 bg-gray-200"></div>;
+  };
   const navigate = useNavigate();
 
   const { user, setUser, setIsLoggedIn } = useAppContext();
@@ -30,47 +31,34 @@ export function NavBar() {
     navigate("/registrar");
   };
 
-  const [isNavbarFixed, setIsNavbarFixed] = useState(false);
-
-  function handleScroll() {
-    const navbar = document.getElementById('navbar');
-    const navbarPosition = navbar.offsetTop;
-
-    if (window.pageYOffset > navbarPosition) {
-      setIsNavbarFixed(true);
-    } else {
-      setIsNavbarFixed(false);
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   return (
     <>
-      <div id="navbar" className={isNavbarFixed ? 'fixed-navbar bg-white shadow-lg bg-transparent-300' : 'bg-white shadow-lg bg-transparent-300'}>
+      <div className="flex justify-center items-center h-[64px] sm:h-[64px] sm2:h-[88px]">
+      <EmptyComponent />
+      </div>
+      <div id="navbar" className="bg-white bg-opacity-90 shadow-lg bg-transparent-300 fixed w-full top-0">
       <nav className="flex text-black px-12 py-3 justify-between items-center">
           <div className="flex items-center">
             <Link to="/" className="text-2xl font-bold">
               <div className="flex items-center">
                 <img
-                  className=" h-16 w-16 mr-3 hidden sm:block sm:ml-6"
+                  className=" h-16 w-16 mr-3 hidden sm2:block sm:ml-6"
                   src="soccer.ico"
                   alt="logo"
                 />
                 DevSports
+                <h1 className="text-WHITE text-2xl font-sans px-2 py-1 rounded-lg flex sm2:hidden">
+                <p className="capitalize ml-2 font-medium text-emerald-700">{user.nombre}.</p>
+              </h1>
               </div>
+              
             </Link>
           </div>
           <div className="hidden sm:block sm:ml-6">
             {user && (
-              <h1 className="text-WHITE text-2xl font-sans px-2 py-1 rounded-lg flex">
-                Bienvenido, <p className="capitalize ml-2">{user.nombre}.</p>
+              <h1 className="text-WHITE text-2xl font-sans px-2 py-1 rounded-lg hidden sm2:flex">
+                Bienvenido, <p className="capitalize ml-2 font-medium text-emerald-700">{user.nombre}.</p>
               </h1>
             )}
           </div>
@@ -98,11 +86,11 @@ export function NavBar() {
                 )}
                 {user && (
                   <>
-                    <Link to="/perfil" className="hover:underline font-sans">
+                    <Link to="/perfil" className="hover:bg-emerald-600 font-sans bg-emerald-500 p-2 rounded-md text-white font-bold">
                       Perfil
                     </Link>
                     <button
-                      className="hover:underline font-sans"
+                      className="hover:bg-emerald-600 font-sans bg-emerald-500 p-2 rounded-md text-white font-bold"
                       onClick={logoutSubmit}
                     >
                       Salir
@@ -156,7 +144,7 @@ export function NavBar() {
           <div className="px-2 pt-2 pb-3 space-y-1 absolute w-full text-center bg-emerald-300 bg-opacity-90">
             <Link
               to="/"
-              className="text-white w-full block hover:bg-emerald-400 font-sans  p-2 rounded-md font-bold "
+              className="text-white w-full block hover:bg-emerald-400 font-sans p-2 rounded-md font-bold"
             >
               Inicio
             </Link>
@@ -180,12 +168,12 @@ export function NavBar() {
               <>
                 <Link
                   to="/perfil"
-                  className="text-white w-full block hover:bg-emerald-400 font-sans bg-emerald-500 p-2 rounded-md font-bold border-white border-2"
+                  className="text-white w-full block hover:bg-emerald-400 font-sans p-2 rounded-md font-bold"
                 >
                   Perfil
                 </Link>
                 <button
-                  className="text-white w-full block hover:bg-emerald-400 font-sans bg-emerald-500 p-2 rounded-md font-bold border-white border-2"
+                  className="text-white w-full block hover:bg-emerald-400 font-sans p-2 rounded-md font-bold"
                   onClick={logoutSubmit}
                 >
                   Salir
