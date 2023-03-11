@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.fixed-navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
 body{
     font-family: 'Roboto', sans-serif;
 }

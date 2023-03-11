@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/userContext";
 
 export function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -29,10 +30,31 @@ export function NavBar() {
     navigate("/registrar");
   };
 
+  const [isNavbarFixed, setIsNavbarFixed] = useState(false);
+
+  function handleScroll() {
+    const navbar = document.getElementById('navbar');
+    const navbarPosition = navbar.offsetTop;
+
+    if (window.pageYOffset > navbarPosition) {
+      setIsNavbarFixed(true);
+    } else {
+      setIsNavbarFixed(false);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <>
-      <div className="bg-white shadow-lg bg-transparent-300 fixed w-full top-0">
-        <nav className="flex text-black px-12 py-3 justify-between items-center">
+      <div id="navbar" className={isNavbarFixed ? 'fixed-navbar bg-white shadow-lg bg-transparent-300' : 'bg-white shadow-lg bg-transparent-300'}>
+      <nav className="flex text-black px-12 py-3 justify-between items-center">
           <div className="flex items-center">
             <Link to="/" className="text-2xl font-bold">
               <div className="flex items-center">
@@ -90,9 +112,9 @@ export function NavBar() {
               </div>
             </div>
           </div>
-          <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
+          <div className="fixed right-1 flex items-center sm:hidden">
             <button
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              className="inline-flex items-center justify-center p-2 rounded-md bg-emerald-500 text-white hover:text-white hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-expanded={isOpen}
               onClick={toggleMenu}
             >
@@ -130,24 +152,24 @@ export function NavBar() {
             </button>
           </div>
         </nav>
-        <div className={`${isOpen ? "block" : "hidden"} sm:hidden`}>
-          <div className="px-2 pt-2 pb-3 space-y-1 absolute w-full text-center">
+        <div className={`${isOpen ? "fixed w-full" : "hidden"} sm:hidden`}>
+          <div className="px-2 pt-2 pb-3 space-y-1 absolute w-full text-center bg-emerald-300 bg-opacity-90">
             <Link
               to="/"
-              className=" w-full  bg-slate-400 text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              className="text-white w-full block hover:bg-emerald-400 font-sans  p-2 rounded-md font-bold "
             >
               Inicio
             </Link>
             {!user && (
               <>
                 <button
-                  className=" w-full  bg-slate-400 text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  className="text-white w-full block hover:bg-emerald-400 font-sans p-2 rounded-md font-bold "
                   onClick={SiginSubmit}
                 >
                   Iniciar Sesion
                 </button>
                 <button
-                  className=" w-full  bg-slate-400 text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  className="text-white w-full block hover:bg-emerald-400 font-sans  p-2 rounded-md font-bold "
                   onClick={RegistrarSubmit}
                 >
                   Registrarse
@@ -158,12 +180,12 @@ export function NavBar() {
               <>
                 <Link
                   to="/perfil"
-                  className=" w-full  bg-slate-400 text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  className="text-white w-full block hover:bg-emerald-400 font-sans bg-emerald-500 p-2 rounded-md font-bold border-white border-2"
                 >
                   Perfil
                 </Link>
                 <button
-                  className=" w-full  bg-slate-400 text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  className="text-white w-full block hover:bg-emerald-400 font-sans bg-emerald-500 p-2 rounded-md font-bold border-white border-2"
                   onClick={logoutSubmit}
                 >
                   Salir

@@ -16,7 +16,7 @@ export function Hero(){
         </div>
       </div>
       <div className="justify-center items-center hidden sm:flex">
-        <img className="w-[35vw] h-[50vh] mr-20" src="sports.png" alt="logo" />
+        <img className="mr-20" src="logo.svg" alt="logo" />
       </div>
     </div>
       </div>
