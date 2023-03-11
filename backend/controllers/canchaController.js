@@ -10,7 +10,7 @@ const listarCanchas = async (req, res) => {
     res.status(200).json(canchas);
   } catch (error) {
     console.log(error);
-    res.status(500).send("Hubo un error");
+    res.json({ error: error.message });
   }
 };
 
@@ -28,7 +28,7 @@ const crearCancha = async (req, res) => {
     res.status(201).json(cancha);
   } catch (error) {
     console.log(error);
-    res.status(500).send("Hubo un error");
+    res.json({ error: error.message });
   }
 };
 
@@ -40,7 +40,7 @@ const mostrarCancha = async (req, res) => {
     res.status(200).json(cancha);
   } catch (error) {
     console.log(error);
-    res.status(500).send("Hubo un error");
+    res.json({ error: error.message });
   }
 };
 
@@ -59,7 +59,7 @@ const actualizarCancha = async (req, res) => {
     res.status(201).json(cancha);
   } catch (error) {
     console.log(error);
-    res.status(500).send("Hubo un error");
+    res.json({ error: error.message });
   }
 };
 
@@ -72,7 +72,7 @@ const eliminarCancha = async (req, res) => {
     res.status(200).json({ msg: "Cancha eliminada correctamente" });
   } catch (error) {
     console.log(error);
-    res.status(500).send("Hubo un error");
+    res.json({error:error.message});
   }
 };
 
@@ -80,7 +80,6 @@ const eliminarCancha = async (req, res) => {
 const disponibilidadCancha = async (req, res) => {
   const { id } = req.params;
 
-  console.log(id);
   if (!id) {
     throw new Error("El id no existe");
   }
@@ -104,10 +103,15 @@ const disponibilidadCancha = async (req, res) => {
       order: [["hora_fin", "ASC"]],
     });
 
+    //si devuelve 0
+    if (disponibilidad.length === 0) {
+      throw new Error('no hay canchas disponibles en el dia de hoy')
+    }
+
     res.status(200).json(disponibilidad);
   } catch (error) {
     console.log(error);
-    res.status(500).send("Hubo un error");
+    res.json({error:error.message})
   }
 };
 

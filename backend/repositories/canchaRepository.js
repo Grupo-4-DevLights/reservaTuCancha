@@ -45,8 +45,8 @@ const mostrarCancha = async (id_cancha) => {
   }
 
   try {
-    const canchaBuscada = await cancha.findByPk(id_cancha);
-    return canchaBuscada;
+    
+    return buscarCanchar;
   } catch (error) {
     console.log(error);
     return error;
