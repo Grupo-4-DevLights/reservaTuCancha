@@ -22,7 +22,7 @@ const Reserva = sequelize.define('Reserva', {
     allowNull: false
   },
   estado: {
-    type: Sequelize.ENUM('reservado', 'pendiente', 'disponible'),
+    type: Sequelize.ENUM('reservado', 'confirmado', 'disponible'),
     allowNull: false,
     defaultValue: 'disponible'
   },

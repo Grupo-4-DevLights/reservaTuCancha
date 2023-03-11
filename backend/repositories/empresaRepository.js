@@ -8,7 +8,7 @@ const listarEmpresas= ()=>{
     try {
         const empresas = empresa.findAll()
 
-        
+        return empresas
     } catch (error) {
         
         return error;
