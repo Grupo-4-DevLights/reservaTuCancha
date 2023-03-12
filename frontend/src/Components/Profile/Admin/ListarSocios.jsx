@@ -20,6 +20,7 @@ export function ListarSocios() {
   const [user, setUser] = useState(initialUser);
   const [modify, setModify] = useState(false);
   const [create, setCreate] = useState(false);
+  const [cargar, setCargar] = useState(false)
 
   useEffect(() => {
     obtenerSocios()
@@ -29,7 +30,7 @@ export function ListarSocios() {
       .catch((error) => {
         console.log(error);
       });
-  }, [modify, create]);
+  }, [cargar]);
 
   const handleEditUser = (row) => {
     setModify(true);
@@ -40,6 +41,7 @@ export function ListarSocios() {
     modifyUser(values).then((data) => {
       console.log("Usuario Modificado", data);
       setModify(!modify);
+      setCargar(!cargar)
     });
     setUser(initialUser);
   };
@@ -47,13 +49,24 @@ export function ListarSocios() {
   const handleDeleteUser = (value) => {
     deleteUser(value).then((data) => {
         console.log("Usuario Eliminado", data);
+        setCargar(!cargar)
     })
   };
 
   async function handleCreateUser(values) {
     const response = await registerUser(values)
     console.log("Usuario Creado", response);
-    setCreate(!create);
+    setCreate(false);
+    setCargar(!cargar)
+    }
+
+    const handleCancel = () => {
+        if(modify){
+            setModify(false)
+        }
+        if(create){
+            setCreate(false)
+        }
     }
 
   return (
@@ -61,7 +74,7 @@ export function ListarSocios() {
       <div className="flex flex-col ">
         <div className="flex relative justify-center items-center text-center  w-full mb-4">
           <h1 className="text-3xl font-bold">Listar Usuarios</h1>
-          <button className="absolute top-0 right-16  bg-emerald-500 hover:bg-emerald-400 p-2 rounded-md" onClick={()=>{setCreate(!create)}}>Agregar Usuario</button>
+          <button className="absolute top-0 right-16 text-white  bg-emerald-500 hover:bg-emerald-400 p-2 rounded-md" onClick={()=>{setCreate(true)}}>Agregar Usuario</button>
         </div>
         
         <TableLayout
@@ -70,15 +83,16 @@ export function ListarSocios() {
           onDeleteUser={handleDeleteUser}
         />
         {modify && (
+            create ? (()=>{setCreate(false)}) : (
           <>
             <div className="flex">
-              <FormEditUser onSaveUser={handleSaveUser} user={user} title={"Modificar Usuario"} />
+              <FormEditUser onSaveUser={handleSaveUser} user={user} title={"Modificar Usuario"} cancel={handleCancel} />
             </div>
           </>
-        )}
-        {create && (
+        ))}
+        {create && !modify &&(
             <div className="flex">
-            <FormEditUser onSaveUser={handleCreateUser} user={undefined} title={"Crear Usuario"} />
+            <FormEditUser onSaveUser={handleCreateUser} user={undefined} title={"Crear Usuario"} cancel={handleCancel}/>
           </div>
         )}
       </div>

@@ -9,7 +9,7 @@ export default function TableLayout({ data, onEditUser, onDeleteUser }) {
           <thead>
             <tr className="text-xl">
               {Object.keys(data[0]).map((title, index) => (
-                <th key={`${title}_${index}`}>{title}</th>
+                <th className="capitalize" key={`${title}_${index}`}>{title}</th>
               ))}
             </tr>
           </thead>
@@ -19,7 +19,7 @@ export default function TableLayout({ data, onEditUser, onDeleteUser }) {
                 {row.rol === "administrador" ? null : (
                   <tr className="row text-lg bg-emerald-100 hover:bg-gray-300">
                     {Object.values(row).map((item, index) => (
-                      <td className="break-words " key={index}>{item}</td>
+                      <td className="break-words  " key={index}>{item}</td>
                     ))}
                     <td>
                       <button

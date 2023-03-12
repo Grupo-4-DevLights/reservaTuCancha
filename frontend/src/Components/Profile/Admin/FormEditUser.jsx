@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export function FormEditUser({ user, onSaveUser , title , }) {
+export function FormEditUser({ user, onSaveUser , title , cancel}) {
   const [formValues, setFormValues] = useState({
     nombre: user?.nombre || "",
     email: user?.email || "",
@@ -64,7 +64,7 @@ export function FormEditUser({ user, onSaveUser , title , }) {
               Password
             </label>
             <input
-              type="text"
+              type="password"
               name="password"
               value={formValues?.password}
               onChange={handleChange}
@@ -83,12 +83,21 @@ export function FormEditUser({ user, onSaveUser , title , }) {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
             />
           </div>
+          <div>
           <button
             className="font-bold mt-5 w-full rounded-lg px-6 py-3 bg-gradient-to-tr from-emerald-500 to-emerald-700 hover:to-green-500 text-white"
             type="submit"
           >
             Guardar Cambios
           </button>
+          <button
+            className="font-bold mt-5 w-full rounded-lg px-6 py-3 bg-gradient-to-tr from-gray-500 to-gray-700 hover:to-gray-500 text-white"
+          onClick={() => cancel()}
+          >
+           Cancelar
+          </button>
+          </div>
+          
         </form>
       </div>
   );
