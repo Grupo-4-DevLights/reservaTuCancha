@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export function FormEditUser({ user, onSaveUser }) {
+export function FormEditUser({ user, onSaveUser , title , }) {
   const [formValues, setFormValues] = useState({
     nombre: user?.nombre || "",
     email: user?.email || "",
@@ -29,7 +29,7 @@ export function FormEditUser({ user, onSaveUser }) {
           className="mt-5 p-4 flex-wrap mx-auto bg-white shadow-lg rounded-lg min-w-[300px] w-1/3"
         >
           <h3 className="text-3xl font-bold text-center w-full mb-6">
-            Modificar Datos
+            {title}
           </h3>
           <div className="mb-4">
             <label className="block mb-2 font-bold text-gray-800" id="email">
@@ -39,7 +39,7 @@ export function FormEditUser({ user, onSaveUser }) {
               autoFocus
               type="text"
               name="nombre"
-              value={formValues.nombre}
+              value={formValues?.nombre}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
             />
@@ -54,7 +54,7 @@ export function FormEditUser({ user, onSaveUser }) {
             <input
               type="email"
               name="email"
-              value={formValues.email}
+              value={formValues?.email}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
             />
@@ -66,7 +66,7 @@ export function FormEditUser({ user, onSaveUser }) {
             <input
               type="text"
               name="password"
-              value={formValues.password || ""}
+              value={formValues?.password}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
             />
@@ -78,7 +78,7 @@ export function FormEditUser({ user, onSaveUser }) {
             <input
               type="text"
               name="rol"
-              value={formValues.rol}
+              value={formValues?.rol}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
             />
