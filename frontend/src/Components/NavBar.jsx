@@ -33,7 +33,7 @@ export function NavBar() {
 
   return (
     <>
-      <div className="flex justify-center items-center h-[64px] sm:h-[64px] sm2:h-[88px]">
+      <div className="flex justify-center items-center h-[89px] sm2:h-[89px]">
         <EmptyComponent />
       </div>
       <div
@@ -41,18 +41,22 @@ export function NavBar() {
         className="bg-white bg-opacity-90 shadow-lg bg-transparent-300 fixed w-full top-0"
       >
         <nav className="flex text-black px-12 py-3 justify-between items-center">
-          <div className="flex items-center">
-            <Link to="/" className="text-2xl font-bold">
+          <div className="flex">
+            <Link to="/" className="text-2xl font-bold ">
               <div className="flex items-center">
                 <img
-                  className=" h-16 w-16 mr-3 hidden sm2:block sm:ml-6"
-                  src="soccer.ico"
+                  className="h-[65px] w-auto hidden sm2:block"
+                  src="logo1.png"
                   alt="logo"
                 />
-                DevSports
+                <img
+                  className="h-[65px] w-auto block sm2:hidden"
+                  src="devsports.png"
+                  alt="logo"
+                />
                 {user && (
-                  <h1 className="text-2xl font-sans px-2 py-1 rounded-lg flex sm2:hidden">
-                    <p className="capitalize ml-2 font-medium text-emerald-700">
+                  <h1 className="text-2xl font-sans px-2 py-1 rounded-lg flex ite sm2:hidden">
+                    <p className="capitalize ml-2 font-medium text-emerald-700 mb-2">
                       {user.nombre}
                     </p>
                   </h1>
@@ -64,7 +68,7 @@ export function NavBar() {
             {user && (
               <h1 className="text-2xl font-sans px-2 py-1 rounded-lg hidden sm2:flex">
                 Bienvenido,{" "}
-                <p className="capitalize ml-2 font-medium text-emerald-700">
+                <p className="capitalize ml-2 font-medium text-emerald-700 self">
                   {user.nombre}.
                 </p>
               </h1>

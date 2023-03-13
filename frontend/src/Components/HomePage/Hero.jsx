@@ -4,7 +4,7 @@ export function Hero(){
       <div className="sm:grid grid-cols-2 items-center bg-gradient-to-tr from-emerald-800 to-emerald-400 h-[95vh]">
       <div className="flex justify-center items-center flex-col">
         <div className="w-[70%] mt-5 mb-5">
-          <h1 className="text-5xl text-white mb-5 hidden sm:flex font-sans font-bold">Reserva tu cancha😎</h1>
+          <h1 className="text-5xl text-white mb-5 font-sans font-bold">Reserva tu cancha</h1>
           <h1 className="text-2xl text-white sm:mt-0">
             Busca tu deporte, selecciona tu cancha, y reservala.
           </h1>
@@ -15,7 +15,7 @@ export function Hero(){
           </div>
         </div>
       </div>
-      <div className="justify-center items-center hidden sm:flex">
+      <div className="justify-center items-center">
         <img className="mr-20" src="logo.svg" alt="logo" />
       </div>
     </div>

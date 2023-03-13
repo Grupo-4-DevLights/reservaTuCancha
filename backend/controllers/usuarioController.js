@@ -18,11 +18,11 @@ const listarUsuarios = async (req, res) => {
 // Método para actualizar un usuario existente
 const actualizarUsuario = async (req, res) => {
   const { id } = req.params;
-  const { nombre, email,rol } = req.body;
+  const { nombre, email,rol, password } = req.body;
 
   
   try {
-    const usuario = await usuarioRepository.actualizarUsuario(id, nombre, email, rol);
+    const usuario = await usuarioRepository.actualizarUsuario(id, nombre, email, rol, password);
     await usuario.save();
     res.status(200).json(usuario);
    
