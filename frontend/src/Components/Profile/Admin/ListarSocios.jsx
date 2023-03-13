@@ -29,7 +29,7 @@ export function ListarSocios() {
   }, [cargar]);
 
   const handleEditUser = (row) => {
-    setCreate(false)
+    setCreate(false);
     setModify(true);
     setUser(row);
   };
@@ -71,9 +71,9 @@ export function ListarSocios() {
 
   function ScrollButton() {
     const handleClick = () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     };
-  
+
     return (
       <button className="fixed-button" onClick={handleClick}>
         Volver arriba
@@ -111,37 +111,27 @@ export function ListarSocios() {
           onEdit={handleEditUser}
           onDelete={handleDeleteUser}
         />
-        {modify &&
-          (create ? (
-            () => {
-              setCreate(false);
-            }
-          ) : (
-            <div className="fixed top-24 right-0 left-0 bottom-0">
-              <FormEditUser
-                onSaveUser={handleSaveUser}
-                user={user}
-                title={"Modificar Usuario"}
-                cancel={handleCancel}
-              />
-            </div>
-          ))}
+        {modify && (
+          <div className="fixed top-24 right-0 left-0 bottom-0">
+            <FormEditUser
+              onSaveUser={handleSaveUser}
+              user={user}
+              title={"Modificar Usuario"}
+              cancel={handleCancel}
+            />
+          </div>
+        )}
 
-        {create &&
-          (modify ? (
-            () => {
-              setModify(false);
-            }
-          ) : (
-            <div className="fixed top-24 right-0 left-0 bottom-0">
-              <FormEditUser
-                onSaveUser={handleCreateUser}
-                user={undefined}
-                title={"Agregar Usuario"}
-                cancel={handleCancel}
-              />
-            </div>
-          ))}
+        {create && (
+          <div className="fixed top-24 right-0 left-0 bottom-0">
+            <FormEditUser
+              onSaveUser={handleCreateUser}
+              user={undefined}
+              title={"Agregar Usuario"}
+              cancel={handleCancel}
+            />
+          </div>
+        )}
       </div>
     </>
   );

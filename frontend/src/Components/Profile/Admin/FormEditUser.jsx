@@ -37,7 +37,7 @@ export function FormEditUser({ user, onSaveUser, title, cancel }) {
             autoFocus
             type="text"
             name="nombre"
-            value={formValues?.nombre}
+            value={formValues?.nombre || ""}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           />
@@ -49,7 +49,7 @@ export function FormEditUser({ user, onSaveUser, title, cancel }) {
           <input
             type="email"
             name="email"
-            value={formValues?.email}
+            value={formValues?.email || ""}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           />
@@ -61,7 +61,7 @@ export function FormEditUser({ user, onSaveUser, title, cancel }) {
           <input
             type="password"
             name="password"
-            value={formValues?.password}
+            value={formValues?.password || ""}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           />
@@ -73,7 +73,7 @@ export function FormEditUser({ user, onSaveUser, title, cancel }) {
           <input
             type="text"
             name="rol"
-            value={formValues?.rol}
+            value={formValues?.rol || ""}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           />

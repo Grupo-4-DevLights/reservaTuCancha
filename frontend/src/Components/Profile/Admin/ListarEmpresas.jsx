@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { deleteEmpresa, modifyEmpresa, obtenerEmpresas } from "../../../Services/Admin";
+import {
+  deleteEmpresa,
+  modifyEmpresa,
+  obtenerEmpresas,
+} from "../../../Services/Admin";
 import { registerEmpresa } from "../../../Services/Empresa";
 import TableLayout from "../TableLayout";
 import { FormEditEmpresa } from "./FormEditEmpresa";
@@ -29,7 +33,7 @@ export function ListarEmpresas() {
   }, [cargar]);
 
   const handleEditEmpresa = (row) => {
-    setCreate(false)
+    setCreate(false);
     setModify(true);
     setEmpresa(row);
   };
@@ -71,9 +75,9 @@ export function ListarEmpresas() {
 
   function ScrollButton() {
     const handleClick = () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     };
-  
+
     return (
       <button className="fixed-button" onClick={handleClick}>
         Volver arriba
@@ -99,7 +103,7 @@ export function ListarEmpresas() {
           <button
             className="ml-10 font-medium font-sans rounded-lg p-3 bg-gradient-to-tr from-blue-400 to-blue-600 hover:to-blue-700 text-white"
             onClick={() => {
-              setCreate(true), setModify(false);
+              setCreate(true);
             }}
           >
             Agregar Empresa
@@ -111,37 +115,27 @@ export function ListarEmpresas() {
           onEdit={handleEditEmpresa}
           onDelete={handleDeleteEmpresa}
         />
-        {modify &&
-          (create ? (
-            () => {
-              setCreate(false);
-            }
-          ) : (
-            <div className="fixed top-24 right-0 left-0 bottom-0">
-              <FormEditEmpresa
-                onSave={handleSaveEmpresa}
-                empresa={empresa}
-                title={"Modificar Empresa"}
-                cancel={handleCancel}
-              />
-            </div>
-          ))}
+        {modify && (
+          <div className="fixed top-24 right-0 left-0 bottom-0">
+            <FormEditEmpresa
+              onSave={handleSaveEmpresa}
+              empresa={empresa}
+              title={"Modificar Empresa"}
+              cancel={handleCancel}
+            />
+          </div>
+        )}
 
-        {create &&
-          (modify ? (
-            () => {
-              setModify(false);
-            }
-          ) : (
-            <div className="fixed top-24 right-0 left-0 bottom-0">
-              <FormEditEmpresa
-                onSave={handleCreateEmpresa}
-                empresa={undefined}
-                title={"Agregar Empresa"}
-                cancel={handleCancel}
-              />
-            </div>
-          ))}
+        {create && (
+          <div className="fixed top-24 right-0 left-0 bottom-0">
+            <FormEditEmpresa
+              onSave={handleCreateEmpresa}
+              empresa={undefined}
+              title={"Agregar Empresa"}
+              cancel={handleCancel}
+            />
+          </div>
+        )}
       </div>
     </>
   );

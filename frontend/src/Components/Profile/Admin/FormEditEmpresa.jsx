@@ -8,7 +8,7 @@ export function FormEditEmpresa({ empresa, onSave, title, cancel }) {
     direccion: empresa?.direccion || "",
     telefono: empresa?.telefono || "",
     id_usuario: empresa?.id_usuario || "",
-    // imagen: empresa?.imagen || ""
+    imagen: empresa?.imagen || ""
   });
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export function FormEditEmpresa({ empresa, onSave, title, cancel }) {
             autoFocus
             type="text"
             name="nombre"
-            value={formValues?.nombre}
+            value={formValues?.nombre || ""}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           />
@@ -52,7 +52,7 @@ export function FormEditEmpresa({ empresa, onSave, title, cancel }) {
           <input
             type="text"
             name="direccion"
-            value={formValues?.direccion}
+            value={formValues?.direccion || ""}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           />
@@ -64,7 +64,7 @@ export function FormEditEmpresa({ empresa, onSave, title, cancel }) {
           <input
             type="number"
             name="telefono"
-            value={formValues?.telefono}
+            value={formValues?.telefono || ""}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           />
@@ -76,7 +76,7 @@ export function FormEditEmpresa({ empresa, onSave, title, cancel }) {
           <input
             type="number"
             name="id_usuario"
-            value={formValues?.id_usuario}
+            value={formValues?.id_usuario || ""}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           />

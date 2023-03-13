@@ -17,7 +17,7 @@ export default function TableLayout({ data, onEdit, onDelete }) {
             </tr>
           </thead>
           <tbody>
-            {data.map((row, index) => (
+            {data.reverse().map((row, index) => (
               <React.Fragment key={index}>
                 {row.rol === "administrador" ? null : (
                   <tr className="row text-lg bg-emerald-100 hover:bg-blue-300">
