@@ -21,7 +21,8 @@
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.8.1",
     "react-scroll": "^1.8.9",
-    "sort-by": "^0.0.2"
+    "sort-by": "^0.0.2",
+    "sweetalert2": "^11.7.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

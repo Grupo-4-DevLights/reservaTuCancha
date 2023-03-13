@@ -19,7 +19,7 @@ const listarEmpresas= ()=>{
 
 const crearEmpresa=async (nombre, direccion, telefono,imagen,id_usuario )=>{
 
-    if(!(nombre && direccion && telefono && imagen && id_usuario)){
+    if(!(nombre && direccion && telefono && id_usuario)){
         throw new Error('deben estar todos los datos(nombre,direccion,telefono,imagen)');
     }
 

@@ -1,37 +1,42 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { NavBar } from "../../Components/NavBar";
 import { registerUser } from "../../Services/Users";
-import ErrorModal from "./ErrorModal";
-import RegisterModal from "./RegisterModal";
+import Swal from "sweetalert2";
 
 export function FormRegister() {
-  const [showModal, setShowModal] = useState(false);
-  const [showErrorModal, setShowErrorModal] = useState(false);
   const [nombre, setNombre] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [rePassword, setrePassword] = useState();
-
-  const handleModalClose = () => {
-    setShowModal(false);
-  };
-
-  const handleErrorModalClose = () => {
-    setShowErrorModal(false);
-  };
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   async function onFormSubmit(event) {
     event.preventDefault();
     if (password !== rePassword) {
-      setShowErrorModal(true);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Las contraseñas deben coincidir",
+        confirmButtonText: "Aceptar",
+      });
     } else {
       const data = await registerUser({
         nombre,
         email,
         password,
+      }).then((data) => {
+        if (data.success) {
+          Swal.fire({
+            icon: "success",
+            title: "Registro completo",
+            confirmButtonText: "Aceptar",
+          }).then(() => navigate("/ingresar"));
+        } else {
+          setError(data.message);
+        }
       });
-      setShowModal(true);
     }
   }
 
@@ -46,6 +51,11 @@ export function FormRegister() {
           <h3 className="text-3xl font-bold text-center w-full mb-6">
             Registrarse
           </h3>
+          <div className="w-full">
+            <p className="text-red-500 font-bold text-center uppercase">
+              {error}
+            </p>
+          </div>
           <div className="mb-4">
             <label
               htmlFor="name"
@@ -55,7 +65,6 @@ export function FormRegister() {
             </label>
             <input
               autoFocus
-              required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               type="text"
               value={nombre}
@@ -71,7 +80,6 @@ export function FormRegister() {
               Email
             </label>
             <input
-              required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               type="email"
               value={email}
@@ -87,7 +95,6 @@ export function FormRegister() {
               Contraseña
             </label>
             <input
-              required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               type="password"
               value={password}
@@ -103,7 +110,6 @@ export function FormRegister() {
               Repetir Contraseña
             </label>
             <input
-              required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               type="password"
               value={rePassword}
@@ -117,9 +123,6 @@ export function FormRegister() {
           >
             Registrarme
           </button>
-
-          <RegisterModal isOpen={showModal} onClose={handleModalClose} />
-          <ErrorModal isOpen={showErrorModal} onClose={handleErrorModalClose} />
           <h1 className="mt-5 font-bold text-center text-c w-full">
             Ya tienes cuenta{" "}
             <NavLink to="/ingresar" className="text-green-600">

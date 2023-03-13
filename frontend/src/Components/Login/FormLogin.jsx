@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { NavBar } from "../NavBar";
 import { decodificar, useAppContext } from "../../context/userContext";
 import { loginUser } from "../../Services/Users";
+import Swal from 'sweetalert2'
 
 export function FormLogin() {
   const [email, setEmail] = useState("");
@@ -38,6 +39,11 @@ export function FormLogin() {
           <h3 className="text-3xl font-bold text-center w-full mb-6">
             Iniciar Sesion
           </h3>
+          <div className="w-full">
+            <p className="text-red-500 font-bold text-center uppercase">
+              {error}
+            </p>
+          </div>
           <div className="mb-4">
             <label className="block mb-2 font-bold text-gray-800" id="email">
               Email
@@ -51,11 +57,6 @@ export function FormLogin() {
               onChange={(event) => setEmail(event.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
             />
-          </div>
-          <div className="w-full">
-            <p className="text-red-500 font-bold text-center uppercase">
-              {error}
-            </p>
           </div>
           <div className="mb-4">
             <label

@@ -38,7 +38,7 @@ export function NavBar() {
       </div>
       <div
         id="navbar"
-        className="bg-white bg-opacity-90 shadow-lg bg-transparent-300 fixed w-full top-0"
+        className="bg-white shadow-lg bg-transparent-300 fixed w-full top-0"
       >
         <nav className="flex text-black px-12 py-3 justify-between items-center">
           <div className="flex">
@@ -156,7 +156,7 @@ export function NavBar() {
           </div>
         </nav>
         <div className={`${isOpen ? "fixed w-full" : "hidden"} sm:hidden`}>
-          <div className="px-2 pt-2 pb-3 space-y-1 absolute w-full text-center bg-emerald-300 bg-opacity-90">
+          <div className="px-2 pt-2 pb-3 space-y-1 absolute w-full text-center bg-emerald-300 ">
             <Link
               to="/"
               className="text-white w-full block hover:bg-emerald-400 font-sans p-2 rounded-md font-bold"

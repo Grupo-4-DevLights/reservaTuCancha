@@ -1,50 +1,50 @@
 import React, { useEffect, useState } from "react";
-import { deleteUser, modifyUser, obtenerSocios } from "../../../Services/Admin";
-import { registerUser } from "../../../Services/Users";
+import { deleteEmpresa, modifyEmpresa, obtenerEmpresas } from "../../../Services/Admin";
+import { registerEmpresa } from "../../../Services/Empresa";
 import TableLayout from "../TableLayout";
-import { FormEditUser } from "./FormEditUser";
+import { FormEditEmpresa } from "./FormEditEmpresa";
 import Swal from "sweetalert2";
-const initialUser = {
+const initialEmpresa = {
   id: "",
   nombre: "",
-  email: "",
-  rol: "",
+  direccion: "",
+  telefono: "",
 };
 
-export function ListarSocios() {
-  const [socios, setSocios] = useState([]);
-  const [user, setUser] = useState(initialUser);
+export function ListarEmpresas() {
+  const [empresas, setEmpresas] = useState([]);
+  const [empresa, setEmpresa] = useState(initialEmpresa);
   const [modify, setModify] = useState(false);
   const [create, setCreate] = useState(false);
   const [cargar, setCargar] = useState(false);
 
   useEffect(() => {
-    obtenerSocios()
+    obtenerEmpresas()
       .then((data) => {
-        setSocios(data);
+        setEmpresas(data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [cargar]);
 
-  const handleEditUser = (row) => {
+  const handleEditEmpresa = (row) => {
     setCreate(false)
     setModify(true);
-    setUser(row);
+    setEmpresa(row);
   };
 
-  const handleSaveUser = (values) => {
-    modifyUser(values).then((data) => {
+  const handleSaveEmpresa = (values) => {
+    modifyEmpresa(values).then((data) => {
       setModify(!modify);
       setCargar(!cargar);
     });
-    setUser(initialUser);
+    setEmpresa(initialEmpresa);
   };
 
-  const handleDeleteUser = (value) => {
+  const handleDeleteEmpresa = (value) => {
     Swal.fire({
-      title: `Seguro que desea eliminar el usuario ${value.nombre}?`,
+      title: `Seguro que desea eliminar la empresa ${value.nombre}?`,
       text: "No podras revertir esta accion!",
       icon: "warning",
       showCancelButton: true,
@@ -54,17 +54,17 @@ export function ListarSocios() {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteUser(value).then((data) => {
+        deleteEmpresa(value).then((data) => {
           setCargar(!cargar);
-          Swal.fire("Eliminado!", "El usuario ah sido eliminado.", "success");
+          Swal.fire("Eliminada!", "La empresa ah sido eliminada.", "success");
         });
       }
     });
   };
 
-  async function handleCreateUser(values) {
-    const response = await registerUser(values);
-    console.log("Usuario Creado", response);
+  async function handleCreateEmpresa(values) {
+    const response = await registerEmpresa(values);
+    console.log("Empresa Creada", response);
     setCreate(false);
     setCargar(!cargar);
   }
@@ -95,21 +95,21 @@ export function ListarSocios() {
       <ScrollButton />
       <div className="flex flex-col ">
         <div className="flex justify-center items-center text-center w-full mb-8">
-          <h1 className="text-5xl font-bold">Lista de Usuarios</h1>
+          <h1 className="text-5xl font-bold">Lista de Empresas</h1>
           <button
             className="ml-10 font-medium font-sans rounded-lg p-3 bg-gradient-to-tr from-blue-400 to-blue-600 hover:to-blue-700 text-white"
             onClick={() => {
               setCreate(true), setModify(false);
             }}
           >
-            Agregar Usuario
+            Agregar Empresa
           </button>
         </div>
 
         <TableLayout
-          data={socios}
-          onEdit={handleEditUser}
-          onDelete={handleDeleteUser}
+          data={empresas}
+          onEdit={handleEditEmpresa}
+          onDelete={handleDeleteEmpresa}
         />
         {modify &&
           (create ? (
@@ -118,10 +118,10 @@ export function ListarSocios() {
             }
           ) : (
             <div className="fixed top-24 right-0 left-0 bottom-0">
-              <FormEditUser
-                onSaveUser={handleSaveUser}
-                user={user}
-                title={"Modificar Usuario"}
+              <FormEditEmpresa
+                onSave={handleSaveEmpresa}
+                empresa={empresa}
+                title={"Modificar Empresa"}
                 cancel={handleCancel}
               />
             </div>
@@ -134,10 +134,10 @@ export function ListarSocios() {
             }
           ) : (
             <div className="fixed top-24 right-0 left-0 bottom-0">
-              <FormEditUser
-                onSaveUser={handleCreateUser}
-                user={undefined}
-                title={"Agregar Usuario"}
+              <FormEditEmpresa
+                onSave={handleCreateEmpresa}
+                empresa={undefined}
+                title={"Agregar Empresa"}
                 cancel={handleCancel}
               />
             </div>

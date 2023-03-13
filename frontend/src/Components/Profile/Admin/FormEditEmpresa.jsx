@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 
-export function FormEditUser({ user, onSaveUser, title, cancel }) {
+// todo q pueda cambiar la imagen tmb
+
+export function FormEditEmpresa({ empresa, onSave, title, cancel }) {
   const [formValues, setFormValues] = useState({
-    nombre: user?.nombre || "",
-    email: user?.email || "",
-    rol: user?.rol || "",
-    password: user?.password || "",
+    nombre: empresa?.nombre || "",
+    direccion: empresa?.direccion || "",
+    telefono: empresa?.telefono || "",
+    id_usuario: empresa?.id_usuario || "",
+    // imagen: empresa?.imagen || ""
   });
 
   useEffect(() => {
-    setFormValues(user);
-  }, [user]);
+    setFormValues(empresa);
+  }, [empresa]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -19,7 +22,7 @@ export function FormEditUser({ user, onSaveUser, title, cancel }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSaveUser(formValues);
+    onSave(formValues);
   };
 
   return (
@@ -43,37 +46,37 @@ export function FormEditUser({ user, onSaveUser, title, cancel }) {
           />
         </div>
         <div className="mb-4">
-          <label className="block mb-2 font-bold text-gray-800" id="email">
-            Email
-          </label>
-          <input
-            type="email"
-            name="email"
-            value={formValues?.email}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-2 font-bold text-gray-800" id="password">
-            Password
-          </label>
-          <input
-            type="password"
-            name="password"
-            value={formValues?.password}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-2 font-bold text-gray-800" id="rol">
-            Rol
+          <label className="block mb-2 font-bold text-gray-800" id="direccion">
+            Direccion
           </label>
           <input
             type="text"
-            name="rol"
-            value={formValues?.rol}
+            name="direccion"
+            value={formValues?.direccion}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-2 font-bold text-gray-800" id="telefono">
+            Telefono
+          </label>
+          <input
+            type="number"
+            name="telefono"
+            value={formValues?.telefono}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-2 font-bold text-gray-800" id="id_usuario">
+            Id_Usuario (debe existir)
+          </label>
+          <input
+            type="number"
+            name="id_usuario"
+            value={formValues?.id_usuario}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           />

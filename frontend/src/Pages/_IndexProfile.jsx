@@ -9,7 +9,7 @@ export function IndexProfile() {
         <>
             <NavBar/>
             <LayoutProfile>
-                <div className="flex flex-col-2 h-screen content-start space-x-[10vw]">
+                <div className="flex flex-col-2 h-screen content-start space-x-[5vw] mt-10">
                   <DatosPersonales/>
                   <ImagenYrecursos/>
                 </div>
