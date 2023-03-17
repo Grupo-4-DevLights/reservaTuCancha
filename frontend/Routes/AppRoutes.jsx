@@ -15,6 +15,7 @@ import { VisualizarEmpresas } from "../src/Components/Socio/VisualizarEmpresas";
 import { VisualizarCanchas } from "../src/Components/Socio/VisualizarCanchas";
 import ListarSociosPage from "../src/Pages/_ListarSocios";
 import ListarEmpresasPage from "../src/Pages/_ListarEmpresas"
+import ListarCanchasPage from "../src/Pages/_ListarCanchas";
 
 //import { RegistrarReserva } from './Pages/Socio/RegistrarReserva'
 
@@ -51,6 +52,7 @@ export default function AppRoutes() {
           <Route path="/reserva" element={<IndexReserva />} />
           <Route path="/listar-socios" element={<ListarSociosPage />} />
           <Route path="/listar-empresas" element={<ListarEmpresasPage />} />
+          <Route path="/listar-canchas" element={<ListarCanchasPage />} />
           <Route path="/socio/elegirempresa" element={<VisualizarEmpresas />} />
           <Route
             path="/socio/elegircancha/:id/"

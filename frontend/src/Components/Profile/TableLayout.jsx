@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TableLayout({ data, onEdit, onDelete }) {
+export default function TableLayout({ data, onEdit, onDelete, layout}) {
   return (
     <>
       {data && data.length > 0 && (
@@ -8,11 +8,9 @@ export default function TableLayout({ data, onEdit, onDelete }) {
           <thead>
             <tr className="text-xl">
               {Object.keys(data[0]).map((title, index) =>
-                title !== "imagen" ? (
                   <th className="capitalize" key={`${title}_${index}`}>
                     {title}
                   </th>
-                ) : null
               )}
             </tr>
           </thead>
@@ -22,8 +20,9 @@ export default function TableLayout({ data, onEdit, onDelete }) {
                 {row.rol === "administrador" ? null : (
                   <tr className="row text-lg bg-emerald-100 hover:bg-blue-300">
                     {Object.values(row).map(
+
                       (item, index) =>
-                        index !== 4 && (
+                        (
                           <td className="break-words" key={index}>
                             {item}
                           </td>

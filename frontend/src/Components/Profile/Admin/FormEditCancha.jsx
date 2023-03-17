@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { obtenerSocios } from "../../../Services/Admin";
+import { obtenerEmpresas, obtenerSocios } from "../../../Services/Admin";
 
 // todo q pueda cambiar la imagen tmb
 
-export function FormEditEmpresa({ empresa, onSave, title, cancel }) {
+export function FormEditCancha({ cancha, onSave, title, cancel }) {
   const [formValues, setFormValues] = useState({
-    nombre: empresa?.nombre || "",
-    direccion: empresa?.direccion || "",
-    telefono: empresa?.telefono || "",
-    id_usuario: empresa?.id_usuario || "",
-    imagen: empresa?.imagen || ""
+    nombre: cancha?.nombre || "",
+    tipo: cancha?.tipo || "",
+    id_empresa: cancha?.id_empresa || "",
+    precio: cancha?.precio || ""
   });
-  const [socios, setSocios] = useState([]);
+  const [empresas, setEmpresas] = useState([]);
 
   useEffect(() => {
-    obtenerSocios()
+    obtenerEmpresas()
       .then((data) => {
-        setSocios(data);
+        console.log("Entre a obtener empresa")
+        setEmpresas(data);
       })
       .catch((error) => {
         console.log(error);
@@ -24,8 +24,8 @@ export function FormEditEmpresa({ empresa, onSave, title, cancel }) {
   }, []);
 
   useEffect(() => {
-    setFormValues(empresa);
-  }, [empresa]);
+    setFormValues(cancha);
+  }, [cancha]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -60,45 +60,38 @@ export function FormEditEmpresa({ empresa, onSave, title, cancel }) {
         </div>
         <div className="mb-4">
           <label className="block mb-2 font-bold text-gray-800" id="direccion">
-            Direccion
+            Tipo
           </label>
           <input
             type="text"
-            name="direccion"
-            value={formValues?.direccion || ""}
+            name="tipo"
+            value={formValues?.tipo || ""}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           />
         </div>
         <div className="mb-4">
           <label className="block mb-2 font-bold text-gray-800" id="telefono">
-            Telefono
+            Precio
           </label>
           <input
             type="number"
-            name="telefono"
-            value={formValues?.telefono || ""}
+            name="precio"
+            value={formValues?.precio || ""}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           />
         </div>
         <div className="mb-4">
-          <label className="block mb-2 font-bold text-gray-800" id="id_usuario">
-            Id_Usuario 
+          <label className="block mb-2 font-bold text-gray-800" id="id_empresa">
+            Id Empresa 
           </label>
-          <select value={formValues?.id_usuario || ""} name="id_usuario" onChange={handleChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500">
-              {socios?.map((socio) => (
-                <option value={socio.id_usuario}>{socio.nombre}</option>
+          <select value={formValues?.id_empresa || ""} name="id_empresa" onChange={handleChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500">
+            <option value="">Seleccione una empresa</option>
+              {empresas?.map((empresa) => (
+                <option value={empresa.id_empresa}>{empresa.nombre}</option>
               ))}
           </select>
-
-          {/* <input
-            type="number"
-            name="id_usuario"
-            
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-          /> */}
         </div>
         <div>
           <button

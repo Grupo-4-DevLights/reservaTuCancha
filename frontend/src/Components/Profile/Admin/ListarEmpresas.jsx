@@ -26,6 +26,7 @@ export function ListarEmpresas() {
     obtenerEmpresas()
       .then((data) => {
         setEmpresas(data);
+        
       })
       .catch((error) => {
         console.log(error);
@@ -73,17 +74,7 @@ export function ListarEmpresas() {
     setCargar(!cargar);
   }
 
-  function ScrollButton() {
-    const handleClick = () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
-    return (
-      <button className="fixed-button" onClick={handleClick}>
-        Volver arriba
-      </button>
-    );
-  }
+  
 
   const handleCancel = () => {
     if (modify) {
@@ -114,6 +105,7 @@ export function ListarEmpresas() {
           data={empresas}
           onEdit={handleEditEmpresa}
           onDelete={handleDeleteEmpresa}
+          layout={"Empresa"}
         />
         {modify && (
           <div className="fixed top-24 right-0 left-0 bottom-0">
@@ -138,5 +130,18 @@ export function ListarEmpresas() {
         )}
       </div>
     </>
+  );
+}
+
+
+export function ScrollButton() {
+  const handleClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <button className="fixed-button" onClick={handleClick}>
+      Volver arriba
+    </button>
   );
 }
