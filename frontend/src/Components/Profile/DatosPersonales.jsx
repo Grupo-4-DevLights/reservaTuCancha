@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { decodificar, useAppContext } from "../../context/userContext";
 import { modifyUser, obtenerSociosConId } from "../../Services/Admin";
+import { ButtonShowPassword } from "../../Utils/Butttons";
 
 export function DatosPersonales() {
   const { user, setUser } = useAppContext();
@@ -11,6 +12,7 @@ export function DatosPersonales() {
     rol: user?.rol || "",
     password: user?.password || "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   function DisabledButton() {
     setEnable(!enable);
@@ -72,16 +74,30 @@ export function DatosPersonales() {
             <p className="text-xl font-sans font-medium border-b-2 border-emerald-400">
               Contraseña
             </p>
-            <input
-              disabled={enable}
-              type="text"
-              name="password"
-              value={formValues?.password}
-              onChange={handleChange}
-              className={`rounded-lg flex w-full ${
-                !enable && "bg-emerald-300"
-              }`}
-            />
+            <div className="relative w-full">
+              <input
+                disabled={enable}
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formValues?.password}
+                onChange={handleChange}
+                className={`rounded-lg flex w-full ${
+                  !enable && "bg-emerald-300"
+                } pr-10`} // Aquí se agrega `pr-10` para darle espacio al botón
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute top-1/2 right-0 transform -translate-y-1/2 mr-2 text-gray-600 focus:outline-none" // Aquí se usa las clases de TailwindCSS para posicionar el botón
+              >
+                {showPassword ? (
+                  <ButtonShowPassword showPassword={showPassword} />
+                ) : (
+                  <ButtonShowPassword showPassword={showPassword} />
+                )}
+              </button>
+            </div>
+            
 
             <p className="text-xl font-sans font-medium border-b-2 border-emerald-400">
               Categoria

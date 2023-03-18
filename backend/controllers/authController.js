@@ -33,7 +33,7 @@ const login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        const signUser = await authRepository.login(email, password);
+        const signUser = await authRepository.login(email, password,);
         return res
             .status(200)
             .cookie("token", signUser.token, signUser.options)

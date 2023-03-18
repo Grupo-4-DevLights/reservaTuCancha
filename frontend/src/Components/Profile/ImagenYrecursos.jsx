@@ -73,10 +73,11 @@ export function ImagenYrecursos() {
         <div>
             
             <form className="flex justify-center flex-wrap w-full">
-            <h1>Subir imagen</h1>
+            <h1 className="text-lg font-bold font-sans px-2 py-1 rounded-lg hidden sm2:flex">Subir imagen</h1>
                 <div className=" flex w-full justify-center">
-                    
-                    <input type="file" onChange={handleFileChange} />
+                    <label className="block">
+                        <input type="file" onChange={handleFileChange} className="block w-full text-sm bg-transparent text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100" />
+                    </label>
                 </div>
                 <div className="flex w-100">
                     <button type="button" onClick={handleUpload}
