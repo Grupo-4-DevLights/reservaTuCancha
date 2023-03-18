@@ -4,7 +4,7 @@ export default function TableLayout({ data, onEdit, onDelete, layout}) {
   return (
     <>
       {data && data.length > 0 && (
-        <table className="table-fixed w-full text-sm text-center mb-10">
+        <table className="table-fixed w-full text-sm text-center mt-5 mb-5">
           <thead>
             <tr className="text-xl">
               {Object.keys(data[0]).map((title, index) =>
@@ -30,7 +30,7 @@ export default function TableLayout({ data, onEdit, onDelete, layout}) {
                     )}
                     <td>
                       <button
-                        className="bg-emerald-500 rounded-md font-medium font-sans text-white p-1 mx-2 my-1"
+                        className="font-medium font-sans my-1 border-b-2 border-blue-700"
                         onClick={() => onEdit(row)}
                       >
                         Modificar
@@ -38,7 +38,7 @@ export default function TableLayout({ data, onEdit, onDelete, layout}) {
                     </td>
                     <td>
                       <button
-                        className="bg-red-500 rounded-md font-medium font-sans text-white p-1 mx-2 my-1"
+                        className="font-medium font-sans my-1 border-b-2 border-red-700"
                         onClick={() => onDelete(row)}
                       >
                         Eliminar

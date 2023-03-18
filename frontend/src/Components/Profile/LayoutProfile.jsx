@@ -7,8 +7,8 @@ import ButtonsSocio from "./Socio/ButtonsSocio";
 export function LayoutProfile({ children }) {
   const { user } = useAppContext();
   return (
-    <div className="flex flex-col ">
-      <div className="w-full flex justify-center  shadow-lg ">
+    <div className="flex flex-col">
+      <div className="w-full flex justify-center bg-emerald-100 mb-5">
         <div className="flex justify-center">
           {user &&
             (user.rol === "socio" ? (

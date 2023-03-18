@@ -84,7 +84,7 @@ export default function ListarCanchas() {
             <div className="flex justify-center items-center text-center w-full mb-8">
                 <h1 className="text-5xl font-bold">Lista de Canchas</h1>
                 <button
-                    className="ml-10 font-medium font-sans rounded-lg p-3 bg-gradient-to-tr from-blue-400 to-blue-600 hover:to-blue-700 text-white"
+                    className="ml-10 font-medium font-sans rounded-lg p-3 bg-gradient-to-tr from-emerald-500 to-blue-400 hover:to-emerald-700 text-white"
                     onClick={() => {
                     setCreate(true);
                     }}
@@ -98,7 +98,7 @@ export default function ListarCanchas() {
           layout={"Cancha"}
         />
         {modify && (
-          <div className="fixed top-24 right-0 left-0 bottom-0">
+          <div className="fixed top-24 right-0 left-0 bottom-0 bg-black bg-opacity-70">
             <FormEditCancha
               onSave={handleSaveCancha}
               empresa={canchas}
@@ -108,7 +108,7 @@ export default function ListarCanchas() {
           </div>
         )}
         {create && (
-          <div className="fixed top-24 right-0 left-0 bottom-0">
+          <div className="fixed top-24 right-0 left-0 bottom-0 bg-black bg-opacity-70">
             <FormEditCancha
               onSave={handleCreateCancha}
               empresa={undefined}

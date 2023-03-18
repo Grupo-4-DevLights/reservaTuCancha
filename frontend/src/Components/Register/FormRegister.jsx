@@ -14,32 +14,25 @@ export function FormRegister() {
 
   async function onFormSubmit(event) {
     event.preventDefault();
-    if (password !== rePassword) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Las contraseñas deben coincidir",
-        confirmButtonText: "Aceptar",
-      });
-    } else {
-      const data = await registerUser({
-        nombre,
-        email,
-        password,
-      }).then((data) => {
-        if (data.success) {
-          Swal.fire({
-            icon: "success",
-            title: "Registro completo",
-            confirmButtonText: "Aceptar",
-          }).then(() => navigate("/ingresar"));
-        } else {
-          setError(data.message);
-        }
-      });
-    }
+    const data = await registerUser({
+      nombre,
+      email,
+      password,
+      rePassword,
+    }).then((data) => {
+      if (password !== rePassword) {
+        setError("Las contraseñas no coinciden");
+      } else if (data.success) {
+        Swal.fire({
+          icon: "success",
+          title: "Registro completo",
+          confirmButtonText: "Aceptar",
+        }).then(() => navigate("/ingresar"));
+      } else {
+        setError(data.message);
+      }
+    });
   }
-
   return (
     <>
       <NavBar />

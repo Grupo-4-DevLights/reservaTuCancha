@@ -33,12 +33,12 @@ export function NavBar() {
 
   return (
     <>
-      <div className="flex justify-center items-center h-[89px] sm2:h-[89px]">
+      <div className="flex justify-center items-center h-[96px] sm2:h-[89px] bg-black">
         <EmptyComponent />
       </div>
       <div
         id="navbar"
-        className="bg-white shadow-lg bg-transparent-300 fixed w-full top-0"
+        className="items-center bg-image bg-transparent-300 fixed w-full top-0"
       >
         <nav className="flex text-black px-12 py-3 justify-between items-center">
           <div className="flex">
@@ -66,7 +66,7 @@ export function NavBar() {
           </div>
           <div className="hidden sm:block sm:ml-6">
             {user && (
-              <h1 className="text-2xl font-sans px-2 py-1 rounded-lg hidden sm2:flex">
+              <h1 className="text-2xl font-sans font-medium px-2 py-1 rounded-lg hidden sm2:flex">
                 Bienvenido,{" "}
                 <p className="capitalize ml-2 font-medium text-emerald-700 self">
                   {user.nombre}.

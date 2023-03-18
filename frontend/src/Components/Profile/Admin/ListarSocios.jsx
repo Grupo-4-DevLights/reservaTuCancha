@@ -97,7 +97,7 @@ export function ListarSocios() {
         <div className="flex justify-center items-center text-center w-full mb-8">
           <h1 className="text-5xl font-bold">Lista de Usuarios</h1>
           <button
-            className="ml-10 font-medium font-sans rounded-lg p-3 bg-gradient-to-tr from-blue-400 to-blue-600 hover:to-blue-700 text-white"
+            className="ml-10 font-medium font-sans rounded-lg p-3 bg-gradient-to-tr from-emerald-500 to-blue-400 hover:to-emerald-700 text-white"
             onClick={() => {
               setCreate(true), setModify(false);
             }}
@@ -112,7 +112,7 @@ export function ListarSocios() {
           onDelete={handleDeleteUser}
         />
         {modify && (
-          <div className="fixed top-24 right-0 left-0 bottom-0">
+          <div className="fixed top-24 right-0 left-0 bottom-0 bg-black bg-opacity-70">
             <FormEditUser
               onSaveUser={handleSaveUser}
               user={user}
@@ -123,7 +123,7 @@ export function ListarSocios() {
         )}
 
         {create && (
-          <div className="fixed top-24 right-0 left-0 bottom-0">
+          <div className="fixed top-24 right-0 left-0 bottom-0 bg-black bg-opacity-70">
             <FormEditUser
               onSaveUser={handleCreateUser}
               user={undefined}
