@@ -86,7 +86,7 @@ const login = async(email, password) => {
 
 
     const token = jwt.sign(
-        { id: userFound.id, nombre:userFound.nombre,email:userFound.email,rol:userFound.rol },
+        { id_usuario: userFound.id_usuario, nombre:userFound.nombre,email:userFound.email,rol:userFound.rol,password:userFound.password },
         TOKEN_KEY, 
         {
         expiresIn: 86400, // 24 hours

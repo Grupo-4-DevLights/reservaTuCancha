@@ -38,58 +38,64 @@ export function DatosPersonales() {
         </h3>
         <form onSubmit={EnviarDatos}>
           <div className="flex gap-2 flex-col items-start">
-            
-              <p className="text-xl font-sans font-medium border-b-2 border-emerald-400">Nombre</p>
-              <input
-                disabled={enable}
-                type="text"
-                name="nombre"
-                value={formValues?.nombre}
-                onChange={handleChange}
-                className={`rounded-lg flex w-full ${
-                  !enable && "bg-emerald-300"
-                }`}
-              />
-            
- 
-              <p className="text-xl font-sans font-medium border-b-2 border-emerald-400">Email</p>
-              <input
-                disabled={enable}
-                type="text"
-                name="email"
-                value={formValues?.email}
-                onChange={handleChange}
-                className={`rounded-lg flex w-full ${
-                  !enable && "bg-emerald-300"
-                }`}
-              />
-      
-           
-              <p className="text-xl font-sans font-medium border-b-2 border-emerald-400">Contraseña</p>
-              <input
-                disabled={enable}
-                type="text"
-                name="password"
-                value={formValues?.password}
-                onChange={handleChange}
-                className={`rounded-lg flex w-full ${
-                  !enable && "bg-emerald-300"
-                }`}
-              />
-    
-           
-              <p className="text-xl font-sans font-medium border-b-2 border-emerald-400">Categoria</p>
-              <input
-                disabled={enable}
-                type="text"
-                name="rol"
-                value={formValues?.rol}
-                onChange={handleChange}
-                className={`rounded-lg flex w-full ${
-                  !enable && "bg-emerald-300"
-                }`}
-              />
-         
+
+
+
+            <p className="text-xl font-sans font-medium border-b-2 border-emerald-400">
+              Nombre
+            </p>
+            <input
+              disabled={enable}
+              type="text"
+              name="nombre"
+              value={formValues?.nombre}
+              onChange={handleChange}
+              className={`rounded-lg flex w-full ${
+                !enable && "bg-emerald-300"
+              }`}
+            />
+
+            <p className="text-xl font-sans font-medium border-b-2 border-emerald-400">
+              Email
+            </p>
+            <input
+              disabled={enable}
+              type="text"
+              name="email"
+              value={formValues?.email}
+              onChange={handleChange}
+              className={`rounded-lg flex w-full ${
+                !enable && "bg-emerald-300"
+              }`}
+            />
+
+            <p className="text-xl font-sans font-medium border-b-2 border-emerald-400">
+              Contraseña
+            </p>
+            <input
+              disabled={enable}
+              type="text"
+              name="password"
+              value={formValues?.password}
+              onChange={handleChange}
+              className={`rounded-lg flex w-full ${
+                !enable && "bg-emerald-300"
+              }`}
+            />
+
+            <p className="text-xl font-sans font-medium border-b-2 border-emerald-400">
+              Categoria
+            </p>
+            <input
+              disabled={enable}
+              type="text"
+              name="rol"
+              value={formValues?.rol}
+              onChange={handleChange}
+              className={`rounded-lg flex w-full ${
+                !enable && "bg-emerald-300"
+              }`}
+            />
           </div>
           {enable && (
             <button
