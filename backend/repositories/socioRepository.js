@@ -128,7 +128,7 @@ const verReservas = async (id_usuario) => {
         id_usuario: id_usuario,
       },
       attributes: [
-        'fecha','hora_inicio','hora_fin', // las columnas que deseas obtener del registro
+        'id_usuario','id_cancha','id_reserva','fecha','hora_inicio','hora_fin', // las columnas que deseas obtener del registro
         [fn('min',col('hora_inicio')), 'hora_inicio'],
         [fn('max',col('hora_fin')), 'hora_fin'],// la función max() de Sequelize para obtener la hora máxima
       ],
@@ -153,7 +153,7 @@ const verReservas = async (id_usuario) => {
 };
 
 //eliminar una reserva
-const eliminarReserva = async (id_usuario,id_reserva) => {
+const eliminarReserva = async (id_usuario,id_cancha) => {
   //comprobar existencia en la bases de datos
 
   const findUser = await usuario.findByPk(id_usuario);
@@ -167,7 +167,7 @@ const eliminarReserva = async (id_usuario,id_reserva) => {
       { estado: "disponible", id_usuario:null },
       {
         where: {
-          id_reserva,
+          id_usuario,id_cancha
         },
       }
     );

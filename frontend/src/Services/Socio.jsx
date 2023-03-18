@@ -49,3 +49,15 @@ export async function ObtenerReservas(id_usuario){
     const data = await response.json();
     return data;
 }
+
+export async function eliminarReservas(id_usuario,id_cancha){
+    const response = await fetch(`http://localhost:3001/api/socio/misreservas/eliminar/${id_usuario}/${id_cancha}`, {
+        method: 'PUT',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+    })
+    const data = await response.json();
+    return data;
+
+}
