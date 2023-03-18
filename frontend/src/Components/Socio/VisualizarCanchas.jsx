@@ -1,7 +1,9 @@
 import { useParams,Link } from "react-router-dom"
 
 import {useState,useEffect} from 'react'
+
 import { obtenerCanchas } from "../../Services/Socio"
+import { NavBar } from "../NavBar"
 
 
 
@@ -25,8 +27,10 @@ export const VisualizarCanchas=()=>{
     if (loading) return <h1>Cargando....</h1>
     if (error) return <h1>Error proveniente del servidor</h1>
     return(
+        <>
+        <NavBar />
         <div className='visual-cancha'>
-            <h1 className=" text-center">Bienvenido a la Empresa {id}</h1>
+            <h1 className=" text-center text-2xl">Bienvenido a la Empresa {id}</h1>
             <p className=" text-center">Elija que cancha quiere jugar</p>
                 {canchas.map((cancha,index)=>(
                     <div className='select-cancha text-center' key={index}>
@@ -38,6 +42,7 @@ export const VisualizarCanchas=()=>{
                     </div>
                 ))}
         </div>
+        </>
 
     )
 

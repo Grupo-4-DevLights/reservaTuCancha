@@ -110,6 +110,12 @@ export function NavBar() {
                     >
                       Salir
                     </button>
+                    <Link
+                      to="/socio/elegirempresa"
+                      className="hover:bg-emerald-600 font-sans bg-emerald-500 p-2 rounded-md text-white font-bold"
+                    >
+                      Buscar canchas
+                    </Link>
                   </>
                 )}
               </div>

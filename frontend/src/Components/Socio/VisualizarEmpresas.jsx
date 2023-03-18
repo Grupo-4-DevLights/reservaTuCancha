@@ -1,7 +1,11 @@
 
 import { useEffect, useState } from 'react'
-import {obtenerEmpresas} from '../../Services/Socio'
 import {Link} from 'react-router-dom'
+
+
+import {obtenerEmpresas} from '../../Services/Socio'
+import { NavBar } from '../NavBar'
+import { LayoutProfile } from '../Profile/LayoutProfile'
 
 export const VisualizarEmpresas = () => {
 
@@ -24,17 +28,20 @@ export const VisualizarEmpresas = () => {
     if (error) return <h1>Error proveniente del servidor</h1>
     else{
     return (
-        <div className='principal'>
-            <h1 className=' text-center'> Eliga el nombre de la empresa que quiere alquilar cancha:</h1>
-            {empresas.map((empresa,index)=>(
-                <div className='select-empresa text-center' key={index}>
-                    <Link to={`/socio/elegircancha/${empresa.id_empresa}`}>
-                        <button  className='' value={empresa.nombre}>{empresa.nombre}</button>
-                    </Link>
+        <>
+            <NavBar />
+                <div className='principal'>
+                        <h1 className=' text-center'> Eliga el nombre de la empresa que quiere alquilar cancha:</h1>
+                        {empresas.map((empresa,index)=>(
+                            <div className='select-empresa text-center' key={index}>
+                                <Link to={`/socio/elegircancha/${empresa.id_empresa}`}>
+                                    <button  className='' value={empresa.nombre}>{empresa.nombre}</button>
+                                </Link>
+                            </div>
+                        ))}
+                        {error && <p>{error}</p>}
                 </div>
-            ))}
-            {error && <p>{error}</p>}
-        </div>
+        </>
     )}
 
 

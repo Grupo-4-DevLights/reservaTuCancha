@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 import { CanchasDisponibles } from '../../Services/Canchas'
 import {ReservarCancha} from '../../Services/Socio'
+import { NavBar } from '../NavBar'  
 
 import {useAppContext} from '../../context/userContext'
-import { useParams } from 'react-router-dom'
+
 
 
 export const VisualizarHorarios = () => {
@@ -95,35 +97,38 @@ export const VisualizarHorarios = () => {
     if (!user) return <p>El usuario no esta logueado</p>
     if (loading) return <h1>Cargando....</h1>
     return (
-        <div className='principal'>
-            <h1 className=' text-center'>usuario {user.nombre}, elija un horario para alquilar</h1>
-            <h1 className=' text-center'>Fecha de {fechaHoy}</h1>
+        <>
+            <NavBar/>
+            <div className='principal'>
+                <h1 className=' text-center'>usuario {user.nombre}, elija un horario para alquilar</h1>
+                <h1 className=' text-center'>Fecha de {fechaHoy}</h1>
 
-            <form onSubmit={handleReservar}>
-                <div className=' text-center'> 
-                    <label>elija la horario de inicio:</label>
-                    <select name='hora_inicio' onChange={(event)=>{setHoraInicio(event.target.value)}}>
-                        <option value="">Seleccione un horario</option>
-                        {horarios.map((horario,index) => (
-                            <option key={index} value={horario.hora_inicio}>{horario.hora_inicio}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className=' text-center'>
-                    <label>elija la horario de fin:</label>
-                    <select name='hora_fin:' onChange={(event)=>{setHoraFin(event.target.value)}}>
-                        <option value="">Seleccione un horario</option>
-                        {horarios.map((horario,index) => (
-                            <option key={index} value={horario.hora_fin}>{horario.hora_fin}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className=' text-center'>
-                    <button type='submit'>Reservar</button>
-                </div>
-            </form>
-            {error && <p>{error}</p>}
-        </div>
+                <form onSubmit={handleReservar}>
+                    <div className=' text-center'> 
+                        <label>elija la horario de inicio:</label>
+                        <select name='hora_inicio' onChange={(event)=>{setHoraInicio(event.target.value)}}>
+                            <option value="">Seleccione un horario</option>
+                            {horarios.map((horario,index) => (
+                                <option key={index} value={horario.hora_inicio}>{horario.hora_inicio}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className=' text-center'>
+                        <label>elija la horario de fin:</label>
+                        <select name='hora_fin:' onChange={(event)=>{setHoraFin(event.target.value)}}>
+                            <option value="">Seleccione un horario</option>
+                            {horarios.map((horario,index) => (
+                                <option key={index} value={horario.hora_fin}>{horario.hora_fin}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className=' text-center'>
+                        <button type='submit'>Reservar</button>
+                    </div>
+                </form>
+                {error && <p>{error}</p>}
+            </div>
+        </>
     )
 
 
