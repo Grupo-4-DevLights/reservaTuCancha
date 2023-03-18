@@ -14,7 +14,7 @@ import { VisualizarHorarios } from "../src/Components/Socio/VisualizarHorarios";
 import { VisualizarEmpresas } from "../src/Components/Socio/VisualizarEmpresas";
 import { VisualizarCanchas } from "../src/Components/Socio/VisualizarCanchas";
 import ListarSociosPage from "../src/Pages/_ListarSocios";
-import ListarEmpresasPage from "../src/Pages/_ListarEmpresas"
+import ListarEmpresasPage from "../src/Pages/_ListarEmpresas";
 import ListarCanchasPage from "../src/Pages/_ListarCanchas";
 
 //import { RegistrarReserva } from './Pages/Socio/RegistrarReserva'
@@ -33,15 +33,15 @@ export default function AppRoutes() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/dashboard" element={<IndexDashboard />} />
-          {isLoggedIn && (
-            <Route
-              path="/perfil"
-              element={user ? <IndexProfile /> : <Navigate to="/login" />}
-            />
-          )}
+
+          <Route
+            path="/perfil"
+            element={isLoggedIn && user ? (<IndexProfile />) : (<Navigate to="/ingresar" />)}
+          />
+
           <Route
             path="/ingresar"
-            element={!isLoggedIn ? <IndexLogin /> : <Navigate to="/perfil" />}
+            element={!user ? <IndexLogin /> : <Navigate to="/" />}
           />
           <Route
             path="/registrar"
