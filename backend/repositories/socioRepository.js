@@ -4,7 +4,7 @@ const empresa = require("../models/empresa");
 const usuario = require("../models/usuario");
 
 //operador sequelize
-const { Op } = require("sequelize");
+const { Op,fn,col, literal } = require("sequelize");
 
 //reserva una cancha en un horario especifico
 
@@ -90,23 +90,62 @@ const reservaCancha = async (
 
 //visualizar reservas
 const verReservas = async (id_usuario) => {
-  //comprobar existencia en la bases de datos
+  //comprobar si existe ese usuario
 
-  const findUser = await usuario.findByPk(id_usuario);
 
-  if (!findUser) {
-    throw new Error("El usuario no existe");
-  }
+  //obtener solo el id de cancha reservada
+  const idCancha = await reserva.findOne({
+    where: {
+      id_usuario: id_usuario,
+      estado: "reservado",
+    },
+  }).then(
+    (data) => {
+      return data.id_cancha;
+    }
+  )
+
+  //obtener el nombre de la cancha reservada
+  const nombreCancha = await cancha.findOne({
+    where: {
+      id_cancha: idCancha,
+    },
+  }).then(
+    (data) => {
+      return data.nombre;
+    }
+  )
+  
+
+
 
   try {
-    const reservas = await reserva.findAll({
+
+    //buscar solo la hora de inicio
+    
+    const horaInicio =await reserva.findAll({
       where: {
-        id_usuario,
+        id_usuario: id_usuario,
       },
-      //que solo me muestra fecha,hora_inicio,hora_fin
-      attributes: ["fecha", "hora_inicio", "hora_fin"],
-    });
-    return reservas;
+      attributes: [
+        'fecha','hora_inicio','hora_fin', // las columnas que deseas obtener del registro
+        [fn('min',col('hora_inicio')), 'hora_inicio'],
+        [fn('max',col('hora_fin')), 'hora_fin'],// la función max() de Sequelize para obtener la hora máxima
+      ],
+      include: {
+        model: cancha,
+        attributes: ['nombre'],
+      },
+      group: ['reserva.id_cancha'],
+      raw:true
+  
+    })
+    
+
+
+
+
+    return horaInicio;
   } catch (error) {
     console.log(error);
     return error;

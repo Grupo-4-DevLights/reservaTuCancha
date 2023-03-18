@@ -24,8 +24,9 @@ const reservarCancha= async (req, res) => {
 
 const VisualizarReservas= async (req, res) => {
     try {
-        const { id } = req.params;
-        const reservas = await socioRepository.verReservas(id);
+        const { id_usuario } = req.params;
+        const reservas = await socioRepository.verReservas(id_usuario);
+        
         res.status(200).json(reservas);
     } catch (error) {
         console.log(error)
