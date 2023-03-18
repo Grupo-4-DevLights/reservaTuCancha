@@ -38,3 +38,14 @@ export async function obtenerCanchas() {
     const data = await response.json();
     return data;
 }
+
+export async function ObtenerReservas(id_usuario){
+    const response = await fetch(`http://localhost:3001/api/socio/misreservas/${id_usuario}`, {
+        method: 'GET',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+    })
+    const data = await response.json();
+    return data;
+}

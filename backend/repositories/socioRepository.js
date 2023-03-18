@@ -103,6 +103,8 @@ const verReservas = async (id_usuario) => {
       where: {
         id_usuario,
       },
+      //que solo me muestra fecha,hora_inicio,hora_fin
+      attributes: ["fecha", "hora_inicio", "hora_fin"],
     });
     return reservas;
   } catch (error) {
@@ -111,7 +113,35 @@ const verReservas = async (id_usuario) => {
   }
 };
 
+//eliminar una reserva
+const eliminarReserva = async (id_usuario,id_reserva) => {
+  //comprobar existencia en la bases de datos
+
+  const findUser = await usuario.findByPk(id_usuario);
+
+  if (!findUser) {
+    throw new Error("El usuario no existe");
+  }
+
+  try {
+    const reservas = await reserva.update(
+      { estado: "disponible", id_usuario:null },
+      {
+        where: {
+          id_reserva,
+        },
+      }
+    );
+    return reservas;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+
 module.exports = {
   reservaCancha,
   verReservas,
+  eliminarReserva,
 };

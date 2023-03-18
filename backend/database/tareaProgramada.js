@@ -5,11 +5,11 @@ const reserva = require('../models/reserva');
 const cancha = require('../models/cancha');
 
 // Ejecutar la tarea programada diariamente a las 00:00
-cron.schedule("43 20 * * *", async () => {
+cron.schedule("49 10 * * *", async () => {
   console.log("Ejecutando tarea programada");
 
 
-  const horasDisponibles = ['14:00:00', '14:30:00', '15:00:00', '15:30:00','16:00:00', '16:30:00', '17:00:00', '17:30:00','18:00:00', '18:30:00', '19:00:00', '19:30:00','20:00:00'];
+  const horasDisponibles = ['14:00:00', '15:00:00','16:00:00', '17:00:00','18:00:00', '19:00:00', '20:00:00','21:00:00','22:00:00','23:00:00','24:00:00' ];
 
    // Crea una nueva instancia de la fecha actual
    let Fechas = new Date();

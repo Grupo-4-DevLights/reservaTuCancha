@@ -7,7 +7,7 @@ import { IndexDashboard } from "./RouteProfile";
 import { IndexProfile } from "../src/Pages/_IndexProfile";
 import { PaginaDeError } from "../src/Pages/PaginaDeError";
 import { PaginaDeCarga } from "../src/Pages/PaginaDeCarga";
-import { IndexReserva } from "../src/Pages/_IndexReserva";
+import { IndexReserva } from "../src/Components/Profile/Socio/Reservas/_IndexReserva";
 
 //verificar disponibilidad de canchas y reservar
 import { VisualizarHorarios } from "../src/Components/Socio/VisualizarHorarios";
@@ -49,7 +49,7 @@ export default function AppRoutes() {
               !isLoggedIn ? <IndexRegister /> : <Navigate to="/perfil" />
             }
           />
-          <Route path="/reserva" element={<IndexReserva />} />
+          <Route path="/reservas" element={<IndexReserva />} />
           <Route path="/listar-socios" element={<ListarSociosPage />} />
           <Route path="/listar-empresas" element={<ListarEmpresasPage />} />
           <Route path="/listar-canchas" element={<ListarCanchasPage />} />
