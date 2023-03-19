@@ -11,12 +11,11 @@ const listarReservas = async (req, res) => {
 };
 
 const crearReserva = async (req, res) => {
-  const { fecha, hora_inicio, hora_fin, id_cancha } = req.body;
+  const { fecha, horario, id_cancha } = req.body;
   try {
     const reserva = await Reserva.create({
       fecha,
-      hora_inicio,
-      hora_fin,
+      horario,
       id_cancha
     });
     res.status(201).json(reserva);
@@ -42,15 +41,14 @@ const mostrarReserva = async (req, res) => {
 
 const actualizarReserva = async (req, res) => {
   const { id } = req.params;
-  const { fecha, hora_inicio, hora_fin, id_cancha } = req.body;
+  const { fecha, horario, id_cancha } = req.body;
   try {
     const reserva = await Reserva.findByPk(id);
     if (!reserva) {
       return res.status(404).json({ message: 'Reserva no encontrada' });
     }
     reserva.fecha = fecha;
-    reserva.hora_inicio = hora_inicio;
-    reserva.hora_fin = hora_fin;
+    reserva.horario = horario;
     reserva.id_cancha = id_cancha;
     await reserva.save();
     res.status(200).json(reserva);

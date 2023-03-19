@@ -99,8 +99,7 @@ const disponibilidadCancha = async (req, res) => {
         fecha: fechaHoy,
         estado: "disponible",
       },
-      order: [["hora_inicio", "ASC"]],
-      order: [["hora_fin", "ASC"]],
+      order: [["horario", "ASC"]],
     });
 
     //si devuelve 0

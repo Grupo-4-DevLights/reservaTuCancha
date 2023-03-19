@@ -13,12 +13,8 @@ const Reserva = sequelize.define('Reserva', {
     type: Sequelize.DATEONLY,
     allowNull: false
   },
-  hora_inicio: {
-    type: Sequelize.TIME,
-    allowNull: false
-  },
-  hora_fin: {
-    type: Sequelize.TIME,
+  horario:{
+    type: Sequelize.STRING,
     allowNull: false
   },
   estado: {

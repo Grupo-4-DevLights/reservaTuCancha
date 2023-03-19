@@ -8,36 +8,24 @@ const { Op,fn,col, literal } = require("sequelize");
 
 //reserva una cancha en un horario especifico
 
-const reservaCancha = async (
-  id_usuario,
-  id_cancha,
-  fecha,
-  hora_inicio,
-  hora_fin
-) => {
-  if (!id_usuario || !id_cancha || !fecha || !hora_inicio || !hora_fin) {
+const reservaCancha = async (id_usuario,id_cancha,fecha,horario) => {
+  if (!id_usuario || !id_cancha || !fecha || !horario) {
     throw new Error("Todos los campos son obligatorios");
-  }
-
-  //validar que la hora de inicio sea menor a la hora de fin
-  if (hora_inicio >= hora_fin) {
-    throw new Error("La hora de inicio debe ser menor a la hora de fin");
   }
 
   //verificar si han hecho una reserva
   const reservaUsuario = await reserva.findOne({
     where: {
       estado: "reservado",
-      hora_inicio: {
-        [Op.between]: [hora_inicio, hora_fin],
-    }},
+      id_usuario,
+      fecha,
+      horario,
+    }
   })
 
   if(reservaUsuario){
     throw new Error('ya tiene una reserva en ese horario');
   }
-
-
 
   // Crea una nueva instancia de la fecha actual
   let Fechas = new Date();
@@ -56,14 +44,12 @@ const reservaCancha = async (
         id_cancha,
         fecha: fechaHoy,
         estado: "disponible",
-        hora_inicio: {
-          [Op.between]: [hora_inicio, hora_fin],
-        },
+        horario,
       },
     }
   );
 
-  //buscar la empresa del usuario que se le va a asignar la reseva
+  //buscar la empresa del usuario que se le va a asignar la reserva
   const usuarioPropietario = await cancha
     .findByPk(id_cancha, {
       include: {
@@ -90,8 +76,6 @@ const reservaCancha = async (
 
 //visualizar reservas
 const verReservas = async (id_usuario) => {
-  //comprobar si existe ese usuario
-
 
   //obtener solo el id de cancha reservada
   const idCancha = await reserva.findOne({
@@ -104,48 +88,21 @@ const verReservas = async (id_usuario) => {
       return data.id_cancha;
     }
   )
-
-  //obtener el nombre de la cancha reservada
-  const nombreCancha = await cancha.findOne({
-    where: {
-      id_cancha: idCancha,
-    },
-  }).then(
-    (data) => {
-      return data.nombre;
-    }
-  )
-  
-
-
-
   try {
-
     //buscar solo la hora de inicio
-    
-    const horaInicio =await reserva.findAll({
+    const reservadas =await reserva.findAll({
       where: {
         id_usuario: id_usuario,
       },
-      attributes: [
-        'id_usuario','id_cancha','id_reserva','fecha','hora_inicio','hora_fin', // las columnas que deseas obtener del registro
-        [fn('min',col('hora_inicio')), 'hora_inicio'],
-        [fn('max',col('hora_fin')), 'hora_fin'],// la función max() de Sequelize para obtener la hora máxima
-      ],
       include: {
         model: cancha,
         attributes: ['nombre'],
       },
       group: ['reserva.id_cancha'],
       raw:true
-  
     })
     
-
-
-
-
-    return horaInicio;
+    return reservadas;
   } catch (error) {
     console.log(error);
     return error;

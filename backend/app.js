@@ -5,7 +5,10 @@ const logger = require('morgan');
 const cors = require('cors');
 
 //cargar las variable de entorno
-const {SERVER_PORT}= require('./config/env')
+const { SERVER_PORT } = require('./config/env')
+
+//cargar horarios
+const {CargarHorarios} = require('./database/tareaProgramada')
 
 const app = express();
 
@@ -49,12 +52,14 @@ app.use(cookieParser());
 app.use('/', require('./routes/index'));
 
 
-//importar tarea programada
-const tareaProgramada = require('./database/tareaProgramada');
-
-
-
-
-app.listen(SERVER_PORT,()=>{
+app.listen(SERVER_PORT, () => {
     console.log(`Servidor corriendo en el puerto ${SERVER_PORT}`)
+    sequelize.sync()
+        .then(() => {
+            console.log('Base de datos sincronizada.');
+            CargarHorarios()
+        })
+        .catch(err => {
+            console.error('Error al sincronizar la base de datos:', err);
+        });
 })

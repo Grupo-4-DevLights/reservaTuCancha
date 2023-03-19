@@ -1,3 +1,4 @@
+
 const Sequelize = require('sequelize');
 
 //importar las variables de entorno
@@ -19,13 +20,5 @@ sequelize.authenticate()
     console.error('No se pudo conectar a la base de datos:', error);
   });
 
-// Sincroniza la base de datos con los modelos
-sequelize.sync()
-.then(() => {
-  console.log('Base de datos sincronizada.');
-})
-.catch(err => {
-  console.error('Error al sincronizar la base de datos:', err);
-});
 
 module.exports = sequelize;

@@ -9,12 +9,12 @@ const enviarCorreo = require('../middlewares/mandarCorreo')
 const reservarCancha= async (req, res) => {
     try {
 
-        const { id_usuario, id_cancha, fecha, hora_inicio, hora_fin } = req.body;
-        const reserva = await socioRepository.reservaCancha(id_usuario, id_cancha, fecha, hora_inicio, hora_fin);
+        const { id_usuario, id_cancha, fecha, horario } = req.body;
+        const reserva = await socioRepository.reservaCancha(id_usuario, id_cancha, fecha, horario);
 
         //mandar correo
-        enviarCorreo(reserva.correo,'reserva solicitada', `se ha hecho una reserva en su cancha numero ${id_cancha}, de ${hora_inicio} hasta las ${hora_fin}`)
-        res.status(201).json({message:`se han reservado correctamente los horarios de ${hora_inicio} hasta ${hora_fin} `});
+        enviarCorreo(reserva.correo,'reserva solicitada', `se ha hecho una reserva en su cancha numero ${id_cancha} para el dia ${fecha} a las ${horario} `)
+        res.status(201).json({message:`se han reservado correctamente los horarios de ${horario} `});
     } catch (error) {
         console.log(error)
         res.status(400).json({success:false, message:error.message})

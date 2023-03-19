@@ -1,8 +1,13 @@
 import React from "react";
 
 export function TableLayout({ data, OnDelete }) {
-  const attributesToShow = ["fecha", "hora_inicio", "hora_fin", "Cancha.nombre"];
+  const attributesToShow = ["fecha", "horario", "Cancha.nombre"];
 
+  
+  if (!data || data.length === 0) {
+    return <p>Cargando reservas...</p>;
+  }
+  
   // Filtrar los atributos que deseas mostrar
   const filteredData = data.map((row) =>
     Object.keys(row)
@@ -13,9 +18,6 @@ export function TableLayout({ data, OnDelete }) {
       }, {})
   );
 
-  if (!data || data.length === 0) {
-    return <p>Cargando reservas...</p>;
-  }
 
   return (
     <>
