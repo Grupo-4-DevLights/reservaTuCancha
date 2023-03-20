@@ -8,12 +8,11 @@ const { TOKEN_KEY, EXPIRES, CORREO } = require("../config/env");
 
 const register = async (req, res) => {
   try {
-    const { nombre, email, password, rePassword } = req.body;
+    const { nombre, email, password } = req.body;
     const newUser = await authRepository.register({
       nombre,
       email,
       password,
-      rePassword,
       rol: "socio",
     });
 

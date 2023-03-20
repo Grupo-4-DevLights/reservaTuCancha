@@ -38,7 +38,7 @@ export function NavBar() {
       </div>
       <div
         id="navbar"
-        className="items-center bg-image bg-transparent-300 fixed w-full top-0"
+        className="items-center bg-white bg-transparent-300 fixed w-full top-0"
       >
         <nav className="flex text-black px-12 py-3 justify-between items-center">
           <div className="flex">

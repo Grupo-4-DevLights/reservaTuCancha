@@ -12,12 +12,9 @@ const user = require("../models/usuario");
 const connection = require("../database/connection");
 
 //create user
-const register = async ({ nombre, email, password, rePassword }) => {
+const register = async ({ nombre, email, password }) => {
   if (!(nombre && password && email)) {
     throw new Error("Los campos no pueden estar vacios");
-  }
-  if (password !== rePassword) {
-    throw new Error("Las contraseñas no coinciden");
   }
   const existingUser = await user.findOne({ where: { email: email } });
 

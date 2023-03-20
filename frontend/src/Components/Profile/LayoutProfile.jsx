@@ -8,7 +8,7 @@ export function LayoutProfile({ children }) {
   const { user } = useAppContext();
   return (
     <div className="flex flex-col">
-      <div className="w-full flex justify-center bg-emerald-100 mb-5">
+      <div className="w-full flex justify-center bg-emerald-500 mb-5">
         <div className="flex justify-center">
           {user &&
             (user.rol === "socio" ? (
