@@ -38,6 +38,7 @@ export function TableLayout({ data, OnDelete }) {
               const onDeleteData = {
                 id_usuario: data[data.length - index - 1].id_usuario,
                 id_cancha: data[data.length - index - 1].id_cancha,
+                id_reserva: data[data.length - index - 1].id_reserva,
               };
               return (
                 <React.Fragment key={index}>
@@ -50,7 +51,7 @@ export function TableLayout({ data, OnDelete }) {
                     <td>
                       <button
                         className="bg-red-500 rounded-md font-medium font-sans text-white p-1 mx-2 my-1"
-                        onClick={() => OnDelete(onDeleteData.id_usuario,onDeleteData.id_cancha)}
+                        onClick={() => OnDelete(onDeleteData.id_usuario,onDeleteData.id_cancha,onDeleteData.id_reserva)}
                       >
                         Eliminar
                       </button>

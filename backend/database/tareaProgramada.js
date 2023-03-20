@@ -25,14 +25,13 @@ const CargarHorarios = async () => {
       fecha: fechaHoy
     }
   })
-
-  //si no hay reservas para la fecha de hoy
-  if (reservas.length === 0) {
-
-    const canchas = await cancha.findAll()
+  
+  const canchas = await cancha.findAll()
       .then(data => { return data })
       .catch(error => { return error })
-    //que me devuelva solo el id de las canchas 
+
+  
+  if (reservas.length === 0) {
     try {
       canchas.forEach(element => {
         horasDisponibles.forEach(

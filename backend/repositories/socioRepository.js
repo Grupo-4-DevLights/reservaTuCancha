@@ -76,20 +76,20 @@ const reservaCancha = async (id_usuario,id_cancha,fecha,horario) => {
 
 //visualizar reservas
 const verReservas = async (id_usuario) => {
+  //comprobar las reservas del usuario
 
-  //obtener solo el id de cancha reservada
-  const idCancha = await reserva.findOne({
-    where: {
-      id_usuario: id_usuario,
-      estado: "reservado",
-    },
-  }).then(
-    (data) => {
-      return data.id_cancha;
+  const cantidadReservas = await reserva.findAll({
+    where:{
+      id_usuario,
     }
-  )
+  })
+
+  if(cantidadReservas.length === 0){
+    throw new Error('No tiene reservas');
+  }
+
+  
   try {
-    //buscar solo la hora de inicio
     const reservadas =await reserva.findAll({
       where: {
         id_usuario: id_usuario,
@@ -97,8 +97,8 @@ const verReservas = async (id_usuario) => {
       include: {
         model: cancha,
         attributes: ['nombre'],
+      group: ['reserva.id_cancha'], //agregamos la cláusula "group"
       },
-      group: ['reserva.id_cancha'],
       raw:true
     })
     
@@ -110,9 +110,9 @@ const verReservas = async (id_usuario) => {
 };
 
 //eliminar una reserva
-const eliminarReserva = async (id_usuario,id_cancha) => {
+const eliminarReserva = async (id_usuario,id_cancha,id_reserva) => {
   //comprobar existencia en la bases de datos
-
+  console.log(id_usuario,id_cancha,id_reserva)
   const findUser = await usuario.findByPk(id_usuario);
 
   if (!findUser) {
@@ -124,7 +124,9 @@ const eliminarReserva = async (id_usuario,id_cancha) => {
       { estado: "disponible", id_usuario:null },
       {
         where: {
-          id_usuario,id_cancha
+          id_usuario,
+          id_cancha,
+          id_reserva,
         },
       }
     );

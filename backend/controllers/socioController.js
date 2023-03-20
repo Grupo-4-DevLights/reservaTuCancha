@@ -36,8 +36,8 @@ const VisualizarReservas= async (req, res) => {
 
 const eliminarReserva = async (req, res) => {
     try {
-        const { id_usuario, id_reserva } = req.params;
-        const reserva = await socioRepository.eliminarReserva(id_usuario, id_reserva);
+        const { id_usuario, id_cancha,id_reserva} = req.params;
+        const reserva = await socioRepository.eliminarReserva(id_usuario,id_cancha, id_reserva,);
         res.status(200).json({message:`se ha eliminado la reserva`});
     } catch (error) {
         console.log(error)

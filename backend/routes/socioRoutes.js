@@ -5,7 +5,7 @@ const {reservarCancha,VisualizarReservas,eliminarReserva } = require('../control
 
 router.post('/', reservarCancha);
 router.get('/misreservas/:id_usuario',VisualizarReservas)
-router.put('/misreservas/eliminar/:id_usuario/:id_reserva',eliminarReserva)
+router.put('/misreservas/eliminar/:id_usuario/:id_cancha/:id_reserva',eliminarReserva)
 
 
 

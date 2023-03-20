@@ -43,7 +43,8 @@ export function IndexReserva() {
   },[]);
 
 
-   const handleDelete=(id_usuario,id_cancha)=>{
+   const handleDelete=(id_usuario,id_cancha,id_reserva)=>{
+    console.log(id_usuario,id_cancha,id_reserva)
     Swal.fire({
       title: `Seguro que desea eliminar la reserva seleccionada?`,
       text: "No podras revertir esta accion!",
@@ -55,7 +56,7 @@ export function IndexReserva() {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        eliminarReservas(id_usuario,id_cancha).then(() => {
+        eliminarReservas(id_usuario,id_cancha,id_reserva).then(() => {
           Swal.fire("Eliminado!", "El usuario ah sido eliminado.", "success");
         });
       }
