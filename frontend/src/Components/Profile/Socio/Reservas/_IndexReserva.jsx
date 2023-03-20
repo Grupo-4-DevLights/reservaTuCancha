@@ -78,7 +78,6 @@ export function IndexReserva() {
 
       <NavBar />
       <LayoutProfile>
-      {console.log(reservas)}
         {loading ? 
           (<p>Cargando reservas...</p>)
         :(
@@ -91,7 +90,7 @@ export function IndexReserva() {
           data={reservas}
           OnDelete={handleDelete}
         />)
-        :(<p>error</p>)}
+        :(<p>El servido no esta disponible</p>)}
 
 
         </div>
