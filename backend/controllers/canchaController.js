@@ -102,10 +102,6 @@ const disponibilidadCancha = async (req, res) => {
       order: [["horario", "ASC"]],
     });
 
-    //si devuelve 0
-    if (disponibilidad.length === 0) {
-      throw new Error('no hay canchas disponibles en el dia de hoy')
-    }
 
     res.status(200).json(disponibilidad);
   } catch (error) {

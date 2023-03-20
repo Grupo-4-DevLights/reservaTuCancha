@@ -68,9 +68,11 @@ export const VisualizarHorarios = () => {
 
     if (!user) return <p>El usuario no esta logueado</p>
     if (loading) return <h1>Cargando....</h1>
+
     return (
         <>
             <NavBar />
+            {console.log(horarios)}
             <div className='principal'>
                 <h1 className=' text-center'>usuario {user.nombre}, elija un horario para alquilar</h1>
                 <h1 className=' text-center'>Fecha de {fechaHoy}</h1>

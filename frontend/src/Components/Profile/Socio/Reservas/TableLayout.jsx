@@ -1,13 +1,14 @@
 import React from "react";
 
-export function TableLayout({ data, OnDelete }) {
+export function TableLayout({ data, OnDelete, }) {
   const attributesToShow = ["fecha", "horario", "Cancha.nombre"];
 
-  
+
+  console.log(data)
   if (!data || data.length === 0) {
-    return <p>Cargando reservas...</p>;
-  }
-  
+    return <p>no tiene ninguna reserva realizada</p>;
+  } 
+  else{
   // Filtrar los atributos que deseas mostrar
   const filteredData = data.map((row) =>
     Object.keys(row)
@@ -17,15 +18,16 @@ export function TableLayout({ data, OnDelete }) {
         return obj;
       }, {})
   );
-
-
+    
   return (
     <>
-      {data && data.length > 0 && (
+
+       
         <table className="table-fixed w-full text-sm text-center mb-10">
+           {console.log(data)}
           <thead>
             <tr className="text-xl">
-              {attributesToShow.map((title, index) => (
+              {data && attributesToShow.map((title, index) => (
                 <th className="capitalize" key={`${title}_${index}`}>
                   {title}
                 </th>
@@ -33,7 +35,7 @@ export function TableLayout({ data, OnDelete }) {
             </tr>
           </thead>
           <tbody>
-          {filteredData.reverse().map((row, index) => {
+          {data && filteredData.reverse().map((row, index) => {
               // Crear un nuevo objeto con los atributos que deseas pasar a OnDelete
               const onDeleteData = {
                 id_usuario: data[data.length - index - 1].id_usuario,
@@ -62,7 +64,6 @@ export function TableLayout({ data, OnDelete }) {
             })}
           </tbody>
         </table>
-      )}
     </>
-  );
+  )}
 }

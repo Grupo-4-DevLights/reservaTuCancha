@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import { useLocation  } from "react-router-dom";
 
 
 
@@ -16,30 +17,32 @@ import { ObtenerReservas,eliminarReservas } from "../../../../Services/Socio";
 export function IndexReserva() {
 
   const { user } = useAppContext();
-
-
   const [reservas, setReservas] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [reservasEliminas,setReservasEliminadas]= useState(0)
+  const [error, setError]= useState(null)
+
+  const cargarReservas = async () => {
+    if (user) { // verificar que user tenga un valor
+      setLoading(true)
+      await ObtenerReservas(user.id_usuario)
+        .then((data) => {
+          setReservas(data);
+          setLoading(false)
+        })
+        .catch((error) => {
+          setError(error)
+          setLoading(false)
+        });
+    }
+  };
 
   
 
 
   useEffect(() => {
-    const cargarReservas = async () => {
-      if (user) { // verificar que user tenga un valor
-        setLoading(true);
-        await ObtenerReservas(user.id_usuario)
-          .then((data) => {
-            setReservas(data);
-            setLoading(false);
-          })
-          .catch((error) => {
-            console.log(error);
-            setLoading(false);
-          });
-      }
-    };
     cargarReservas();
+
   },[]);
 
 
@@ -58,6 +61,8 @@ export function IndexReserva() {
       if (result.isConfirmed) {
         eliminarReservas(id_usuario,id_cancha,id_reserva).then(() => {
           Swal.fire("Eliminado!", "El usuario ah sido eliminado.", "success");
+          setReservasEliminadas(valor => valor +1)
+          cargarReservas();
         });
       }
     })
@@ -67,21 +72,30 @@ export function IndexReserva() {
 
 
   
+  
   return (
     <>
+
       <NavBar />
       <LayoutProfile>
+      {console.log(reservas)}
+        {loading ? 
+          (<p>Cargando reservas...</p>)
+        :(
         <div className="flex flex-col ">
           <div className="flex justify-center items-center text-center w-full mb-8">
             <h1 className="text-5xl font-bold">Sus reservas realizadas</h1>
           </div>
-  
+        {!error ? (
         <TableLayout
           data={reservas}
           OnDelete={handleDelete}
-        />
+        />)
+        :(<p>error</p>)}
+
 
         </div>
+      )}
       </LayoutProfile>
     </>
   );

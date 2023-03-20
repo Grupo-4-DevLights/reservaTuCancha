@@ -76,17 +76,6 @@ const reservaCancha = async (id_usuario,id_cancha,fecha,horario) => {
 
 //visualizar reservas
 const verReservas = async (id_usuario) => {
-  //comprobar las reservas del usuario
-
-  const cantidadReservas = await reserva.findAll({
-    where:{
-      id_usuario,
-    }
-  })
-
-  if(cantidadReservas.length === 0){
-    throw new Error('No tiene reservas');
-  }
 
   
   try {
