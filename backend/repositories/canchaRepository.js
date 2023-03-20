@@ -38,11 +38,13 @@ const crearCancha = async (nombre, tipo, precio, id_empresa) => {
 //mostrar una cancha
 
 const mostrarCancha = async (id_cancha) => {
+  //mostrarme todas las canchas de un id
   const buscarCanchar = await cancha.findByPk(id_cancha);
-
+  
   if (!buscarCanchar) {
     throw new Error("no se encontro la cancha");
   }
+
 
   try {
     

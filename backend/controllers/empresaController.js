@@ -70,6 +70,19 @@ const eliminarEmpresa = async (req, res) => {
     console.log(error);
     res.status(400).json({error:error.message})
   }
+}
+
+//mostras las canchas
+const mostrarCanchas = async (req, res) => {
+  const { id_empresa } = req.params;
+
+  try {
+    const canchas = await empresaRepository.mostrarCanchas(id_empresa);
+    res.status(200).json(canchas);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: error.message });
+  }
 };
 
 module.exports = {
@@ -78,4 +91,5 @@ module.exports = {
   mostrarEmpresa,
   actualizarEmpresa,
   eliminarEmpresa,
+  mostrarCanchas
 };

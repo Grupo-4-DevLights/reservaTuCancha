@@ -1,4 +1,5 @@
 export async function ReservarCancha(Cancha) {
+    try{
     const response = await fetch('http://localhost:3001/api/socio/', {
         method: 'POST',
         headers:{
@@ -8,8 +9,17 @@ export async function ReservarCancha(Cancha) {
         body: JSON.stringify(Cancha)
 
     })
-    const data = await response.json();
-    return data;
+    if (response.ok) {
+        const data = await response.json()
+        return data
+      } else {
+        throw new Error('Error al reservar la cancha')
+
+        
+      }
+    } catch (error) {
+      throw new Error('Ya tiene alquilado una cancha a esa hora')
+    }
 }
 
 
@@ -28,8 +38,8 @@ export async function obtenerEmpresas() {
 
 //visualizar todas las canchas
 
-export async function obtenerCanchas() {
-    const response = await fetch('http://localhost:3001/api/cancha', {
+export async function obtenerCanchas(id_empresa) {
+    const response = await fetch(`http://localhost:3001/api/empresa/canchas/${id_empresa}`, {
         method: 'GET',
         headers:{
             'Content-Type': 'application/json'
