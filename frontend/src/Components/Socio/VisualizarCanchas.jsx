@@ -17,8 +17,9 @@ export const VisualizarCanchas=()=>{
 
 
     useEffect(() => {
+        console.log(id)
         setLoading(true)
-        obtenerCanchas()
+        obtenerCanchas(id)
             .then(data => setCanchas(data))
             .catch(error => setError(error))
             .finally(()=>setLoading(false))
@@ -30,17 +31,23 @@ export const VisualizarCanchas=()=>{
         <>
         <NavBar />
         <div className='visual-cancha'>
-            <h1 className=" text-center text-2xl">Bienvenido a la Empresa {id}</h1>
-            <p className=" text-center">Elija que cancha quiere jugar</p>
-                {canchas.map((cancha,index)=>(
-                    <div className='select-cancha text-center' key={index}>
-                        <Link to={`/socio/elegirhorario/${cancha.id_cancha}`}>
-                            <p>tipo:{cancha.tipo}</p>
-                            <button  className='' value={cancha.nombre}>{cancha.nombre}</button>
+            <h1 className=" text-center text-2xl mt-5">Bienvenido a la Empresa {id}</h1>
+            <p className=" text-center mt-10 mb-4"> <strong>Elija que cancha quiere jugar </strong></p>
+                    <div className='cards m-0 p-0 box-border flex flex-wrap	justify-start ml-14 gap-20 '>
+                    {canchas.length !==0 ? canchas.map((cancha,index)=>(
+                        <div className='card p-4 border-4 shadow-lg' key={index}>
+                            <img className='border-2 w-60 ' src='../../../public/icons.png' alt="mi cancha"/>
+                            <h2 className='mt-8 '><strong>nombre:</strong>{cancha.nombre}</h2>
+                            <h2><strong>tipo:</strong>{cancha.tipo}</h2>
+                            <h2><strong>precio:</strong>{cancha.precio}</h2>
 
-                        </Link>
+                            <Link to={`/socio/elegirhorario/${cancha.id_cancha}`}>
+                                <button  className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' value={cancha.nombre}>Visualizar canchas</button>
+                            </Link>
+                        </div>
+                    
+                    )) : <h1  className="mt-10">No hay canchas disponibles en este momento</h1>}
                     </div>
-                ))}
         </div>
         </>
 

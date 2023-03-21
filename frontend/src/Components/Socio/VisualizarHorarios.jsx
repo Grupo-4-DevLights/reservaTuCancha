@@ -7,6 +7,7 @@ import { NavBar } from '../NavBar'
 
 import { useAppContext } from '../../context/userContext'
 
+import Swal from 'sweetalert2'
 
 
 export const VisualizarHorarios = () => {
@@ -18,10 +19,9 @@ export const VisualizarHorarios = () => {
     //se cargan el arreglo de objetos sobre las canchas disponibles
     const [horarios, setHorarios] = useState([])
     const [hora, setHora] = useState('')
-
+    const [cantidadConfirmada,setCantidadConfirmada]=useState(0)
 
     //referida a la carga dle fetch
-    const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
 
 
@@ -51,47 +51,91 @@ export const VisualizarHorarios = () => {
     }, [])
 
     //resevar la cancha
-    const handleReservar = async (event) => {
+    const handleReservar = async (e) => {
+        e.preventDefault();
         if (user) {
-            const reserva = {
-                id_cancha: parseInt(id),
-                id_usuario: user.id_usuario,
-                fecha: fechaHoy,
-                horario: hora
-            }
-            console.log(reserva)
-            await ReservarCancha(reserva)
-                .then(data => console.log(data))
-                .catch(error => setError(error))
+          const reserva = {
+            id_cancha: parseInt(id),
+            id_usuario: user.id_usuario,
+            fecha: fechaHoy,
+            horario: hora
+          }
+          if( !reserva.horario){
+            Swal.fire({
+              icon: 'error',
+              title: '¡Error!',
+              text: 'Debe seleccionar un horario',
+              confirmButtonColor: '#EF4444'
+            });
+            return
+          }
+          console.log(reserva);
+          await ReservarCancha(reserva)
+            .then(data => {
+              console.log(data);
+              Swal.fire({
+                icon: 'success',
+                title: '¡Reservado!',
+                text: 'La cancha ha sido reservada exitosamente.',
+                confirmButtonColor: '#60A5FA',
+                
+              });
+            })
+            .catch(error => {
+              Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: error,
+                confirmButtonColor: '#EF4444'
+              });
+            });
+            cargarCanchas()
         }
-    }
+      }
+
+
+
+
+
 
     if (!user) return <p>El usuario no esta logueado</p>
     if (loading) return <h1>Cargando....</h1>
-
     return (
         <>
             <NavBar />
-            {console.log(horarios)}
-            <div className='principal'>
-                <h1 className=' text-center'>usuario {user.nombre}, elija un horario para alquilar</h1>
-                <h1 className=' text-center'>Fecha de {fechaHoy}</h1>
-                {console.log(horarios)}
-                <form onSubmit={handleReservar}>
-                    <div className=' text-center'>
-                        <label>elija la horario de inicio:</label>
-                        <select name='horario' onChange={(event) => { setHora(event.target.value) }}>
+            <div className="bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+                <h1 className="text-3xl font-bold text-center mb-4">
+                    Usuario {user.nombre}, elija un horario para alquilar
+                </h1>
+                <h2 className="text-xl font-semibold text-center mb-8">
+                    Fecha de {fechaHoy}
+                </h2>
+                <form className="max-w-md mx-auto">
+                    <div className="mb-4">
+                        <label htmlFor="horario" className="block text-gray-700 font-bold mb-2">
+                            Elija un horario de inicio:
+                        </label>
+                        <select
+                            name="horario"
+                            onChange={(event) => { setHora(event.target.value) }}
+                            className="block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                        >
                             <option value="">Seleccione un horario disponible</option>
-                            {horarios.length!==0 && horarios.map((hor,index) => (
+                            {horarios.length !== 0 && horarios.map((hor, index) => (
                                 <option key={index} value={hor.horario}>{hor.horario}</option>
                             ))}
                         </select>
                     </div>
-                    <div className=' text-center'>
-                        <button type='submit'>Reservar</button>
+                    <div className="text-center">
+                        <button
+                            type="submit"
+                            className="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                            onClick={(e)=>handleReservar(e)}
+                        >
+                            Reservar
+                        </button>
                     </div>
                 </form>
-                {error && <p>{error}</p>}
             </div>
         </>
     )
