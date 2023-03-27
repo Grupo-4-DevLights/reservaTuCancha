@@ -23,11 +23,6 @@
   font-size: large;
 }
 
-.bg-image {
-  background-image: url('https://webunwto.s3.eu-west-1.amazonaws.com/2020-01/sport-congresse.jpg');
-  background-size: cover; 
-  background-position: fixed;
-}
 
 input{
   background-color: #f4f4f4;

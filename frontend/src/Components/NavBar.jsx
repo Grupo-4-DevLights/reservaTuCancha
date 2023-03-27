@@ -33,14 +33,14 @@ export function NavBar() {
 
   return (
     <>
-      <div className="flex justify-center items-center h-[96px] sm2:h-[89px] bg-black">
+      <div className="flex justify-center items-center h-[89px] sm2:h-[89px]">
         <EmptyComponent />
       </div>
       <div
         id="navbar"
-        className="items-center bg-white bg-transparent-300 fixed w-full top-0"
+        className="items-center fixed w-full top-0"
       >
-        <nav className="flex text-black px-12 py-3 justify-between items-center">
+        <nav className="flex bg-white text-black px-12 py-3 justify-between items-center">
           <div className="flex">
             <Link to="/" className="text-2xl font-bold ">
               <div className="flex items-center">
@@ -164,10 +164,10 @@ export function NavBar() {
           </div>
         </nav>
         <div className={`${isOpen ? "fixed w-full" : "hidden"} sm:hidden`}>
-          <div className="px-2 pt-2 pb-3 space-y-1 absolute w-full text-center bg-emerald-300 ">
+          <div className="px-2 pt-2 pb-3 space-y-1 absolute w-full text-center bg-emerald-300">
             <Link
               to="/"
-              className="text-white w-full block hover:bg-emerald-400 font-sans p-2 rounded-md font-bold"
+              className="border-b-2 text-white w-full block hover:bg-emerald-400 font-sans p-2 rounded-md font-bold"
             >
               Inicio
             </Link>
@@ -191,12 +191,12 @@ export function NavBar() {
               <>
                 <Link
                   to="/perfil"
-                  className="text-white w-full block hover:bg-emerald-400 font-sans p-2 rounded-md font-bold"
+                  className="border-b-2 text-white w-full block hover:bg-emerald-400 font-sans p-2 rounded-md font-bold"
                 >
                   Perfil
                 </Link>
                 <button
-                  className="text-white w-full block hover:bg-emerald-400 font-sans p-2 rounded-md font-bold"
+                  className="border-b-2 text-white w-full block hover:bg-emerald-400 font-sans p-2 rounded-md font-bold"
                   onClick={logoutSubmit}
                 >
                   Salir
