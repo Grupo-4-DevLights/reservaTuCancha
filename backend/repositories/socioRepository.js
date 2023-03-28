@@ -2,11 +2,29 @@ const reserva = require("../models/reserva");
 const cancha = require("../models/cancha");
 const empresa = require("../models/empresa");
 const usuario = require("../models/usuario");
+const mensaje = require('./mensajeRepository')
 
 //operador sequelize
 const { Op,fn,col, literal } = require("sequelize");
+const Mensaje = require("../models/mensaje");
+
+
+//PARA LAS FECHAS 
+ // Crea una nueva instancia de la fecha actual
+ let Fechas = new Date();
+
+ // Obtiene la hora actual en UTC (hora local - desfase horario)
+ const horaUTC = Fechas.getUTCHours();
+
+ // Transforma la fecha a UTC-3
+ Fechas.setUTCHours(horaUTC - 3);
+ const fechaHoy = Fechas.toISOString().slice(0, 10); // Imprime la fecha en formato ISO 8601
 
 //reserva una cancha en un horario especifico
+
+
+
+const fechaConFormato = Fechas.toISOString().slice(0, 19).replace('T', ' ');
 
 const reservaCancha = async (id_usuario,id_cancha,fecha,horario) => {
   if (!id_usuario || !id_cancha || !fecha || !horario) {
@@ -27,15 +45,7 @@ const reservaCancha = async (id_usuario,id_cancha,fecha,horario) => {
     throw new Error('ya tiene una reserva en ese horario');
   }
 
-  // Crea una nueva instancia de la fecha actual
-  let Fechas = new Date();
-
-  // Obtiene la hora actual en UTC (hora local - desfase horario)
-  const horaUTC = Fechas.getUTCHours();
-
-  // Transforma la fecha a UTC-3
-  Fechas.setUTCHours(horaUTC - 3);
-  const fechaHoy = Fechas.toISOString().slice(0, 10); // Imprime la fecha en formato ISO 8601
+ 
 
   const findReserva = await reserva.update(
     { id_usuario, estado: "reservado" },
@@ -66,7 +76,22 @@ const reservaCancha = async (id_usuario,id_cancha,fecha,horario) => {
     return data.email;
   });
 
+
+
+
+  
+
   try {
+      //crear un mensaje para la reserva agregada
+    const mensaje = `se ha hecho una reserva en su cancha numero ${id_cancha} a las ${horario} para la fecha: ${fecha}`;
+    const newMensaje= await Mensaje.create(
+      {
+        id_usuario: id_usuario,
+        fecha:fechaConFormato,
+        tipo:'positivo',
+        nombre:mensaje,
+      }
+    )
     return { findReserva, correo };
   } catch (error) {
     console.log(error);
@@ -109,6 +134,15 @@ const eliminarReserva = async (id_usuario,id_cancha,id_reserva) => {
   }
 
   try {
+    //guardar el registro de reserva
+    const laReserva= await reserva.findOne({
+      where: {
+        id_usuario,
+        id_cancha,
+        id_reserva,
+      },
+    })
+
     const reservas = await reserva.update(
       { estado: "disponible", id_usuario:null },
       {
@@ -119,6 +153,17 @@ const eliminarReserva = async (id_usuario,id_cancha,id_reserva) => {
         },
       }
     );
+
+    const mensaje = `se ha eliminado una reserva en su cancha numero ${id_cancha} a las ${laReserva.horario} para la fecha: ${laReserva.fecha}`;
+    const newMensaje= await Mensaje.create(
+      {
+        id_usuario: id_usuario,
+        fecha:fechaConFormato,
+        tipo:'negativo',
+        nombre:mensaje,
+      }
+    )
+
     return reservas;
   } catch (error) {
     console.log(error);

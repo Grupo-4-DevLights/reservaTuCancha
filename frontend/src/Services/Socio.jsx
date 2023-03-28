@@ -71,3 +71,16 @@ export async function eliminarReservas(id_usuario,id_cancha,id_reserva){
     return data;
 
 }
+
+export async function notificacionesSocio(id_usuario) {
+    const response = await fetch(`http://localhost:3001/api/mensaje/mensajes/${id_usuario}`, {
+        method: 'GET',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+    })
+    const data = await response.json();
+    return data;
+}
+
+

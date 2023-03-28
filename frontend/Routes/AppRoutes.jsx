@@ -17,6 +17,9 @@ import ListarSociosPage from "../src/Pages/_ListarSocios";
 import ListarEmpresasPage from "../src/Pages/_ListarEmpresas";
 import ListarCanchasPage from "../src/Pages/_ListarCanchas";
 
+//notificaciones
+import { NotificacionesSocio } from "../src/Components/Profile/Socio/Notificaciones/Notificaciones";
+
 //import { RegistrarReserva } from './Pages/Socio/RegistrarReserva'
 
 export default function AppRoutes() {
@@ -62,6 +65,7 @@ export default function AppRoutes() {
             path="/socio/elegirhorario/:id/"
             element={<VisualizarHorarios />}
           />
+          <Route path="/notificaciones" element={<NotificacionesSocio/>} />
           {isLoggedIn && <Route path="*" element={<PaginaDeError />} />}
         </Routes>
       </BrowserRouter>

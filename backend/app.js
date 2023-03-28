@@ -20,6 +20,7 @@ const Usuario = require('./models/usuario');
 const Empresa = require('./models/empresa');
 const Cancha = require('./models/cancha');
 const Reserva = require('./models/reserva');
+const Mensaje = require('./models/mensaje');
 
 // Define las relaciones entre los modelos
 
@@ -36,6 +37,9 @@ Reserva.belongsTo(Cancha, { foreignKey: 'id_cancha' });
 
 Empresa.belongsTo(Usuario, { foreignKey: 'id_empresa' });
 Usuario.hasOne(Empresa, { foreignKey: 'id_usuario' });
+
+Usuario.hasMany(Mensaje, { foreignKey: 'id_usuario' });
+Mensaje.belongsTo(Usuario, { foreignKey: 'id_usuario' });
 
 
 //para mostrar mensajes a las peticiones de las paginas
@@ -54,7 +58,7 @@ app.use('/', require('./routes/index'));
 
 app.listen(SERVER_PORT, () => {
     console.log(`Servidor corriendo en el puerto ${SERVER_PORT}`)
-    sequelize.sync()
+    sequelize.sync({ alter:true})
         .then(() => {
             console.log('Base de datos sincronizada.');
             CargarHorarios()
