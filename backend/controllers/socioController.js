@@ -19,6 +19,8 @@ const reservarCancha= async (req, res) => {
         console.log(error)
         res.status(400).json({success:false, message:error.message})
     }
+
+
 }
 
 
@@ -45,10 +47,22 @@ const eliminarReserva = async (req, res) => {
     }
 }
 
+//visualizar reserva por fecha
+const visualizarReservaFecha = async (req, res) => {
+    try {
+        const { id_cancha, fecha } = req.params;
+        const reserva = await socioRepository.verReservasFecha(id_cancha, fecha);
+        res.status(200).json(reserva);
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({success:false, message:error.message})
+    }
+}
 
 
 module.exports = {
     reservarCancha,
     VisualizarReservas,
-    eliminarReserva
+    eliminarReserva,
+    visualizarReservaFecha
 }

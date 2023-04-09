@@ -2,7 +2,7 @@ import React from "react";
 import { useAppContext } from "../../context/userContext";
 import ButtonsAdmin from "./Admin/ButtonsAdmin";
 import { NavBarUser } from "./NavBarUser";
-import { ButtonsEmpresa } from "./Empresa/ButtonsEmpresa";
+import { ButtonsPropietario } from "./Propietario/ButtonsPropietario";
 import ButtonsSocio from "./Socio/ButtonsSocio";
 export function LayoutProfile({ children }) {
   const { user } = useAppContext();
@@ -21,7 +21,7 @@ export function LayoutProfile({ children }) {
               </NavBarUser>
             ) : (
               <NavBarUser>
-                <ButtonsEmpresa />
+                <ButtonsPropietario />
               </NavBarUser>
             ))}
         </div>

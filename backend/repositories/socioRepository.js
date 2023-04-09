@@ -5,7 +5,6 @@ const usuario = require("../models/usuario");
 const mensaje = require('./mensajeRepository')
 
 //operador sequelize
-const { Op,fn,col, literal } = require("sequelize");
 const Mensaje = require("../models/mensaje");
 
 
@@ -19,18 +18,21 @@ const Mensaje = require("../models/mensaje");
  // Transforma la fecha a UTC-3
  Fechas.setUTCHours(horaUTC - 3);
  const fechaHoy = Fechas.toISOString().slice(0, 10); // Imprime la fecha en formato ISO 8601
+ 
+ const fechaConFormato = Fechas.toISOString().slice(0, 19)
 
 //reserva una cancha en un horario especifico
 
 
 
-const fechaConFormato = Fechas.toISOString().slice(0, 19).replace('T', ' ');
+
 
 const reservaCancha = async (id_usuario,id_cancha,fecha,horario) => {
   if (!id_usuario || !id_cancha || !fecha || !horario) {
     throw new Error("Todos los campos son obligatorios");
   }
 
+  console.log(fecha)
   //verificar si han hecho una reserva
   const reservaUsuario = await reserva.findOne({
     where: {
@@ -52,7 +54,7 @@ const reservaCancha = async (id_usuario,id_cancha,fecha,horario) => {
     {
       where: {
         id_cancha,
-        fecha: fechaHoy,
+        fecha: fecha,
         estado: "disponible",
         horario,
       },
@@ -78,20 +80,33 @@ const reservaCancha = async (id_usuario,id_cancha,fecha,horario) => {
 
 
 
-
   
 
   try {
-      //crear un mensaje para la reserva agregada
-    const mensaje = `se ha hecho una reserva en su cancha numero ${id_cancha} a las ${horario} para la fecha: ${fecha}`;
-    const newMensaje= await Mensaje.create(
+    //crear un mensaje PARA UN SOCIO la reserva agregada
+    const mensajeSocio = `se ha hecho una reserva en su cancha numero ${id_cancha} a las ${horario} para la fecha: ${fecha}`;
+    const newMensajeSocio= await Mensaje.create(
       {
         id_usuario: id_usuario,
         fecha:fechaConFormato,
         tipo:'positivo',
-        nombre:mensaje,
+        nombre:mensajeSocio,
       }
     )
+    
+    //Crear un mensaje para un PROPIETARIO de la reserva
+    const mensajePropietario = `se ha hecho una reserva en su cancha numero ${id_cancha} a las ${horario} para la fecha: ${fecha}`;
+    const newMensajePropietario= await Mensaje.create(
+      {
+        id_usuario: usuarioPropietario,
+        fecha:fechaConFormato,
+        tipo:'positivo',
+        nombre:mensajePropietario,
+      }
+    )
+
+
+
     return { findReserva, correo };
   } catch (error) {
     console.log(error);
@@ -154,15 +169,38 @@ const eliminarReserva = async (id_usuario,id_cancha,id_reserva) => {
       }
     );
 
-    const mensaje = `se ha eliminado una reserva en su cancha numero ${id_cancha} a las ${laReserva.horario} para la fecha: ${laReserva.fecha}`;
+    const mensajeSocio = `se ha eliminado una reserva en su cancha numero ${id_cancha} a las ${laReserva.horario} para la fecha: ${laReserva.fecha}`;
     const newMensaje= await Mensaje.create(
       {
         id_usuario: id_usuario,
         fecha:fechaConFormato,
         tipo:'negativo',
-        nombre:mensaje,
+        nombre:mensajeSocio,
       }
     )
+
+    //buscar el propietario de la cancha con su id_cancha
+    const id_propietario = await cancha.findByPk(id_cancha, {
+      include: {
+        model: empresa,
+        attributes: ["id_usuario"],
+      },
+    }).then((data) => {
+      return data.Empresa.id_usuario;
+    });
+
+
+    //Crear un mensaje para un PROPIETARIO de la reserva
+    const mensajePropietario = `se ha eliminado una reserva en su cancha numero ${id_cancha} a las ${laReserva.horario} para la fecha: ${laReserva.fecha}`;
+    const newMensajePropietario= await Mensaje.create(
+      {
+        id_usuario: id_propietario,
+        fecha:fechaConFormato,
+        tipo:'negativo',
+        nombre:mensajePropietario,
+      }
+    )
+
 
     return reservas;
   } catch (error) {
@@ -171,9 +209,32 @@ const eliminarReserva = async (id_usuario,id_cancha,id_reserva) => {
   }
 };
 
+//visualizar reserva por fecha
+const verReservasFecha = async (id_cancha,fecha) => {
+
+
+  try {
+    const reservadas =await reserva.findAll({
+      where: {
+        id_cancha: id_cancha,
+        fecha: fecha,
+        estado: "disponible",
+      },
+      order: [["horario", "ASC"]],
+    })
+  
+    return reservadas;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+
 
 module.exports = {
   reservaCancha,
   verReservas,
   eliminarReserva,
+  verReservasFecha
 };

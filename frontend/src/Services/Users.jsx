@@ -23,4 +23,5 @@ export async function loginUser(user) {
 
     const data = await response.json();
     return data;
-    }
+}
+

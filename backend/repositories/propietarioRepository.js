@@ -5,19 +5,29 @@ const empresa= require('../models/empresa');
 
 
 // visualizar solo las reservas en estado pendiente que hicieron en su cancha
-const listarReservasPendientes = async (id) => {
-    const buscarCancha = await cancha.findByPk(id);
+const listarReservasPendientes = async (id_propietario) => {
 
-    if(!buscarCancha){
-        throw new Error('no se encontro la cancha');
-    }
-
-
-    const reservas = await reserva.findAll({
+    //encontrar la empresa con el id_propietario
+    const idEmpresa = await empresa.findOne({
         where: {
-            id_cancha: id,
-            estado: 'reservado'
+            id_usuario: id_propietario
         }
+    }).then(
+        data => {
+            console.log(data.id_empresa)
+            return data.id_empresa;
+        }
+    )
+
+
+
+    const reservas = await cancha.findAll({
+        where: {
+            id_empresa: idEmpresa,
+        },
+        include:[{
+            model: reserva,
+        }]
     });
 
     return reservas;
@@ -26,10 +36,7 @@ const listarReservasPendientes = async (id) => {
 //cambiar la reserva a confirmado
 const confirmarReserva = async (id) => {
     
-    const buscarReserva = await reserva.findByPk(id);
-    if (!buscarReserva) {
-        throw new Error('no se encontro la reserva');
-    }
+
     try {
         const reservaConfirmada = await buscarReserva.update({
             estado: 'confirmado'
@@ -44,9 +51,7 @@ const confirmarReserva = async (id) => {
 //cambiar la reserva a cancelado
 const cancelarReserva = async (id) => {
     const buscarReserva = await reserva.findByPk(id);
-    if (!buscarReserva) {
-        throw new Error('no se encontro la reserva');
-    }
+ 
     try {
         const reservaCancelada = await buscarReserva.update({
             estado: 'cancelado'
@@ -62,9 +67,6 @@ const cancelarReserva = async (id) => {
 const listarReservasConfirmadas = async (id) => {
     const buscarCancha = await cancha.findByPk(id);
 
-    if(!buscarCancha){
-        throw new Error('no se encontro la cancha');
-    }
 
     const reservas = await reserva.findAll({
         where: {

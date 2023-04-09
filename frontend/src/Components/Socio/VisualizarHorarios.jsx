@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { CanchasDisponibles } from '../../Services/Canchas'
+import { CanchasDisponiblesFecha } from '../../Services/Canchas'
 import { ReservarCancha } from '../../Services/Socio'
 import { NavBar } from '../NavBar'
 
@@ -14,32 +14,19 @@ export const VisualizarHorarios = () => {
     const { user } = useAppContext();
 
     //se obtiene el id de la url seleccionada de la empresa
-    const { id } = useParams();
-
+    const { id, dia } = useParams();
     //se cargan el arreglo de objetos sobre las canchas disponibles
     const [horarios, setHorarios] = useState([])
     const [hora, setHora] = useState('')
-    const [cantidadConfirmada,setCantidadConfirmada]=useState(0)
 
-    //referida a la carga dle fetch
+
+    //referida a la carga del fetch
     const [loading, setLoading] = useState(false)
-
-
-    // Crea una nueva instancia de la fecha actual
-    const fecha = new Date();
-
-    // Obtiene la hora actual en UTC (hora local - desfase horario)
-    const horaUTC = fecha.getUTCHours();
-
-    // Transforma la fecha a UTC-3
-    fecha.setUTCHours(horaUTC - 3);
-
-    const fechaHoy = (fecha.toISOString().slice(0, 10)) // Imprime la fecha en formato ISO 8601
 
 
     const cargarCanchas = async () => {
         setLoading(true)
-        await CanchasDisponibles(id)
+        await CanchasDisponiblesFecha(id,dia)
             .then(data => setHorarios(data))
             .catch(error => setError(error))
             .finally(() => setLoading(false))
@@ -57,7 +44,7 @@ export const VisualizarHorarios = () => {
           const reserva = {
             id_cancha: parseInt(id),
             id_usuario: user.id_usuario,
-            fecha: fechaHoy,
+            fecha: dia,
             horario: hora
           }
           if( !reserva.horario){
@@ -107,14 +94,15 @@ export const VisualizarHorarios = () => {
                 <h1 className="text-3xl font-bold text-center mb-4">
                     Usuario {user.nombre}, elija un horario para alquilar
                 </h1>
-                <h2 className="text-xl font-semibold text-center mb-8">
-                    Fecha de {fechaHoy}
-                </h2>
+                
                 <form className="max-w-md mx-auto">
                     <div className="mb-4">
                         <label htmlFor="horario" className="block text-gray-700 font-bold mb-2">
-                            Elija un horario de inicio:
+                            Elija un horario para la fecha de {dia}
                         </label>
+                        
+
+
                         <select
                             name="horario"
                             onChange={(event) => { setHora(event.target.value) }}

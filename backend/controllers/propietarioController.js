@@ -4,9 +4,9 @@ const propietarioRepository= require('../repositories/propietarioRepository')
 // listar todos las reservas en estado pendiente con su cancha particular
 
 const listarReservasPendientes = async (req, res) => {
-    const { id } = req.params;
+    const { id_propietario } = req.params;
     try {
-        const reservas = await propietarioRepository.listarReservasPendientes(id);
+        const reservas = await propietarioRepository.listarReservasPendientes(id_propietario);
         res.status(200).json(reservas);
     } catch (error) {
         console.log(error);

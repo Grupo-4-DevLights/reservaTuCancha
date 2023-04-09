@@ -17,8 +17,16 @@ import ListarSociosPage from "../src/Pages/_ListarSocios";
 import ListarEmpresasPage from "../src/Pages/_ListarEmpresas";
 import ListarCanchasPage from "../src/Pages/_ListarCanchas";
 
+
+//Dia de la semana
+import SelectorDeDias from "../src/Components/Socio/VisualizarDiasSemana";
+
+
 //notificaciones
 import { NotificacionesSocio } from "../src/Components/Profile/Socio/Notificaciones/Notificaciones";
+
+//reservas de cancha
+import { ReservasPropietarios } from "../src/Components/Profile/Propietario/Reservas/ReservasPropietario";
 
 //import { RegistrarReserva } from './Pages/Socio/RegistrarReserva'
 
@@ -63,9 +71,22 @@ export default function AppRoutes() {
           />
           <Route
             path="/socio/elegirhorario/:id/"
-            element={<VisualizarHorarios />}
+            element={<SelectorDeDias />}
           />
+
+          <Route
+            path="/socio/elegirhorario/:id/:dia"
+            element={<VisualizarHorarios/>} 
+          />
+
+
+          
+
+          <Route path="/socio/diasemana" element={<SelectorDeDias/>}/>
           <Route path="/notificaciones" element={<NotificacionesSocio/>} />
+          
+          <Route path="/propietario/reservas" element={<ReservasPropietarios/>} />
+
           {isLoggedIn && <Route path="*" element={<PaginaDeError />} />}
         </Routes>
       </BrowserRouter>

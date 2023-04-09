@@ -58,7 +58,7 @@ app.use('/', require('./routes/index'));
 
 app.listen(SERVER_PORT, () => {
     console.log(`Servidor corriendo en el puerto ${SERVER_PORT}`)
-    sequelize.sync({ alter:true})
+    sequelize.sync()
         .then(() => {
             console.log('Base de datos sincronizada.');
             CargarHorarios()
