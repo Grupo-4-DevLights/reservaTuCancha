@@ -7,7 +7,7 @@ const listarEmpresas = async (req, res) => {
     res.status(200).json(empresas);
   } catch (error) {
     console.log(error);
-    res.status(4001).json({ error: message.error });
+    res.status(401).json({ error: message.error });
   }
 };
 

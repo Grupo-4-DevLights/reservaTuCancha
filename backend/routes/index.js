@@ -14,6 +14,7 @@ router.use('/api/auth',require('./authRoutes'))
 router.use('/api/socio',require('./socioRoutes'))
 router.use('/api/propietario',require('./propietarioRoutes'))
 router.use('/api/mensaje',require('./mensajeRoutes'))
+router.use('/api/contacto',require('./contactoRoutes'))
 
 
 module.exports=router
