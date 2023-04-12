@@ -20,7 +20,6 @@ const listarReservasPendientes = async (id_propietario) => {
     )
 
 
-
     const reservas = await cancha.findAll({
         where: {
             id_empresa: idEmpresa,
@@ -91,11 +90,35 @@ const listarEmpresaPropietario = async (id_usuario) => {
 }
 
 
+//visualizar reservas pendientes
+
+//visualizar reservas pendientes por fecha
+const verReservasPendienteFecha = async (id_cancha,fecha) => {
+
+    try {
+      const reservadas =await reserva.findAll({
+        where: {
+          id_cancha: id_cancha,
+          fecha: fecha,
+          estado: "reservado",
+        },
+        order: [["horario", "ASC"]],
+      })
+    
+      return reservadas;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+
+
 module.exports={
     listarReservasPendientes,
     confirmarReserva,
     cancelarReserva,
     listarReservasConfirmadas,
-    listarEmpresaPropietario
+    listarEmpresaPropietario,
+    verReservasPendienteFecha
 }
 

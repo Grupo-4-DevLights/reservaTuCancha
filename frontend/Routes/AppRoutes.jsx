@@ -20,7 +20,6 @@ import ListarCanchasPage from "../src/Pages/_ListarCanchas";
 
 import  {ElegirCanchaPropietario} from "../src/Components/Profile/Propietario/administracion/ElegirCanchaPropietario";
 import ButtonsPropietario from "../src/Components/Profile/Propietario/administracion/ButtonsPropietario";
-import  HorariosDisponiblesPropietarios  from "../src/Components/Profile/Propietario/administracion/HorariosDisponiblesPropietarios";
 
 
 
@@ -85,10 +84,7 @@ export default function AppRoutes() {
             element={<VisualizarHorarios/>} 
           />
 
-          <Route
-            path="/propietario/elegirhorario/:id/:dia"
-            element={<HorariosDisponiblesPropietarios/>}
-          />
+          
 
 
           

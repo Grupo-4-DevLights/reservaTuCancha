@@ -15,18 +15,30 @@ export const NotificacionesSocio = () => {
     const [notificaciones, setNotificaciones] = useState([])
 
 
-    const attributesToShow = ["fecha", "nombre"];
+   const attributesToShow = ["fecha", "nombre", "tipo"];
 
-
-
-    const filteredData = notificaciones.map((row) =>
-        Object.keys(row)
-            .filter((key) => attributesToShow.includes(key))
-            .reduce((obj, key) => {
-                obj[key] = row[key];
-                return obj;
-            }, {})
-    );
+const filteredData = notificaciones.map((row) =>
+  Object.keys(row)
+    .filter((key) => attributesToShow.includes(key))
+    .reduce((obj, key) => {
+      if (key === 'fecha') {
+        const fechaJS = new Date(row[key]);
+        const opciones = {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false
+        };
+        obj[key] = fechaJS.toLocaleString('es-ES', opciones);
+      } else {
+        obj[key] = row[key];
+      }
+      return obj;
+    }, {})
+);
 
 
     //traer notificaciones
@@ -54,7 +66,7 @@ export const NotificacionesSocio = () => {
             <NavBar />
             <LayoutProfile>
                 <div>
-                    {notificaciones && notificaciones.length > 0 ? (
+                    {notificaciones && filteredData.length > 0 ? (
                         <table className="table-fixed w-full text-sm text-center mt-5 mb-5">
                             <thead>
                                 <tr className="text-xl">
@@ -66,7 +78,7 @@ export const NotificacionesSocio = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {notificaciones.reverse().map((row, index) => (
+                                {filteredData.reverse().map((row, index) => (
                                     <React.Fragment key={index}>
                                         {row.tipo === "negativo" ? (
                                             <tr className="row   text-lg bg-red-400 hover:bg-red-700">

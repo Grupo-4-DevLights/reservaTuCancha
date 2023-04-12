@@ -3,7 +3,7 @@ import React from "react";
 
 
 export function TableLayout({ data }) {
-  const attributesToShow = ["nombre", "tipo"];
+  const attributesToShow = ["fecha","nombre", "tipo"];
 
 
   console.log(data)
@@ -12,11 +12,25 @@ export function TableLayout({ data }) {
   } 
   else{
   // Filtrar los atributos que deseas mostrar
-  const filteredData = data.map((row) =>
+  const filteredData = notificaciones.map((row) =>
     Object.keys(row)
       .filter((key) => attributesToShow.includes(key))
       .reduce((obj, key) => {
-        obj[key] = row[key];
+        if (key === 'fecha') {
+          const fechaJS = new Date(row[key]);
+          const opciones = {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+          };
+          obj[key] = fechaJS.toLocaleString('es-ES', opciones);
+        } else {
+          obj[key] = row[key];
+        }
         return obj;
       }, {})
   );

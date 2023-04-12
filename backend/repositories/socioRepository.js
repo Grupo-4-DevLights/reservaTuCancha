@@ -78,13 +78,21 @@ const reservaCancha = async (id_usuario,id_cancha,fecha,horario) => {
     return data.email;
   });
 
+  //buscar el nombre de la cancha con el id
+  const nombreCancha = await cancha.findByPk(id_cancha, {
+      attributes: ["nombre"],
+    }).then((data) => {
+        return data.nombre;
+    });
+  
+
 
 
   
 
   try {
     //crear un mensaje PARA UN SOCIO la reserva agregada
-    const mensajeSocio = `se ha hecho una reserva en su cancha numero ${id_cancha} a las ${horario} para la fecha: ${fecha}`;
+    const mensajeSocio = `se ha hecho una reserva en la  cancha con nombre "${nombreCancha}" a las ${horario} para la fecha: ${fecha}`;
     const newMensajeSocio= await Mensaje.create(
       {
         id_usuario: id_usuario,
@@ -95,7 +103,7 @@ const reservaCancha = async (id_usuario,id_cancha,fecha,horario) => {
     )
     
     //Crear un mensaje para un PROPIETARIO de la reserva
-    const mensajePropietario = `se ha hecho una reserva en su cancha numero ${id_cancha} a las ${horario} para la fecha: ${fecha}`;
+    const mensajePropietario = `se ha hecho una reserva en la cancha con nombre "${nombreCancha}" a las ${horario} para la fecha: ${fecha}`;
     const newMensajePropietario= await Mensaje.create(
       {
         id_usuario: usuarioPropietario,
@@ -169,7 +177,17 @@ const eliminarReserva = async (id_usuario,id_cancha,id_reserva) => {
       }
     );
 
-    const mensajeSocio = `se ha eliminado una reserva en su cancha numero ${id_cancha} a las ${laReserva.horario} para la fecha: ${laReserva.fecha}`;
+    //buscar el nombre de la cancha con el id
+    const nombreCancha = await cancha.findByPk(id_cancha, {
+      attributes: ["nombre"],
+    }).then((data) => {
+      return data.nombre;
+    });
+
+
+
+    //Crear un mensaje para un PROPIETARIO de la reserva
+    const mensajeSocio = `se ha eliminado una reserva en su cancha con nombre "${nombreCancha}" a las ${laReserva.horario} para la fecha: ${laReserva.fecha}`;
     const newMensaje= await Mensaje.create(
       {
         id_usuario: id_usuario,
@@ -191,7 +209,7 @@ const eliminarReserva = async (id_usuario,id_cancha,id_reserva) => {
 
 
     //Crear un mensaje para un PROPIETARIO de la reserva
-    const mensajePropietario = `se ha eliminado una reserva en su cancha numero ${id_cancha} a las ${laReserva.horario} para la fecha: ${laReserva.fecha}`;
+    const mensajePropietario = `se ha eliminado una reserva en su cancha con nombre "${nombreCancha}" a las ${laReserva.horario} para la fecha: ${laReserva.fecha}`;
     const newMensajePropietario= await Mensaje.create(
       {
         id_usuario: id_propietario,

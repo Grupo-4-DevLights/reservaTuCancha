@@ -65,12 +65,25 @@ const listarEmpresaPropietario = async (req, res) => {
     }
 }
 
+//visualizar reservas pendientes por fecha
+const verReservasPendienteFecha= async(req,res)=>{
+    const {id_cancha,fecha}= req.params;
+    try {
+        const reservas= await propietarioRepository.verReservasPendienteFecha(id_cancha,fecha);
+        res.status(200).json(reservas);
+    }
+    catch (error) {
+        res.status(400).json({message:error.message});
+    }
+}
+
 
 module.exports = {
     listarReservasPendientes,
     listarReservasConfirmadas,
     confirmarReserva,
     cancelarReserva,
-    listarEmpresaPropietario
+    listarEmpresaPropietario,
+    verReservasPendienteFecha
 }
 

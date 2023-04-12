@@ -23,6 +23,18 @@ export async function CanchasDisponiblesFecha(id, fecha) {
     return data;
 }
 
+//canchas reservadas por fecha
+export async function CanchasReservadasFecha(id, fecha) {
+    const response = await fetch(`http://localhost:3001/api/propietario/reservasPendientesFecha/${id}/${fecha}`, {
+        method: 'GET',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+    })
+    const data = await response.json();
+    return data;
+}
+
 
 export async function listarCanchas(){
     const response = await fetch(`http://localhost:3001/api/cancha/`, {
