@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import { NavBar } from '../NavBar';
+import { NavBar } from './NavBar'
 
 
 
@@ -46,10 +46,17 @@ export default function SelectorDeDias() {
 
   return (
     
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center ">
       <NavBar />
-      <h1 className="text-2xl font-bold mb-10 mt-10">Selecciona un día de la semana que desea alquilar para reservar un horario</h1>
+      <div>
+        <h1 className="text-2xl font-bold mb-10 mt-10">Selecciona un día de la semana que desea alquilar para reservar un horario</h1>
+      </div>
+      <div>
+        <h1 className="text-2xl font-bold mb-10 mt-10">Selecciona un día de la semana que desea alquilar para reservar un horario</h1>
+      </div>
+      
       <div className="grid grid-cols-7 gap-4">
+        
         {nombresDia.map((dia) => (
           <Link
             key={dia}

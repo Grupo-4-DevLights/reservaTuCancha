@@ -15,3 +15,18 @@ export async function reservasPendiente (id_propietario){
     return data;
 
 }
+
+export async function listarEmpresaPropietario(id_usuario){
+    const response = await fetch(`http://localhost:3001/api/propietario/visualizarEmpresa/${id_usuario}`
+    ,{
+        method: 'GET',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+    })
+
+    //me tiene que devolver un valor entero
+    const data = await response.json();
+    return data;
+    
+}

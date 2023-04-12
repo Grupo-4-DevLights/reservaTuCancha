@@ -27,6 +27,9 @@ const listarReservasPendientes = async (id_propietario) => {
         },
         include:[{
             model: reserva,
+            where: {
+                estado: 'reservado'
+            }
         }]
     });
 
@@ -77,11 +80,22 @@ const listarReservasConfirmadas = async (id) => {
     return reservas;
 }
 
+//visualizar empresa del usuario
+const listarEmpresaPropietario = async (id_usuario) => {
+    const mostrarEmpresa = await empresa.findOne({
+        where: {
+            id_usuario: id_usuario
+        }
+    });
+    return mostrarEmpresa;
+}
+
 
 module.exports={
     listarReservasPendientes,
     confirmarReserva,
     cancelarReserva,
-    listarReservasConfirmadas
+    listarReservasConfirmadas,
+    listarEmpresaPropietario
 }
 

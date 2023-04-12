@@ -7,7 +7,7 @@ import { useAppContext } from "../../../../context/userContext"
 import { reservasPendiente } from "../../../../Services/Propietario"
 
 //tabla de cargas de mis reservas
-import TablaRevervas from './TablaRevervas'
+import {TableLayout} from './TableLayout'
 
 
 
@@ -48,23 +48,21 @@ export const ReservasPropietarios = () => {
     return (
         <>
             <NavBar />
-            <LayoutProfile>
                 {loading ?
                     (<p>Cargando reservas...</p>)
                     : (
                         <div className="flex flex-col ">
                             <div className="flex justify-center items-center text-center w-full mb-8">
-                                <h1 className="text-5xl font-bold">Reservas en sus canchas2</h1>
+                                <h1 className="text-5xl font-bold">Reservas en sus canchas</h1>
                             </div>
                             {!error ? (
-                                <TablaRevervas
+                                <TableLayout
                                     data={reservas}
                                     //OnDelete={handleDelete}
                                 />
-                                ) : (<p>El servido no esta disponible</p>)}
+                                ) : (<p>El servidor no esta disponible</p>)}
                         </div>
                     )}
-            </LayoutProfile>
         </>
     )
 }

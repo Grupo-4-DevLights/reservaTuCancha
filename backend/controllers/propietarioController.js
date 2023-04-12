@@ -53,11 +53,24 @@ const cancelarReserva = async (req, res) => {
     }
 }
 
+//visualizar empresa del usuario
+
+const listarEmpresaPropietario = async (req, res) => {
+    const { id_propietario } = req.params;
+    try {
+        const empresa = await propietarioRepository.listarEmpresaPropietario(id_propietario);
+        res.status(200).json(empresa);
+    } catch (error) {
+        res.status(400).json({message:error.message});
+    }
+}
+
 
 module.exports = {
     listarReservasPendientes,
     listarReservasConfirmadas,
     confirmarReserva,
-    cancelarReserva
+    cancelarReserva,
+    listarEmpresaPropietario
 }
 

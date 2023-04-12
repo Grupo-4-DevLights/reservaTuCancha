@@ -44,8 +44,6 @@ const mostrarCancha = async (id_cancha) => {
   if (!buscarCanchar) {
     throw new Error("no se encontro la cancha");
   }
-
-
   try {
     
     return buscarCanchar;

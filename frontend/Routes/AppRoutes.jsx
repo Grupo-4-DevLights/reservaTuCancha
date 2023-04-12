@@ -18,6 +18,12 @@ import ListarEmpresasPage from "../src/Pages/_ListarEmpresas";
 import ListarCanchasPage from "../src/Pages/_ListarCanchas";
 
 
+import  {ElegirCanchaPropietario} from "../src/Components/Profile/Propietario/administracion/ElegirCanchaPropietario";
+import ButtonsPropietario from "../src/Components/Profile/Propietario/administracion/ButtonsPropietario";
+import  HorariosDisponiblesPropietarios  from "../src/Components/Profile/Propietario/administracion/HorariosDisponiblesPropietarios";
+
+
+
 //Dia de la semana
 import SelectorDeDias from "../src/Components/Socio/VisualizarDiasSemana";
 
@@ -79,13 +85,21 @@ export default function AppRoutes() {
             element={<VisualizarHorarios/>} 
           />
 
+          <Route
+            path="/propietario/elegirhorario/:id/:dia"
+            element={<HorariosDisponiblesPropietarios/>}
+          />
+
 
           
 
           <Route path="/socio/diasemana" element={<SelectorDeDias/>}/>
           <Route path="/notificaciones" element={<NotificacionesSocio/>} />
           
-          <Route path="/propietario/reservas" element={<ReservasPropietarios/>} />
+          <Route path="/propietario/administrar_reserva" element={<ElegirCanchaPropietario/>} />
+          <Route path='/propietario/buttonPropietario/:id'  element={<ButtonsPropietario/>}/>
+
+
 
           {isLoggedIn && <Route path="*" element={<PaginaDeError />} />}
         </Routes>
