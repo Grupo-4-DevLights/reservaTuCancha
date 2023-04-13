@@ -54,7 +54,7 @@ export const ElegirCanchaPropietario=()=>{
     return(
         <>
         <NavBar />
-            <p className=" text-center mt-10 mb-4  "> <strong className="text-3xl">Elija que cancha quiere saber las reservas </strong></p>
+            <p className=" text-center mt-10 mb-4  "> <strong className="text-3xl">visualize el estado de las reservas de cada cancha </strong></p>
                     <div className='cards m-0 p-0 box-border flex flex-wrap	justify-start ml-14 gap-20 '>
                         {console.log(canchas)}
                     {canchas.length !==0 ? canchas.map((cancha,index)=>(

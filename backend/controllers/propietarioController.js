@@ -30,9 +30,9 @@ const listarReservasConfirmadas = async (req, res) => {
 // cambiar la reserva a confirmado de una  reserva especifica
 
 const confirmarReserva = async (req, res) => {
-    const { id } = req.params;
+    const { id_reserva } = req.params;
     try {
-        const reserva = await propietarioRepository.confirmarReserva(id);
+        const reserva = await propietarioRepository.confirmarReserva(id_reserva);
         res.status(200).json({menssaje:'Se ha confirmado la reservado exitosamente'});
     } catch (error) {
         console.log(error);
@@ -43,9 +43,9 @@ const confirmarReserva = async (req, res) => {
 // cambiar la reserva a cancelado de una reserva especifica
 
 const cancelarReserva = async (req, res) => {
-    const { id } = req.params;
+    const { id_reserva } = req.params;
     try {
-        const reserva = await propietarioRepository.cancelarReserva(id);
+        const reserva = await propietarioRepository.cancelarReserva(id_reserva);
         res.status(200).json({menssaje:'Se ha cancelado la reservado exitosamente'});
     } catch (error) {
         console.log(error);

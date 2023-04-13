@@ -20,6 +20,7 @@ import ListarCanchasPage from "../src/Pages/_ListarCanchas";
 
 import  {ElegirCanchaPropietario} from "../src/Components/Profile/Propietario/administracion/ElegirCanchaPropietario";
 import ButtonsPropietario from "../src/Components/Profile/Propietario/administracion/ButtonsPropietario";
+import { CrearCancha } from "../src/Components/Profile/Propietario/administracion/CrearCancha";
 
 
 
@@ -88,7 +89,7 @@ export default function AppRoutes() {
 
 
           
-
+          <Route path="/propietario/crearCancha" element={<CrearCancha/>} />
           <Route path="/socio/diasemana" element={<SelectorDeDias/>}/>
           <Route path="/notificaciones" element={<NotificacionesSocio/>} />
           

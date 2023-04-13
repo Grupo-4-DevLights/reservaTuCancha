@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import DisponiblePropietario from './DisponiblePropietario'
 import ReservaPropietario from './ReservaPropietario'
+import ConfirmadoPropietario from './ConfirmadoPropietario'
 
 
 import {NavBar} from '../../../NavBar'
@@ -9,7 +10,7 @@ import {NavBar} from '../../../NavBar'
 const ButtonsPropietario = () => {
     const [Componente1, SetComponente1] = useState(false);
     const [Componente2, SetComponente2] = useState(false);
-    const [showList3, setShowList3] = useState(false);
+    const [Componente3, setComponente3] = useState(false);
 
     const mostrarComponente1 = () => {
         SetComponente1(!Componente1);
@@ -20,14 +21,15 @@ const ButtonsPropietario = () => {
     const mostrarComponente2= ()=>{
         SetComponente2(!Componente2);
         SetComponente1(false);
-        setShowList3(false);
+        setComponente3(false);
 
     }
 
-    const handleClick = () => {
-        mostrarComponente1();
-      };
-    
+    const mostrarComponente3= ()=>{
+        setComponente3(!Componente3);
+        SetComponente1(false);
+        SetComponente2(false);
+    }
   
 
   
@@ -53,12 +55,14 @@ const ButtonsPropietario = () => {
           </button>
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={mostrarComponente3}
           >
             Confirmada
           </button>       
         </div>
         {Componente1 && <DisponiblePropietario/>}
         {Componente2 && <ReservaPropietario/>}
+        {Componente3 && <ConfirmadoPropietario/>}
 
 
       </div>

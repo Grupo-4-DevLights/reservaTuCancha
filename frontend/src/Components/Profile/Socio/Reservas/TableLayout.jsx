@@ -1,30 +1,38 @@
 import React from "react";
 
 export function TableLayout({ data, OnDelete, }) {
-  const attributesToShow = ["fecha", "horario", "Cancha.nombre"];
+  const attributesToShow = ["fecha", "horario", "estado", "Cancha.nombre",];
+  
 
+  function transformEstado(estado) {
+    return estado === "confirmado" ? "Confimada" : "No confirmada";
+  }
 
-  console.log(data)
   if (!data || data.length === 0) {
-    return <p>no tiene ninguna reserva realizada</p>;
-  } 
-  else{
-  // Filtrar los atributos que deseas mostrar
-  const filteredData = data.map((row) =>
-    Object.keys(row)
-      .filter((key) => attributesToShow.includes(key))
-      .reduce((obj, key) => {
-        obj[key] = row[key];
-        return obj;
-      }, {})
-  );
-    
-  return (
-    <>
+    return <p>No tiene ninguna reserva realizada</p>;
+  } else {
+    // Filtrar los atributos que deseas mostrar y transformar el estado
+    const filteredData = data.map((row) =>
+      Object.keys(row)
+        .filter((key) => attributesToShow.includes(key))
+        .reduce((obj, key) => {
+          obj[key] = key === "estado" ? transformEstado(row[key]) : row[key];
+          //cambiar de nombre del atributo estado a confirmado
+          if (key === "Estado") {
+            obj["confirmado"] = obj["estado"];
+            delete obj["estado"];
+          }
+          return obj;
+        }, {})
+    );
 
-       
+
+    return (
+      <>
+
+
         <table className="table-fixed w-full text-sm text-center mb-10">
-           {console.log(data)}
+          {console.log(data)}
           <thead>
             <tr className="text-xl">
               {data && attributesToShow.map((title, index) => (
@@ -35,7 +43,7 @@ export function TableLayout({ data, OnDelete, }) {
             </tr>
           </thead>
           <tbody>
-          {data && filteredData.reverse().map((row, index) => {
+            {data && filteredData.reverse().map((row, index) => {
               // Crear un nuevo objeto con los atributos que deseas pasar a OnDelete
               const onDeleteData = {
                 id_usuario: data[data.length - index - 1].id_usuario,
@@ -53,7 +61,7 @@ export function TableLayout({ data, OnDelete, }) {
                     <td>
                       <button
                         className="bg-red-500 rounded-md font-medium font-sans text-white p-1 mx-2 my-1"
-                        onClick={() => OnDelete(onDeleteData.id_usuario,onDeleteData.id_cancha,onDeleteData.id_reserva)}
+                        onClick={() => OnDelete(onDeleteData.id_usuario, onDeleteData.id_cancha, onDeleteData.id_reserva)}
                       >
                         Eliminar
                       </button>
@@ -64,6 +72,7 @@ export function TableLayout({ data, OnDelete, }) {
             })}
           </tbody>
         </table>
-    </>
-  )}
+      </>
+    )
+  }
 }

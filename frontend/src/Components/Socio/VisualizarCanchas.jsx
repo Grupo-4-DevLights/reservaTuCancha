@@ -33,10 +33,13 @@ export const VisualizarCanchas=()=>{
         <div className='visual-cancha'>
             <h1 className=" text-center text-2xl mt-5">Bienvenido a la Empresa {id}</h1>
             <p className=" text-center mt-10 mb-4"> <strong>Elija que cancha quiere jugar </strong></p>
-                    <div className='cards m-0 p-0 box-border flex flex-wrap	justify-start ml-14 gap-20 '>
+                    <div className='cards m-0 p-0 box-border flex flex-wrap	justify-center ml-14 gap-20 '>
                     {canchas.length !==0 ? canchas.map((cancha,index)=>(
                         <div className='card p-4 border-4 shadow-lg' key={index}>
-                            <img className='border-2 w-60 ' src='../../../public/icons.png' alt="mi cancha"/>
+                            
+                            <img 
+                            className='border-2 w-60 h-52' 
+                            src={(cancha.tipo ==='futbol') ? '../../../public/futbol.jpg' : (cancha.tipo ==='basquetbol') ? '../../../public/basquet.jpg' : (cancha.tipo ==='tennis' || 'padel') ? '../../../public/tennis.jpg' : '../../../public/icons.png'} alt="mi cancha"/>
                             <h2 className='mt-8 '><strong>nombre:</strong>{cancha.nombre}</h2>
                             <h2><strong>tipo:</strong>{cancha.tipo}</h2>
                             <h2><strong>precio:</strong>{cancha.precio}</h2>

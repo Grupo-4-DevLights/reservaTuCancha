@@ -8,6 +8,8 @@ export  function ButtonsPropietario() {
         <NavLink to="/perfil" className="mx-5 p-1 px-2 rounded-md hover:text-emerald-700">Modificar Perfil</NavLink>
         <NavLink to="/propietario/administrar_reserva" className="mx-5 p-1 px-2 rounded-md hover:text-emerald-700">Administrar Reservas</NavLink>
         <NavLink to="/notificaciones" className="mx-5 p-1 px-2 rounded-md hover:text-emerald-700">Notificaciones</NavLink>
+        <NavLink to="/propietario/crearCancha" className="mx-5 p-1 px-2 rounded-md hover:text-emerald-700">Agregar Cancha</NavLink>
+
       </div>
     </>
   )

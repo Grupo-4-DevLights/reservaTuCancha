@@ -83,7 +83,7 @@ export function IndexReserva() {
         :(
         <div className="flex flex-col ">
           <div className="flex justify-center items-center text-center w-full mb-8">
-            <h1 className="text-5xl font-bold">Sus reservas realizadas</h1>
+            <h1 className="text-5xl font-bold"> reservas realizadas</h1>
           </div>
         {!error ? (
         <TableLayout
