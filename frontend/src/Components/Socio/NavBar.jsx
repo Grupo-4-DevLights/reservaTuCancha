@@ -39,19 +39,19 @@ export function NavBar() {
         id="navbar"
         className="items-center fixed w-full top-0"
       >
-        <nav className="flex bg-white text-black px-12 py-3 justify-between items-center">
+        <nav className="flex bg-gradient-to-r from-yellow-200 via-green-200 to-green-500 text-black px-12 py-3 justify-between items-center">
           <div className="flex">
             <Link to="/" className="text-2xl font-bold ">
               <div className="flex items-center">
-                <img
-                  className="h-[65px] w-auto hidden sm2:block"
-                  src="logo1.png"
-                  alt="logo"
+              <img
+                  className="h-[65px] w-auto hidden sm2:block "
+                  src="../../public/logo1.png"
+                  alt="logo1"
                 />
                 <img
-                  className="h-[65px] w-auto block sm2:hidden"
-                  src="devsports.png"
-                  alt="logo"
+                  className="h-[65px] w-auto block sm2:hidden "
+                  src="../../public/logo1.png"
+                  alt="logo1"
                 />
                 {user && (
                   <h1 className="text-2xl font-sans px-2 py-1 rounded-lg flex ite sm2:hidden">

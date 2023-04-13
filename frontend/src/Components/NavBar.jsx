@@ -52,8 +52,8 @@ export function NavBar() {
                 />
                 <img
                   className="h-[65px] w-auto block sm2:hidden "
-                  src="devsports.png"
-                  alt="logo"
+                  src="../../public/logo1.png"
+                  alt="logo1"
                 />
                 {user && (
                   <h1 className="text-2xl font-sans px-2 py-1 rounded-lg flex ite sm2:hidden">
