@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { obtenerCanchas } from "../../Services/Socio";
 import { NavBar } from "../NavBar";
 
-export const VisualizarCanchas = () => {
+const VisualizarCanchas = () => {
   const { id } = useParams();
   const [canchas, setCanchas] = useState([]);
   const [error, setError] = useState('');
@@ -57,3 +57,4 @@ export const VisualizarCanchas = () => {
   );
 }
 
+export default VisualizarCanchas;

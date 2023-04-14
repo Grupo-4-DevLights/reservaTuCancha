@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import { NavBar } from "../../../NavBar";
 import { LayoutProfile } from "../../LayoutProfile";
-import  TableLayout  from "../../TableLayout";
+import { TableLayout } from "./TableLayout";
 import { useAppContext } from "../../../../context/userContext";
 import { ObtenerReservas, eliminarReservas } from "../../../../Services/Socio";
 
