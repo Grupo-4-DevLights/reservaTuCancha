@@ -81,10 +81,9 @@ const reservasConEmpresa = async () => {
     const buscarReserva = await reserva.findAll({
       include: [
         {
-          model: cancha,
-          attributes:['id_empresa']
-        },
-        
+            model: cancha,
+            attributes: ["id_empresa"]
+        }
     ],
     raw:true
 });

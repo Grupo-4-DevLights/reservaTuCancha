@@ -101,24 +101,36 @@ export function NavBar() {
                   <>
                     <Link
                       to="/perfil"
-                      className="hover:bg-emerald-600 font-sans bg-emerald-500 p-2 rounded-md text-white font-bold"
+                      className=" hover:underline font-sans font-bold"
                     >
                       Perfil
                     </Link>
+                    { user.rol ==="socio" &&
+                    <>
+                    <Link
+                      to="/reserva"
+                      className=" hover:underline font-sans font-bold"
+                    >
+                      Reservar
+                    </Link>
+                    
+                    <Link
+                      to="/socio/elegirempresa"
+                      className=" hover:underline font-sans font-bold"
+                    >
+                      Buscar Canchas
+                    </Link>
+                    </>
+                    }
+
                     <button
                       className="hover:bg-emerald-600 font-sans bg-emerald-500 p-2 rounded-md text-white font-bold"
                       onClick={logoutSubmit}
                     >
                       Salir
                     </button>
-                    { user.rol ==="socio" &&
-                    <Link
-                      to="/socio/elegirempresa"
-                      className="hover:bg-emerald-600 font-sans bg-emerald-500 p-2 rounded-md text-white font-bold"
-                    >
-                      Buscar canchas
-                    </Link>
-                    }
+                    
+                    
                   </>
                 )}
               </div>

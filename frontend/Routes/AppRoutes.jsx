@@ -33,17 +33,13 @@ import { NotificacionesSocio } from "../src/Components/Profile/Socio/Notificacio
 
 //reservas de cancha
 import { ReservasPropietarios } from "../src/Components/Profile/Propietario/Reservas/ReservasPropietario";
+import { Reservas } from "../src/Pages/_Reservas";
 
 //import { RegistrarReserva } from './Pages/Socio/RegistrarReserva'
 
 export default function AppRoutes() {
   const { user, isLoggedIn } = useAppContext();
-  // todo Falta mejorar la logica
-  // if(isLoggedIn){
-  //     return(
-  //         <PaginaDeCarga/>
-  //     )
-  // }
+
   return (
     <>
       <BrowserRouter>
@@ -67,6 +63,8 @@ export default function AppRoutes() {
             }
           />
           <Route path="/reservas" element={<IndexReserva />} />
+          <Route path="/reserva" element={<Reservas />} />
+
           <Route path="/listar-socios" element={<ListarSociosPage />} />
           <Route path="/listar-empresas" element={<ListarEmpresasPage />} />
           <Route path="/listar-canchas" element={<ListarCanchasPage />} />

@@ -82,3 +82,15 @@ export async function deleteCancha(values) {
     const data = await response.json();
     return data;
 }
+
+
+export async function obtenerCanchass() {
+    const response = await fetch(`http://localhost:3001/api/cancha`, {
+        method: 'GET',
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    })
+    const data = await response.json();
+    return data;
+}
