@@ -4,6 +4,7 @@ import {  ReservarCancha, obtenerEmpresas } from '../../Services/Socio';
 import { obtenerCanchass } from '../../Services/Canchas';
 import Swal from "sweetalert2";
 import { useAppContext } from '../../context/userContext';
+import { fetchMercadoPago } from '../../Services/mercadopago';
 
 export  function TablaReserva() {
     const { user } = useAppContext();
@@ -105,8 +106,9 @@ export  function TablaReserva() {
             }).then(async (result)=>{
                 if (result.isConfirmed) {
                     await ReservarCancha(reservaData)
-                    .then(()=>{
+                    .then(async()=>{
                         cargarDatos()
+                        await fetchMercadoPago()
                         Swal.fire("Reservada!", "Te informaremos por mail la confirmacion de la Reserva", "success");
                     })
                     .catch((error)=>{

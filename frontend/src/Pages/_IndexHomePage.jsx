@@ -1,4 +1,7 @@
+import { Contacto } from "../Components/HomePage/Contacto";
+import { Footer } from "../Components/HomePage/Footer";
 import { Hero } from "../Components/HomePage/Hero";
+import { Pasos } from "../Components/HomePage/Pasos";
 import { NavBar } from "../Components/NavBar";
 
 export function HomePage() {
@@ -6,7 +9,9 @@ export function HomePage() {
   <>
     <NavBar />
     <Hero />
-    <Hero />
+    <Pasos />
+    <Contacto />
+    <Footer />
   </>
   );
 }

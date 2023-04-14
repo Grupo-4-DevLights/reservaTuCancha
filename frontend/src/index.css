@@ -40,6 +40,19 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
+input{
+  background-color: transparent;
+}
+
+#formularioContacto input{
+  border-color: #2FC790;
+  text-align: start;
+}
+
+#formularioContacto textarea{
+  border-color: #2FC790;
+}
+
 @keyframes spinner {
     0% {
       transform: rotate(0deg);
