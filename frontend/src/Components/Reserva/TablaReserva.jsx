@@ -108,8 +108,16 @@ export  function TablaReserva() {
                     await ReservarCancha(reservaData)
                     .then(async()=>{
                         cargarDatos()
-                        await fetchMercadoPago()
-                        Swal.fire("Reservada!", "Te informaremos por mail la confirmacion de la Reserva", "success");
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Accediendo al metodo de pago!',
+                            text: 'Serás redirigido en unos segundos...',
+                            showConfirmButton: false,
+                            timer: 2000 // el tiempo en milisegundos que quieres que dure el mensaje
+                          }).then(async () => {
+                            // Aquí puedes agregar la redirección a la página deseada
+                            await fetchMercadoPago()
+                          });
                     })
                     .catch((error)=>{
                         Swal.fire("Error!", "No se pudo realizar la reserva", "error");

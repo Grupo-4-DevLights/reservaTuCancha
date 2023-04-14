@@ -8,6 +8,8 @@ import {cancelarReserva} from '../../../../Services/Propietario'
 
 
 import Swal from 'sweetalert2'
+import { ButtonsPropietario } from '../ButtonsPropietario';
+import { LayoutProfile } from '../../LayoutProfile';
 
 
 
@@ -153,9 +155,10 @@ export default function ReservaPropietario() {
     return (
         <div className="flex flex-col items-center ">
             <NavBar />
+            <LayoutProfile>
                 <div>
-                <h1 className="text-2xl font-bold mb-10 mt-10">Selecciona un día de la semana que desea saber la cantidad de horarios reservados</h1>
-            </div>
+                    <h1 className="text-2xl font-bold mb-10 mt-10">Selecciona un día de la semana que desea saber la cantidad de horarios reservados</h1>
+                </div>
             <div className="grid grid-cols-7 gap-4">
                 {nombresDia.map((dia) => (
                     <button
@@ -167,58 +170,60 @@ export default function ReservaPropietario() {
                     </button>
                 ))}
             </div>
-            {mostrarContenido && 
-                        <label htmlFor="horario" className="block text-gray-700 font-bold text-center mt-10">
-                            Dia {diaSeleccionado} de la fecha {diasDeLaSemana[diaSeleccionado]}
-                        </label>}
-            {mostrarContenido && (
-                <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <table style={{ width: "50vw" }} className="divide-gray-800 rounded-lg shadow-lg mt-10 border-10 mb-20">
-                        <thead className="bg-gradient-to-r from-blue-300 to-purple-400 text-white mt-20 text-center">
-                            <tr>
-                                <th scope="col" className="py-3 pl-12 text-left text-xs font-medium uppercase tracking-wider">
-                                    Horario
-                                </th>
-                                <th scope="col" className="px-3 pl-12 text-left text-xs font-medium uppercase tracking-wider">
-                                    Estado
-                                </th>
-                                <th scope="col" className=" text-xs font-medium uppercase tracking-wider fixed-col ">
-                                    Opciones
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody className="bg-white divide-y divide-gray-200">
-                            {horarios.map((hora, index) => (
-                                <tr key={index} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
-                                    {console.log(hora)}
-                                    <td className="px-6 py-4  align-top whitespace-nowrap">
-                                        <div className="text-sm text-gray-900 pl-10 ">{hora.horario}</div>
-                                    </td>
-                                    <td className="px-6 py-4 align-top whitespace-nowrap">
-                                        <span className={`px-2  pl-12 inline-flex text-xs leading-5 font-semibold rounded-full ${hora.estado === 'disponible' ?  'text-green-800' :  'text-red-800'}`}>
-                                            {hora.estado}
-                                        </span>
-                                    </td>
-                                    <td className="px-6 py-4 align-top whitespace-nowrap text-sm text-gray-500 ">
-                                        <button 
-                                            className="bg-green-500 hover:bg-green-700 text-white font-bold ml-40 py-2 px-4 rounded"
-                                            onClick={()=>handleConfirmar(hora.id_reserva)}
-                                
-                                        >
-                                            Confirmar
-                                        </button>
-                                        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-4"
-                                            onClick={()=>hadleCancelar(hora.id_reserva)}
-                                        >
-                                            Cancelar
-                                        </button>
-                                    </td>
+                {mostrarContenido && 
+                            <label htmlFor="horario" className="block text-gray-700 font-bold text-center mt-10">
+                                Dia {diaSeleccionado} de la fecha {diasDeLaSemana[diaSeleccionado]}
+                            </label>
+                }
+                {mostrarContenido && (
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <table style={{ width: "50vw" }} className="divide-gray-800 rounded-lg shadow-lg mt-10 border-10 mb-20">
+                            <thead className="bg-gradient-to-r from-blue-300 to-purple-400 text-white mt-20 text-center">
+                                <tr>
+                                    <th scope="col" className="py-3 pl-12 text-left text-xs font-medium uppercase tracking-wider">
+                                        Horario
+                                    </th>
+                                    <th scope="col" className="px-3 pl-12 text-left text-xs font-medium uppercase tracking-wider">
+                                        Estado
+                                    </th>
+                                    <th scope="col" className=" text-xs font-medium uppercase tracking-wider fixed-col ">
+                                        Opciones
+                                    </th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            )}
+                            </thead>
+                            <tbody className="bg-white divide-y divide-gray-200">
+                                {horarios.map((hora, index) => (
+                                    <tr key={index} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
+                                        {console.log(hora)}
+                                        <td className="px-6 py-4  align-top whitespace-nowrap">
+                                            <div className="text-sm text-gray-900 pl-10 ">{hora.horario}</div>
+                                        </td>
+                                        <td className="px-6 py-4 align-top whitespace-nowrap">
+                                            <span className={`px-2  pl-12 inline-flex text-xs leading-5 font-semibold rounded-full ${hora.estado === 'disponible' ?  'text-green-800' :  'text-red-800'}`}>
+                                                {hora.estado}
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4 align-top whitespace-nowrap text-sm text-gray-500 ">
+                                            <button 
+                                                className="bg-green-500 hover:bg-green-700 text-white font-bold ml-40 py-2 px-4 rounded"
+                                                onClick={()=>handleConfirmar(hora.id_reserva)}
+                                    
+                                            >
+                                                Confirmar
+                                            </button>
+                                            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-4"
+                                                onClick={()=>hadleCancelar(hora.id_reserva)}
+                                            >
+                                                Cancelar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
+            </LayoutProfile>
         </div>
     );
 }

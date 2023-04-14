@@ -65,16 +65,18 @@ const filteredData = notificaciones.map((row) =>
         <>
             <NavBar />
             <LayoutProfile>
-                <div>
+                <div className='w-1/2'>
                     {notificaciones && filteredData.length > 0 ? (
                         <table className="table-fixed w-full text-sm text-center mt-5 mb-5">
                             <thead>
                                 <tr className="text-xl">
-                                    {Object.keys(notificaciones[0]).map((title, index) =>
-                                        <th className="capitalize" key={`${title}_${index}`}>
-                                            {title}
-                                        </th>
-                                    )}
+                                {Object.keys(notificaciones[0]).map((title, index) => {
+                                        return (
+                                            <th className="capitalize" key={`${title}_${index}`}>
+                                                {title}
+                                            </th>
+                                        );
+                                })}
                                 </tr>
                             </thead>
                             <tbody>
@@ -82,11 +84,10 @@ const filteredData = notificaciones.map((row) =>
                                     <React.Fragment key={index}>
                                         {row.tipo === "negativo" ? (
                                             <tr className="row   text-lg bg-red-400 hover:bg-red-700">
-
                                                 {Object.values(row).map(
                                                     (item, index) =>
                                                     (
-                                                        <td className="break-words" key={index}>
+                                                        <td className="break-words normal-case" key={index}>
                                                             {item}
                                                         </td>
                                                     )

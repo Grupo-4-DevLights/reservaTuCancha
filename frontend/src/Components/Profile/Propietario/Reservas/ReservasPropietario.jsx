@@ -48,6 +48,7 @@ export const ReservasPropietarios = () => {
     return (
         <>
             <NavBar />
+            
                 {loading ?
                     (<p>Cargando reservas...</p>)
                     : (
