@@ -57,9 +57,20 @@ const eliminarUsuario = async (req, res) => {
   }
 };
 
+const reservasConEmpresa=async(req,res)=>{
+  try {
+    const reservas=await usuarioRepository.reservasConEmpresa();
+    res.status(200).json(reservas);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({message:error.message})
+  }
+}
+
 module.exports = {
   listarUsuarios,
   actualizarUsuario,
   mostrarUsuario,
-  eliminarUsuario
+  eliminarUsuario,
+  reservasConEmpresa
 };

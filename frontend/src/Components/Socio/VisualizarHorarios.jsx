@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { CanchasDisponiblesFecha } from '../../Services/Canchas'
+import {fetchMercadoPago} from '../../Services/mercadopago'
 import { ReservarCancha } from '../../Services/Socio'
 import { NavBar } from './NavBar'
 import SelectorDeDias from './VisualizarDiasSemana'
@@ -48,6 +49,8 @@ export const VisualizarHorarios = () => {
             fecha: dia,
             horario: hora
           }
+
+
           if( !reserva.horario){
             Swal.fire({
               icon: 'error',
@@ -57,17 +60,20 @@ export const VisualizarHorarios = () => {
             });
             return
           }
-          console.log(reserva);
+
           await ReservarCancha(reserva)
-            .then(data => {
-              console.log(data);
+            .then(async data => {
               Swal.fire({
                 icon: 'success',
-                title: '¡Reservado!',
-                text: 'La cancha ha sido reservada exitosamente.',
-                confirmButtonColor: '#60A5FA',
-                
+                title: '¡Accediendo al metodo de pago!',
+                text: 'Serás redirigido en unos segundos...',
+                showConfirmButton: false,
+                timer: 3000 // el tiempo en milisegundos que quieres que dure el mensaje
+              }).then(async () => {
+                // Aquí puedes agregar la redirección a la página deseada
+                await fetchMercadoPago()
               });
+              
             })
             .catch(error => {
               Swal.fire({
@@ -80,6 +86,8 @@ export const VisualizarHorarios = () => {
             cargarCanchas()
         }
       }
+
+
 
 
 

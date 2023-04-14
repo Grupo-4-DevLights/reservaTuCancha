@@ -17,4 +17,10 @@ router.use('/api/mensaje',require('./mensajeRoutes'))
 router.use('/api/contacto',require('./contactoRoutes'))
 
 
+
+//para mercadopago
+router.use('/api/mercadopago',require('./mercadopagoRoute'))
+
+
+
 module.exports=router

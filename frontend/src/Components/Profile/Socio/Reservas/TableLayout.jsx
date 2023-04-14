@@ -1,81 +1,78 @@
-import React, { useState, useEffect } from "react";
-import Swal from "sweetalert2";
-import { useLocation } from "react-router-dom";
-import { NavBar } from "../../../NavBar";
-import { LayoutProfile } from "../../LayoutProfile";
-import { TableLayout } from "./TableLayout";
-import { useAppContext } from "../../../../context/userContext";
-import { ObtenerReservas, eliminarReservas } from "../../../../Services/Socio";
+import React from "react";
 
-export function IndexReserva() {
-  const { user } = useAppContext();
-  const [reservas, setReservas] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [reservasEliminas, setReservasEliminadas] = useState(0);
-  const [error, setError] = useState(null);
+export function TableLayout({ data, OnDelete, }) {
+  const attributesToShow = ["fecha", "horario", "estado", "Cancha.nombre",];
+  
 
-  const cargarReservas = async () => {
-    if (user) {
-      setLoading(true);
-      await ObtenerReservas(user.id_usuario)
-        .then((data) => {
-          setReservas(data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          setError(error);
-          setLoading(false);
-        });
-    }
-  };
+  function transformEstado(estado) {
+    return estado === "confirmado" ? "Confimada" : "No confirmado";
+  }
 
-  useEffect(() => {
-    cargarReservas();
-  }, []);
+  if (!data || data.length === 0) {
+    return <p>No tiene ninguna reserva realizada</p>;
+  } else {
+    // Filtrar los atributos que deseas mostrar y transformar el estado
+    const filteredData = data.map((row) =>
+      Object.keys(row)
+        .filter((key) => attributesToShow.includes(key))
+        .reduce((obj, key) => {
+          obj[key] = key === "estado" ? transformEstado(row[key]) : row[key];
+          //cambiar de nombre del atributo estado a confirmado
+          if (key === "Estado") {
+            obj["confirmado"] = obj["estado"];
+            delete obj["estado"];
+          }
+          return obj;
+        }, {})
+    );
 
-  const handleDelete = (id_usuario, id_cancha, id_reserva) => {
-    console.log(id_usuario, id_cancha, id_reserva);
-    Swal.fire({
-      title: `Seguro que desea eliminar la reserva seleccionada?`,
-      text: "No podras revertir esta accion!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Si, eliminar",
-      cancelButtonText: "Cancelar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        eliminarReservas(id_usuario, id_cancha, id_reserva).then(() => {
-          Swal.fire("Eliminado!", "El usuario ah sido eliminado.", "success");
-          setReservasEliminadas((valor) => valor + 1);
-          cargarReservas();
-        });
-      }
-    });
-  };
 
-  return (
-    <>
-      <NavBar />
-      <LayoutProfile>
-        {loading ? (
-          <p className="text-center text-gray-500 text-xl mt-8">Cargando reservas...</p>
-        ) : (
-          <div className="flex flex-col">
-            <div className="flex justify-center items-center text-center w-full mb-8">
-              <h1 className="text-5xl font-bold">Reservas realizadas</h1>
-            </div>
-            {!error ? (
-              <div className="w-full overflow-x-auto">
-                <TableLayout data={reservas} OnDelete={handleDelete} />
-              </div>
-            ) : (
-              <p className="text-red-500">El servidor no está disponible.</p>
-            )}
-          </div>
-        )}
-      </LayoutProfile>
-    </>
-  );
+    return (
+      <>
+
+
+        <table className="table-fixed w-full text-sm text-center mb-10">
+          {console.log(data)}
+          <thead>
+            <tr className="text-xl">
+              {data && attributesToShow.map((title, index) => (
+                <th className="capitalize" key={`${title}_${index}`}>
+                  {title}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data && filteredData.reverse().map((row, index) => {
+              // Crear un nuevo objeto con los atributos que deseas pasar a OnDelete
+              const onDeleteData = {
+                id_usuario: data[data.length - index - 1].id_usuario,
+                id_cancha: data[data.length - index - 1].id_cancha,
+                id_reserva: data[data.length - index - 1].id_reserva,
+              };
+              return (
+                <React.Fragment key={index}>
+                  <tr className="row text-lg bg-emerald-100 hover:bg-blue-300">
+                    {Object.values(row).map((item, index) => (
+                      <td className="break-words" key={index}>
+                        {item}
+                      </td>
+                    ))}
+                    <td>
+                      <button
+                        className="bg-red-500 rounded-md font-medium font-sans text-white p-1 mx-2 my-1"
+                        onClick={() => OnDelete(onDeleteData.id_usuario, onDeleteData.id_cancha, onDeleteData.id_reserva)}
+                      >
+                        Eliminar
+                      </button>
+                    </td>
+                  </tr>
+                </React.Fragment>
+              );
+            })}
+          </tbody>
+        </table>
+      </>
+    )
+  }
 }

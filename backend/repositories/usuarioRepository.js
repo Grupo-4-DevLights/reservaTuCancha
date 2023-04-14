@@ -1,5 +1,9 @@
 const usuario = require('../models/usuario');
 
+const reserva=require('../models/reserva')
+const cancha=require('../models/cancha')
+const empresa=require('../models/empresa')
+
 
 //listar todos los usuarios
 const listarUsuarios = async ()=>{
@@ -72,9 +76,28 @@ const eliminarUsuario = async (id_usuario)=>{
     }
 }
 
+//traer la empresa incluida en un reserva
+const reservasConEmpresa = async () => {
+    const buscarReserva = await reserva.findAll({
+      include: [
+        {
+          model: cancha,
+          attributes:['id_empresa']
+        },
+        
+    ],
+    raw:true
+});
+    return buscarReserva
+}
+
+
+
+
 module.exports = {
     listarUsuarios,
     actualizarUsuario,
     mostrarUsuario,
-    eliminarUsuario
+    eliminarUsuario,
+    reservasConEmpresa
 }

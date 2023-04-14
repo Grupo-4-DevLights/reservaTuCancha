@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { obtenerCanchas } from "../../Services/Socio";
 import { NavBar } from "../NavBar";
 
-const VisualizarCanchas = () => {
+export const VisualizarCanchas = () => {
   const { id } = useParams();
   const [canchas, setCanchas] = useState([]);
   const [error, setError] = useState('');
